@@ -1,0 +1,919 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<chapter xml:id="ch-linearsystems" xmlns:xi="http://www.w3.org/2001/XInclude">
+ <title>First-order Differential Equations</title>
+ <introduction><p>bla bla bla introduction bla bla bla</p></introduction>
+ <section xml:id="sec_firstorderodes">
+  <title>Classification of first-order ODEs</title>
+  <p>
+   Let <m>y</m> be a suitably differentiable function of <m>t</m>. Recall that derivatives of <m>y</m> with respect to <m>t</m> can be written as <md>y'=\dfrac{\mathrm{d}y}{\mathrm{d}t}=\dot{y}=Dy</md>, <md>y''=\dfrac{\mathrm{d}^2y}{\mathrm{d}t^2}=\ddot{y}=D^2 y</md>, <md>\vdots</md> <md>y^{(n)}=\dfrac{\mathrm{d}^ny}{\mathrm{d}t^n}=D^n y</md>.
+   <definition>
+    <p>A <term>differential equation</term> is an equation containing the derivatives of one or more unknown functions or dependent variables, with respect to one or more independent variables. A differential equation is called an <term>ordinary differential equation</term> whenever the unknown function has one independent variable. If the unkonwn function has two or more independent variables, then we call it a <term>partial differential equation</term>.</p>
+   </definition>
+
+   <definition>
+    <p>A <term>first-order ordinary differential equation</term> can be written in the form 
+    <md xml:id="def_firstorderode" number="yes">y'=f(t,y),</md> 
+    where <m>t</m> is the independent variable and <m>y</m> is the independent variable.</p>
+   </definition>
+   
+   Most ODEs can't be solved by hand. However, we can solve a number of ODEs of special and useful types. Some of these properties will carry over to higher-order ODEs.
+   <definition>
+    <title>Separable ODEs</title>
+    <p>A first-order ODE is said to be <term>separable</term> if it can be written in the form 
+    <md xml:id="def_firstorderseparableode" number="yes">y'=f(t,y)=g(t)h(y)</md> for some functions <m>g</m> (dependent only on <m>t</m>), and <m>h</m> (dependent only on <m>y</m>).</p>
+   </definition>
+
+   <definition>
+    <p>A first-order ODE is said to be <term>autonomous</term> if it can be written in the form 
+    <md xml:id="def_firstorderautonomous" number="yes">y'=f(y)</md>. In other words, there is no explicit dependence of the right-hand side <m>f</m> on the time variable <m>t</m>.</p>
+   </definition>
+
+   <definition>
+    <p>A first-order ODE is said to be <term>linear</term> if it can be written in the form <md xml:id="def_firstorderlinearode" number="yes">a_1(t)y'+a_0(t)y=g(t),</md> where <m>g</m> is called a forcing function (or input or control). If <m>g(t)=0</m> for all <m>x</m>, then <xref ref="def_firstorderlinearode"/> is called <term>homogeneous</term>. Otherwise, <xref ref="def_firstorderlinearode"/> is called <term>nonhomogeneous</term>.</p>
+   </definition>
+
+   <remark>
+    <p>A few things to note about first-order linear ODEs.
+     <ol>
+      <li>A first-order ODE is linear when <m>y</m> (or whatever the dependent variable is called) and <m>y'</m> are both of degree one and the coefficients depend on at most a function of <m>t</m> (or whatever the independent variable is called).</li>
+      <li><xref ref="def_firstorderlinearode"/> can also be written as 
+       <md>
+        <mrow>a_1(t)y'+a_0(t)y \equiv a_1(t)Dy + a_0(t)y = g(t)</mrow>
+        <mrow>\underbrace{a_1(t)D+a_0(t)}_{=:L}y=g(t)</mrow>
+        <mrow>Ly=g(t),</mrow>
+       </md>
+       where <m>L:=a_1(t) \dfrac{\mathrm{d}}{\mathrm{d}t}+a_0(t)</m> is called a differential operator.
+      </li>
+     </ol>
+    </p>      
+   </remark>
+
+   <example>
+      Find the order of the differential equation. Is the differential equation linear or nonlinear?, autonomous or nonautonomous?, separable or nonseparable?
+    <ol marker="(a)">
+     <li><m>(1-t)y'+7ty=\cos(t)</m></li>
+     <li><m>(y-2)y'+4y=9</m></li>
+     <li><m>\dfrac{\mathrm{d}A}{\mathrm{d}t} = 10-\dfrac{3A}{140-t}</m></li>
+     <li><m>\dfrac{\mathrm{d}z}{\mathrm{d\xi}} + 2\xi z^2=\xi e^{\xi}</m></li>
+     <li><m>w'-4e^w=6t</m></li>
+    </ol>
+   </example>
+  </p>
+ </section>
+
+ <section xml:id="sec_malthusiangrowth">
+  <title>Malthusian growth and decay</title>
+  <p>
+    The rate of growth (or decay) of a population is proportional to the size of that population at time <m>t</m>. Let <m>P(t)</m> be the size of the population at time <m>t</m>. We write this with the <m>\propto</m> symbol: <m>\dfrac{\mathrm{d}P}{\mathrm{d}t} \propto P</m>. To get an equality, we write <md xml:id="def_malthusianmodel" number="yes">\dfrac{\mathrm{d}P}{\mathrm{d}t} = rP,</md> where <m>r</m> is a constant of proportionality, called the growth or decay rate in the context of this model. We can check that for any constant <m>P_0</m> that all functions of the form <m>P(t)=P_0e^{rt}</m> are solutions to <xref ref="def_malthusianmodel"/>.
+   <sage language='python'>
+    <input>
+# Python code for plotting the Malthusian model solution. 
+#
+# First, import numpy and plotting package
+import numpy as np
+from matplotlib import pyplot as plt
+# Clear the old axis so the pictures don't lie on top of each other
+plt.cla()
+
+
+# Malthusian growth is defined as the solution to the differential equation y'=ky
+# The general solution to this equation is y(t)=P_0*e^(rt), for constants r called the growth rate and P_0 called the initial population.
+
+# Set our parameters. They will not vary in the solution (although we could do that).
+r=0.1
+p0=3
+
+# So we define that function here.
+def malthus(t):
+	return p0*exp(r*t)
+
+# Now we need a list of time values for the t-axis of the plot, which we would like over the interval from 0 to TMAX.
+TMAX=10
+ts=np.arange(0,TMAX)
+
+# Now we need a list of y-values for the y-axis of the plot, i.e. the collection of outputs of my malthus function for each of the t-values in the list named ts I created above
+ys=[malthus(t) for t in ts]
+
+# Now we can plot
+plt.title("Malthusian growth for various parameter sets")
+plt.ylabel(r"$P(t)$")
+plt.xlabel(r"$t$")
+plt.plot(ts,ys,label=r'r='+str(r)+' and p0='+str(p0), color="Black")
+
+# We can also plot multiple curves at once by redefining our parameters and replotting.
+# Uncomment the next four lines and it will plot both.
+#r=0.3
+#p0=4
+#ys=[malthus(t) for t in ts]
+#plt.plot(ts,ys,label=r'r='+str(r)+' and p0='+str(p0), color="Blue")
+
+# Generate the legend
+plt.legend()
+
+# Show the plot
+plt.show()
+    </input>
+   </sage>
+   <example>
+    <title>Malthusian growth model setup</title>
+    <p>A biologist starts with 100 cells in a culture. After one day, there are 250 cells in the culture. Write a differential equation that models that population <m>P(t)</m> of a bacteria culture if the population grows at a rate proportional to the number of bacteria present at any time <m>t</m> (in days).</p>
+   </example>
+  </p>
+ </section>
+
+ <section>
+  <title>Newton's law of heating and cooling</title>
+  <p>
+   The rate of change in an object's temperature is proportional to the difference in its temperature and the temperature of its surrounding medium. Let <m>T(t)</m> be the temperature of an object at time <m>t</m> and <m>T_m</m> be the (constant) temperature of the surrounding environment. Then, <md xml:id="def_heatingcoolingmodel" number="yes">\dfrac{\mathrm{d}T}{\mathrm{d}t} = k(T-T_m),</md>
+   where <m>k</m> is a constant of proportionality called the heat transfer coefficient. We can check that for any constant <m>T_0</m>, all functions of the form <m>T(t)=T_m+(T_0-T_m)e^{-kt}</m> are solutions to <xref ref="def_heatingcoolingmodel"/>.
+  </p>
+  <example>
+   <title>Newton's law of heating and cooling model setup</title>
+   <p>
+    Suppose that an object initially having a temperature of 25<degree/>F is placed in a large temperature controlled room of 89<degree/>F and one hour later the object has a temperature of 37<degree/>F. Write a differential equation for the temperature <m>T(t)</m> of the object at time <m>t</m> (in hours) assuming <m>T(t)</m> satisfies Newton's law of heating and cooling.
+   </p>
+  </example>
+ </section>
+
+ <section>
+  <title>Kirchhoff's second law</title>
+  <p>
+   We use <m>q</m> to denote the charge (in colombs), <m>i</m> to denote the current (in amperes). In a single-loop or series circuit, the sum of the voltage drops across an inductor, resistor, and capacitor is equal to the impressed voltage <m>E</m>. 
+   <table>
+    <title>Voltage drop for different electrical components</title>
+    <tabular halign="center">
+     <row header="yes" bottom="minor">
+      <cell></cell>
+      <cell><em>Inductance</em></cell>
+      <cell><em>Resistance</em></cell>
+      <cell><em>Capacitance</em></cell>
+     </row>
+     <row>
+      <cell><em>Units</em></cell>
+      <cell>henries <m>h</m></cell>
+      <cell>Ohms <m>\Omega</m></cell>
+      <cell>farads <m>f</m></cell>
+     </row>
+     <row>
+      <cell><em>Electrical law</em></cell>
+      <cell>Faraday's law<br/> <m>V=L \dfrac{\mathrm{d}i}{\mathrm{d}t}</m></cell>
+      <cell>Ohm's law <br/> <m>V=Ri</m></cell>
+      <cell>Capacitance law<br/> <m>V=\dfrac{1}{C}q</m></cell>
+     </row>
+    </tabular>
+   </table>
+   <figure xml:id="fig-tikz">
+    <image source="images/circuit" width="60%">
+     <description><p>A circuit with an electrical source, an inductor, a resistor, and a capacitor in a loop back to the electrical source.</p></description>
+     <caption>A simple circuit with an electrical source, an inductor, a resistor, and a capacitor.</caption>
+    </image>
+   </figure>
+   These electrical components connected in different ways lead to a variety of different possible differential equations:
+   <ol>
+    <li>(<m>LR</m> circuit): <m>Li'+Ri=E(t)</m></li>
+    <li>(<m>RC</m> circuit): <m>Rq'+\dfrac{1}{C}q=E(t)</m></li>
+    <li>(<m>LRC</m> circuit): later!</li>
+   </ol>
+   <example>
+    <p>
+     Write a differential equation for the <m>LR</m> circuit for the current <m>i</m> when <m>L=2 \text{h}</m>, <m>R=5 \Omega</m>, <m>i(0)=3 \text{amp}</m>, and the impressed voltage is <m>E(t)=t \text{volt}</m>.
+    </p>
+   </example>
+
+   <example>
+    <p>
+     The <m>RC</m> circuit with resistance <m>R=1 \Omega</m> and capacitance <m>C=\dfrac{1}{2} \text{f}</m> when connected to an AC power source <m>E(t)=\sin(5t)</m> has the following differential equation for charge <m>q</m>: 
+     <md>q'+2q=\sin(5t).</md>
+     It can be shown that a general solution of this differential equation is <m>q(t)=c_1 e^{-2t}+\dfrac{2}{29}\sin(5t)-\dfrac{5}{29}\cos(5t)</m>. Plot the solution for various choices of the parameter <m>C</m>.
+        <sage language='python'>
+    <input>
+# Python code for plotting the RC circuit solution.
+#
+# First, import numpy and plotting package
+import numpy as np
+from matplotlib import pyplot as plt
+# Clear the old axis so the pictures don't lie on top of each other
+plt.cla()
+
+# Set our parameters. They will not vary in the solution (although we could do that).
+c1=5
+
+# Define the solution function here.
+def rcsoln(t):
+    return c1*exp(-2*t)+(2/29)*sin(5*t)-(5/29)*cos(5*t)
+
+# Now we need a list of time values for the t-axis of the plot, which we would like over the interval from 0 to TMAX.
+# The third argument to np.arange is the stepsize! Shrinking this increases accuracy of the plot.
+TMAX=10
+ts=np.arange(0,TMAX,0.01)
+
+# Now we need a list of y-values for the y-axis of the plot, i.e. the collection of outputs of my malthus function for each of the t-values in the list named ts I created above
+ys=[rcsoln(t) for t in ts]
+
+# Now we can plot
+plt.title("RC circuit solution")
+plt.ylabel(r"$q(t)$")
+plt.xlabel(r"$t$")
+plt.plot(ts,ys,label=r'$c_1=$'+str(c1), color="Black")
+
+# Generate the legend
+plt.legend()
+
+# Show the plot
+plt.show()
+    </input>
+   </sage>
+    </p>
+   </example>
+  </p>
+ </section>
+
+ <section xml:id="section_secondorderchemical">
+  <title>Second-order chemical reactions</title>
+  <p>
+    The Law of Mass states that when temperature is held constant, the range of change in the amount of a compound is proportional to the product of the remaining amounts of chemicals used to form it. Suppose that we start with <m>a</m> units of chemical <m>A</m> and <m>b</m> units of chemical <m>B</m>. For every <m>M</m> units of chemical <m>A</m> used, <m>N</m> units of chemical <m>B</m> are used when forming a compound <m>X</m>. The rate of change in the compound <m>X</m> formed is given by the differential equation
+    <md>\dfrac{\mathrm{d}X}{\mathrm{d}t}=k\underbrace{\left( a - \dfrac{M}{M+N} X \right)}_{\text{remaining amount of } A}\underbrace{\left( b-\dfrac{N}{N+M}X \right)}_{\text{remaining amount of } B},</md>
+    where <m>k</m> is the constant of proportionality.
+   <example>
+    <p>
+     Suppose two chemicals <m>A</m> and <m>B</m> are combined to form a compound <m>X</m>. Initially, there are <m>60</m> units of <m>A</m> and <m>40</m> units of <m>B</m>. For every <m>2</m> units of <m>B</m>, <m>3</m> units of <m>A</m> are used to form <m>X</m>. After <m>10</m> minutes, <m>5</m> units of <m>X</m> are present. Write a boundary-value problem for <m>X</m>, using time in minutes.
+    </p>
+   </example>
+  </p>
+ </section>
+ <section xml:id="sec_mixtures">
+  <title>Mixtures</title>
+  <p>
+   The rate of change in the amount of a substance in a well-mixed solution is equal to the input rate in of that substance minus its output rate. Let <m>A(t)</m> denote the amount of a substance at time <m>t</m>. Further, let <m>f_i</m> be the flow in, let <m>c_i</m> be the concentration in, and let <m>f_0</m> be the flow out. Notice that the rate <m>R=(\text{flow})(\text{concentration})</m>. So the volume in the tank is given by 
+   <table>
+    <title>Volume in the tank at integer time steps</title>
+    <tabular halign="center">
+     <row header="yes" bottom="minor">
+      <cell><em>Time</em></cell>
+      <cell><em>Volume</em></cell>
+     </row>
+     <row>
+      <cell><m>0</m></cell>
+      <cell><m>V_0=\text{initial volume}</m></cell>
+     </row>
+     <row>
+      <cell><m>1</m></cell>
+      <cell><m>V_0+(f_i-f_0)</m></cell>
+     </row>
+     <row>
+      <cell><m>2</m></cell>
+      <cell><m>[V_0+(f_i-f_0)]+(f_i-f_0)=V_0+2(f_i-f_0)</m></cell>
+     </row>
+     <row>
+      <cell><m>\vdots</m></cell>
+      <cell><m>\vdots</m></cell>
+     </row>
+     <row>
+      <cell><m>t</m></cell>
+      <cell><m>V_0+t(f_i-f_0)</m></cell>
+     </row>
+    </tabular>
+   </table>
+   Then the rate of change of <m>A</m> is given by
+   <md>
+    <mrow>\dfrac{\mathrm{d}A}{\mathrm{d}t} = R_i-R_0 \amp = f_i c_i - f_0 c_0</mrow>
+    <mrow>\amp = f_ic_i - f_0 \left( \dfrac{\text{mass}}{\text{volume}} \right)</mrow>
+    <mrow>\amp = f_ic_i - f_0 \left( \dfrac{A}{V_0+(f_i-f_0)t} \right)</mrow>
+   </md>
+   <example>
+    <p>
+     An <m>800 \mathrm{gal}</m> tank is filled with <m>500 \mathrm{gal}</m> containing <m>80 \mathrm{lb}</m> of salt. Brine containing <m>5 \dfrac{\mathrm{lb}}{\mathrm{gal}}</m> is pumped into the tank at a rate of <m>6 \dfrac{\mathrm{gal}}{\mathrm{min}}</m>. The well-mixed solution is then pumped out at a rate of <m>8 \dfrac{\mathrm{gal}}{\mathrm{min}}</m>. Find a differential equation for the amount <m>A(t)</m> of salt in the tank at time <m>t</m> (in minutes).
+    </p>
+   </example>
+  </p>
+ </section>
+ <section>
+  <title>Verhulst ("logistic") and Gompertz population models</title>
+  <p>
+   Consider a population that has a maximum possible size, called the <em>carrying capacity</em> of the population. We will use a constant <m>K</m> to denote the carrying capacity. However, carrying capacity of a population can change in many ways, such as from a lack of resources, the spread of disease, or the development of a new technology, but we will only consider populations having a constant carrying capacity here. The Malthusian model of <xref ref="sec_malthusiangrowth" /> is a crude population model that does allow carrying capacity to be considered. We consider below two population models that take carrying capcity into account.
+  </p> 
+  <subsection>
+   <title>Verhulst ("logistic") model</title>
+    <p>
+     The Verhult model (also called "logistic model") says that the rate of change of the size of the population is proportional to the size of the population multiplied by the proportion that the environment can handle
+   <md>\dfrac{\mathrm{d}P}{\mathrm{d}t} = rP\left(1-\dfrac{P}{K}\right),</md>
+   where the proportionality constant <m>r</m> is the growth rate and <m>K</m> is the carrying capacity.
+   </p>
+    <p>
+     If the population at time <m>t</m>, <m>P(t)</m>, is less than <m>K</m>, then we observe that the proportion of population that the environment can handle is <m>\dfrac{P(t)}{K} &lt; 1</m>. From this we conclude that the remaining proportion of the population the environment can handle is <m>1-\dfrac{P(t)}{K} &gt; 0</m>. In other words, the population can still grow whenever <m>P(t) &lt; K</m>. Similarly, if the population is larger than <m>K</m> at time <m>t</m>, then we conclude that <m>1-\dfrac{P(t)}{K} &lt; 0</m>, meaning the population must shrink since its size is beyond the carrying capacity <m>K</m> of the environment. We summarize this in the following table.
+     <table>
+      <title>Signs of <m>\dfrac{\mathrm{d}P}{\mathrm{d}t}</m> in the Verhulst model</title>
+      <tabular halign="center">
+       <row header="yes" bottom="minor"> 
+        <cell><em>Relation between <m>P</m> and <m>K</m></em></cell>
+        <cell><em>Sign of <m>1-\dfrac{P(t)}{K}</m></em></cell>
+        <cell><em>Sign of <m>\dfrac{\mathrm{d}P}{\mathrm{d}t}</m></em></cell>
+        <cell><em>Effect on solution curve</em></cell>
+       </row>
+       <row>
+        <cell><m>P(t)&lt; K</m></cell>
+        <cell><m>+</m></cell>
+        <cell><m>+</m></cell>
+        <cell>Increasing at time <m>t</m></cell>
+       </row>
+       <row>
+        <cell><m>P(t)=K</m></cell>
+        <cell><m>0</m></cell>
+        <cell><m>0</m></cell>
+        <cell>Unchanging at time <m>t</m></cell>
+       </row>
+       <row>
+        <cell><m>P(t) &gt; K</m></cell>
+        <cell><m>-</m></cell>
+        <cell><m>-</m></cell>
+        <cell>Decreasing at time <m>t</m></cell>
+       </row>
+      </tabular>
+     </table>
+    </p> 
+  </subsection>
+  <subsection>
+   <title>Gompertz model</title>
+   <p>
+    The Gompertz model works similarly to the Verhulst model, except instead of multiplying by <m>1-\dfrac{P(t)}{K}</m>, we instead multiply by <m>\ln\left(\dfrac{K}{P(t)}\right)</m> 
+    <md>\dfrac{\mathrm{d}P}{\mathrm{d}t}=rP\ln\left(\dfrac{K}{P(t)}\right).</md>
+    This model captures the carrying capacity idea because if <m>P(t) &lt; K</m>, then <m>\dfrac{K}{P(t)} &gt; 1</m>. Since the logarithm function is positive for any input larger than <m>1</m>, we obtain that <m>\ln\left(\dfrac{K}{P(t)}\right)</m> is a positive quantity, so the right-hand side of the differential equation will also be positive.
+   </p>
+  </subsection>
+ </section>
+ <section>
+  <title>Initial value problems</title>
+  <subsection>
+    <title>Types of solutions</title>
+    <p>
+     <definition>
+      <title>Explicit versus implicit solutions</title>
+      <p>
+       An <em>explicit solution</em> to <xref ref="def_firstorderode" /> on an interval <m>I</m> is a function of <m>t</m> such that when substituted into <xref ref="def_firstorderode" /> results in an identity. We will see later that all linear ODEs will give us an explicit solution, but for higher-order linear ODEs, some explicit solutions can be expressed in multiple different ways. An <em>implicit solution</em> to <xref ref="def_firstorderode" /> on a region <m>R</m> in the plane is a relation <m>\phi(t,y)=c</m> that when differentiated implicitly results in the ODE <xref ref="def_firstorderode" />.
+      </p>
+     </definition>
+     <example>
+      <p>
+       Determine if the following functions represent an explicit solution to the differential equation <m>ty'+y=4t</m> on the interval <m>t>0</m>.
+       <ol>
+        <li><m>f(t)=t^2</m></li>
+        <li><m>g(t)=\dfrac{1}{t}+2t</m></li>
+       </ol>
+      </p>
+     </example>
+     <example>
+      <p>
+       Determine if <m>e^y=ty</m> represents an implicit solution to <m>\dfrac{\mathrm{d}y}{\mathrm{d}t}=\dfrac{y}{(y-1)t}</m> on <m>R=\{(t,y) \colon t>0, y>1 \}</m>. 
+      </p>
+     </example>
+    </p>
+  </subsection>
+  <subsection>
+   <title>Initial value problems</title>
+   <p>
+    Solutions to <xref ref="def_firstorderode" /> can also be described by the number of parameters (arbitrary constants) that show up in its solution. For a linear ODE, a family of solutions represents all possible solutions.
+    <table xml:id="table_firstorderexamples">
+     <title>Some first-order ODEs and their explicit solutions</title>
+     <tabular halign="center">
+      <row header="yes" bottom="minor"> 
+       <cell><em>ODE</em></cell>
+       <cell><em>Solution</em></cell>
+      </row>
+      <row>
+       <cell><m>y'+2ty^2=0</m></cell>
+       <cell><m>y(t)=\dfrac{1}{x^2+c}</m></cell>
+      </row>
+      <row>
+        <cell><m>\dfrac{\mathrm{d}B}{\mathrm{d}t}=k(B-70)</m></cell>
+        <cell><m>B(t)=70+ce^{kt}</m></cell>
+      </row>
+      <row>
+       <cell><m>(t+1)y'-ty=0</m></cell>
+       <cell><m>y(t)=\dfrac{ce^t}{t+1}</m></cell>
+      </row>
+     </tabular>
+    </table>
+    Each of the solutions in Table <xref ref="table_firstorderexamples" /> depend on a constant <m>c</m>, which may change while keeping the resulting function a solution of the differential equation. Unless we have more information to work with, we cannot determine a value for <m>c</m>. That is precisely the role of an <em>initial value problem</em>, which is a differential equation equipped with some values of the solution function (and possibly its derivatives) at an initial point <m>t_0</m>. We express a first-order initial value problem based on <xref ref="def_firstorderode" /> as 
+    <md xml:id="def_firstorderivp" number="yes">y'=f(t,y), \quad y(t_0)=y_0</md>
+    </p>
+    <p>
+     Consider the differential equation <m>y'=y^2</m> with the one-parameter family of solutions given by <m>y(t)=\dfrac{1}{C-t}</m>. Notice that <m>y(t)=0</m> is also a solution, often called the <em>trivial solution</em>. However, we cannot obtain the trivial solution by a choice of <m>C</m> in the solution family.
+     <sage language='python'>
+      <input>
+# Plotting 1/(C-t)
+#
+# First, import numpy and plotting package
+import numpy as np
+from matplotlib import pyplot as plt
+# Clear the old axis so the pictures don't lie on top of each other
+plt.cla()
+
+# Define the solution function here.
+def soln(C,t):
+    return 1/(C-t)
+
+ts1left=np.arange(-8,0.99,0.01)
+ts1right=np.arange(1.01,8,0.01)
+ts2left=np.arange(-8,1.99,0.01)
+ts2right=np.arange(2.01,8,0.01)
+ts3left=np.arange(-8,2.99,0.01)
+ts3right=np.arange(3.01,8,0.01)
+ts4left=np.arange(-8,3.99,0.01)
+ts4right=np.arange(4.01,8,0.01)
+
+# Now we need a list of y-values for the y-axis of the plot, i.e. the collection of outputs of my malthus function for each of the t-values in the list named ts I created above
+ys1left=[soln(1,t) for t in ts1left]
+ys1right=[soln(1,t) for t in ts1right]
+ys2left=[soln(2,t) for t in ts2left]
+ys2right=[soln(2,t) for t in ts2right]
+ys3left=[soln(3,t) for t in ts3left]
+ys3right=[soln(3,t) for t in ts3right]
+ys4left=[soln(4,t) for t in ts4left]
+ys4right=[soln(4,t) for t in ts4right]
+
+
+# Now we can plot
+plt.ylim([-8,8])
+plt.title(r"Plots of $y(t)$ for various choices of $C$")
+plt.ylabel(r"$y(t)$")
+plt.xlabel(r"$t$")
+plt.plot(ts1left,ys1left,label=r'$C=1$', color="Black")
+plt.plot(ts1right,ys1right, color="Black")
+plt.plot(ts2left,ys2left,label=r'$C=2$', color="Black", linestyle='dashed')
+plt.plot(ts2right,ys2right, color="Black", linestyle='dashed')
+plt.plot(ts3left,ys3left,label=r'$C=3$', color="Black", linestyle='dotted')
+plt.plot(ts3right,ys3right, color="Black", linestyle='dotted')
+plt.plot(ts4left,ys4left,label=r'$C=4$', color="Black", linestyle='dashdot')
+plt.plot(ts4right,ys4right, color="Black", linestyle='dashdot')
+
+# Generate the legend
+plt.legend()
+
+# Show the plot
+plt.show()
+     </input>
+    </sage>
+   </p>
+   <p>
+    <example>
+        <p>
+    Consider the differential equation <m>y'=4y</m> with the one-parameter family of solutions given by <m>y(t)=ce^{4t}</m>. Suppose we want a particular solution curve in the family of solutions that goes through the point <m>(3,17)</m>, or in terms of the solution <m>y</m>, it obeys the <em>initial condition</em> <m>y(3)=17</m>. The general solution of this differential equation is <m>y(t)=ce^{4t}</m>. Find the value of <m>c</m> that plots the solution obeying the initial condition and alter the code in the box below to plot the correct solution.In the code box below, plot the solution corresponding to the initial condition given that the general solution 
+     <sage language='python'>
+     <input>
+# Plotting c*e^(4t)
+#
+# First, import numpy and plotting package
+import numpy as np
+from matplotlib import pyplot as plt
+# Clear the old axis so the pictures don't lie on top of each other
+plt.cla()
+
+# Define the value of c here:
+c=0.01
+
+# Define the solution function here.
+def soln(t):
+    return c*exp(4*t)
+
+ts=np.arange(0,4,0.01)
+ys=[soln(t) for t in ts]
+
+
+# Now we can plot
+plt.title(r"Plot of $ce^{4t}$ with $c=$"+str(c))
+plt.ylabel(r"$y(t)$")
+plt.xlabel(r"$t$")
+plt.plot(ts,ys,color='Black')
+
+plt.scatter([3],[17],marker='x',color='red')
+
+# Show the plot
+plt.show()
+      </input>
+     </sage>
+     </p>
+    </example>
+    <example>
+     <p>
+      Consider <m>y'=3y^{\frac{2}{3}}</m> with the one-parameter family of solutions given by <m>y(t)=(t+c)^3</m>. Find all solutions that satisfy the initial condition <m>y(0)=0</m>.
+     </p>
+    </example>
+    The previous example raises two fundamental questions that we can ask about any initial value problem:
+    <ol>
+     <li><em>Existence</em> - is there a solution matching my initial data?</li>
+     <li><em>Uniqueness</em> - is it the only such solution?</li>
+    </ol>
+    <theorem>
+     <title>Existence and uniqueness for first-order linear IVPs</title>
+     <p>
+      Consider the linear IVP we obtain from <xref ref="def_firstorderlinearode" /> and <xref ref="def_firstorderivp" /> as guides:
+      <md xml:id="def_firstorderlinearivp" number="yes">a_1(t)y'+a_0(t)y=g(t), \quad y(t_0)=y_0.</md>
+      Rewriting it into <em>standard form</em>
+      <md>y'+P(t)y=Q(t), \quad y(t_0)=y_0,</md>
+      where <m>P(t)=\dfrac{a_0(t)}{a_1(t)}</m> and <m>Q(t)=\dfrac{g(t)}{a_1(t)}</m> implies that <xref ref="def_firstorderlinearivp" /> is guaranteed to have a unique solution if <m>P</m> and <m>Q</m> are both continuous on an open interval <m>I</m> containing <m>t_0</m>. The largest such interval <m>I</m> is called the <em>interval of definition</em> for the IVP <xref ref="def_firstorderlinearivp" />.
+     </p>
+    </theorem>
+    <example>
+     <p>
+      Find the largest interval where the initial value problem is guaranteed a unique solution.
+      <ol>
+       <li><m>(t-2)y'+(t-5)y=4\ln(|t|), \quad y(1)=2</m></li>
+       <li><m>\sin(t)y'+7y=t^2, \quad y(2)=-1</m></li>
+      </ol>
+     </p>
+    </example>
+    When solving a linear IVP, the interval where our solutions are defined always matters! Our solution may also not be defined the same way over the entire interval. 
+   </p>
+   <example>
+    <p>
+     Consider the IVP 
+     <md>y'+y=\mathcal{U}(t-2), \quad y(0)=1,</md>
+     where <m>\mathcal{U}(t-2)=\left\{ \begin{align*} 0, \amp \quad 0 \le t \lt 2 \\ 1, \amp \quad t \ge 2 \end{align*}\right.</m>. Its solution is of the form <m>y(t)=\left\{ \begin{align*} e^{-t}, \amp \quad 0 \le t \lt 2 \\ 1+e^{-(t-2)}+e^{-t}, \amp \quad t \ge 2 \end{align*}\right.</m>.
+    </p>
+   </example>
+    <theorem>
+     <title>Existence and uniqueness for first-order (nonlinear) IVPs</title>
+     <statement>
+      <p>
+       The IVP <xref ref="def_firstorderivp" /> is guaranteed to have a unique solution on a region <m>R</m> in the plane containing the point <m>(t_0,y_0)</m> provided that both <m>f</m> and <m>\dfrac{\partial f}{\partial y}</m> are continuous on <m>R</m>.
+      </p>
+     </statement>
+     <proof>
+      <p>later!</p>
+     </proof>
+    </theorem>
+    <example>
+     <p>
+      Consider the differential equation <m>\dfrac{\mathrm{d}y}{\mathrm{d}t}=\sqrt{16-t^2-y^2}</m>. Determine a region <m>R</m> in the plane for the differential equation to have a unique solution through each point <m>(t_0,y_0)</m>. Plot the region.
+      <sage language='python'>
+       <input>
+# Plotting a region defined by f(t,y)&lt;c
+#
+# First, import numpy and plotting package
+import numpy as np
+from matplotlib import pyplot as plt
+# Clear the old axis so the pictures don't lie on top of each other
+plt.cla()
+
+#stepsize 
+## increase this number to speed up the calculation and lose accuracy
+## decrease this number to take longer but make a better picture
+h=0.03
+
+#choose c
+c=16
+
+# choose the function f(t,y) that you want the plot of f(t,y)&lt;c for
+#
+def f(t,y):
+    return t*t+y*y
+
+ts=np.arange(-5,5,h)
+ys=np.arange(-5,5,h)
+goodts=[]
+goodys=[]
+for t in ts:
+    for y in ys:
+        if(f(t,y) &lt; c):
+            goodts.append(t)
+            goodys.append(y)
+
+plt.xlabel(r"$t$")
+plt.ylabel(r"$y$")
+plt.scatter(goodts,goodys)
+plt.show()
+       </input>
+      </sage>
+     </p>
+    </example>
+  </subsection>
+ </section>
+ <section>
+  <title>Behavior of solutions without solving</title>
+  <p>
+   While most differential equations can't be solved by hand, that doesn't mean we can't describe the behavior of their solutions.
+  </p>
+  <subsection>
+   <title>Direction fields</title>
+   <p>
+    <definition>
+     <title>Direction fields (also called slope fields)</title>
+     <p>
+      A <em>direction field</em> for <xref ref="def_firstorderode" /> is a collection of slopes at points <m>(t,y)</m> on solution curves. Visually, direction fields represent the approximate "flow of solutions" among a family of solution curves.
+     </p>
+    </definition>
+   </p>
+   <p>
+    We now consider the differential equation <m>ty'=y^2+1</m>. First isolate <m>y'</m> to obtain <m>y'=\dfrac{y^2+1}{t}</m>. We see that we have put this differential equation into the form <xref ref="def_firstorderode" /> with <m>f(t,y)=\dfrac{y^2+1}{t}</m>. That function <m>f</m> gives us the slope at each point <m>(t,y)</m> in the plane. It turns out we can write an explicit general solution as <m>y(t)=\tan(c+\log(t))</m>. We now use this to explore the initial value problem <m>ty'=y^2+1, \quad y(2)=1</m>.
+    <sage>
+     <input>
+import warnings
+warnings.filterwarnings("ignore")
+t = var('t')
+y = var('y')
+c = var('c')
+ysol = tan(c+log(t))
+show(ysol)
+p1 = plot_slope_field( (y*y+1)/t, (t,-3,3), (y,-3,3), axes_labels=['$t$', '$'+'\\mathrm{tan}(c+\\mathrm{log}(t))'+'$'])
+
+#choose c
+cvalue=2
+print("with c="+str(cvalue))
+# Now we would like to plot particular solutions on top of the slope field.
+# Let us plot the solution corresponding to the initial data y(2)=1:
+# This gives us 
+# 1 = y(2) = tan(c+log(2))
+# and solving this for c gives
+# c=arctan(1)-ln(2)=pi/4 - ln(2)
+# substitute this value for c in for the variable cvalue above
+p1 = p1 + plot(ysol(c=cvalue),t,0.2,3, ymin=-3, ymax=3)
+p1 = p1+point((2, 1),marker='x',color='red',size="50")
+p1
+     </input>
+    </sage>
+   </p>
+   <p>
+    <example>
+     <p>
+      Modify the above code to plot the slope field and solution of the IVP <m>y'=y^2\sin(t), \quad y(1)=-1</m> which has general solution <m>y(t)=\dfrac{1}{c+\cos(t)}</m> <sage></sage>
+     </p>
+    </example>
+   </p>
+  </subsection>
+  <subsection>
+   <title>Euler's method</title>
+   <p>
+    From calculus, we know that tangent lines (or linear approximation) can be used to estimate a differentiable function at some value <m>t=a</m>. In a similar manner, we would like to approximate the solution of an IVP.
+    <algorithm>
+     <title>Euler's method</title>
+     <p>
+      Consider the IVP <xref ref="def_firstorderivp" />. <em>Euler's method with stepsize <m>h</m></em> consists of applying the recurrence relation
+      <md>y_{n+1}=y_n+hf(t_n,y_n), \quad n=0,1,2,\ldots</md>
+      to calculate the successive approximations <m>y_1, y_2, \ldots</m> to exact solution values <m>y(1_1),y(t_2),\ldots</m> at the points <m>t_1, t_2, \ldots</m>, respectively.
+     </p>
+     <p>
+      Consider the equally spaced points <m>t_n:=t_0+nh, \quad n=0,1,2,\ldots</m>. At the point <m>(t_0,y_0)</m>, the slope of the solution to <xref ref="def_firstorderivp" /> is <m>f(x_0,y_0)</m>. The corresponding tangent line at <m>(t_0,y_0)</m> is <m>y=y_0+(t-t_0)f(t_0,y_0)</m>. Using this line to estimate <m>y(t_1)</m> where <m>t_1=t_0+h</m>, we have 
+      <md>y(t_1) \approx y_1 := y_0 + h f(t_0,y_0).</md>
+      Similarly, we can use the new line to approximate <m>y(t_2)</m> where <m>t_2=t_0+2h=t_1+h</m> to get
+      <md>y(t_2)\approx y_2:=y_1+hf(t_1,y_1).</md>
+      And so on. Thus, we have the recurrence relations for <m>n=0,1,2,\ldots</m>
+      <md>t_{n+1}=t_n+h,</md>
+      and
+      <md>y_{n+1}=y_n+hf(t_n,y_n),</md>
+      which are seeded with the initial value problem's given data <m>y(t_0)=y_0</m>.
+     </p>
+    </algorithm>
+    <example>
+     <p>
+      Use Euler's method with <m>h=0.5</m> and <m>h=0.2</m> to approximate the solution of the IVP
+      <md>y'=f(t,y):=y-t^2+1, \quad y(0)=0.5</md>
+      for <m>0 \le t \le 2</m>. It turns out that the exact solution to this IVP is <m>y(t)=(t+1)^2-0.5e^t</m>. We will learn how to find such solutions later on.<sage language="python"> </sage>
+     </p>
+    </example>
+   </p>
+  </subsection>
+  <subsection>
+   <title>Autonomous ODEs</title>
+   <p>
+    Recall the form of an autonomous first-order ODE <xref ref="def_firstorderautonomous" />. Since the independent variable <m>t</m> does not appear in the right-hand side explicitly, we can study the behavior of its solutions and sketch typical solution curves without finding an explicit or implicit solution. Recall from calculus that we can sketch a function by knowing where it is increasing and decreasing, which we find by locating the <em>critical points</em>, i.e. the values of <m>y</m> so that <m>y'=f(y)=0</m>. There are three types of critical points. A critical point <m>y=c</m> is...
+    <ol>
+     <li><em>asymptotically stable</em> if as <m>t \rightarrow \infty</m>, the solution curve tends toward the horizontal line <m>y=c</m>,</li>
+     <li><em>unstable</em> if as <m>t \rightarrow \infty</m>, the solution curve moves away from the horizontal line <m>y=c</m>, and</li>
+     <li><em>semi-stable</em> if the solution curve moves either towards or away from the line <m>y=c</m>, depending on on whether the solution it is above or below that line at time <m>t</m>.</li>
+    </ol>
+    <example>
+     <p>Find the critical points of the differential equation <m>y'=y^3-4y^2</m>.</p>
+    </example>
+    <!-- the old Remark 1.3.11 goes here --> 
+    <example>
+     <p>
+      Consider the differential equation <m>\dfrac{\mathrm{d}y}{\mathrm{d}t}=y^2(y^4-16)</m>. 
+      <ol>
+        <li>Find the critical points. Classify each critical point as either asymptotically stable, unstable, or semi-stable. Sketch the appropriate phase portrait.</li>
+        <li>Sketch the typical solution curves in regions in the plane determined by the graphs of the equilibrium solutions.</li>
+      </ol>
+     </p>
+    </example>
+    <example xml:id="ex_chemicalexamplesautonomous">
+     <p>
+      Suppose two chemicals <m>A</m> and <m>B</m> are combined to form the compound <m>X</m> as was studied in <xref ref="section_secondorderchemical" />. Initially, there are <m>30</m> units of <m>A</m> and <m>40</m> units of <m>B</m>. For every <m>2</m> units of <m>B</m>, <m>3</m> units of <m>A</m> are used to form the compound <m>X</m>. It is observed that <m>6</m> units of <m>X</m> are formed after <m>10</m> minutes. 
+      <ol>
+       <li>Set up the boundary value problem.</li>
+       <li>Find the order of the differential equation. Is it (non)linear, (non)automous, and (non)separable?</li>
+       <li>What is the limiting amount of <m>X</m> after a long time? How much of <m>A</m> and <m>B</m> remain after a long time?</li>
+      </ol>
+     </p>
+    </example>
+   </p>
+  </subsection>
+ </section>
+ <section>
+  <title>Separable differential equations</title>
+  <p>
+    Recall from <xref ref="sec_firstorderodes"/> that first-order separable differential equations take the form <xref ref="def_firstorderseparableode" />. We solve such ODEs by the <em>separation of variables algorithm</em>.
+    <algorithm>
+     <p>
+      To solve <xref ref="def_firstorderseparableode" />, we "illegally" treat <m>\dfrac{\mathrm{d}y}{\mathrm{d}t}</m> as a fraction and rewrite it as
+      <md>\dfrac{1}{h(y)} \mathrm{d}y = g(t) \mathrm{d}t</md>
+      and apply an integral on the left to each side to get
+      <md>\displaystyle\int \dfrac{1}{h(y)} \mathrm{d}y = \displaystyle\int g(t) \mathrm{d}t.</md>
+      This is technically an illegal mathematical step because the operation of integration includes its differential, but it nonetheless still works!
+     </p>
+    </algorithm>
+    <example><p>Classify and solve <m>ay'+by=0</m>.</p></example>
+    <example>
+     <p>
+      Continuing with <xref ref="ex_chemicalexamplesautonomous" />, we ask what amount of the compound <m>X</m> there is after <m>20</m> minutes.
+     </p>
+    </example>
+    <example>
+     <p>
+      Consider the differential equation <m>4t\ln(y)\dfrac{\mathrm{d}y}{\mathrm{d}t} = \dfrac{\sqrt{t^2-4}}{y^3}</m>.
+      <ol>
+       <li>Find the order of the differential equation. Is it (non)linear, (non)automous, and (non)separable?</li>
+       <li>What method(s) can you use to solve this differential equation?</li>
+       <li>Find an implicit solution to the differential equation.</li>
+      </ol>
+     </p>
+    </example>
+    <example>
+     <p>
+      Consider the differential equation <m>2y\dfrac{\mathrm{d}y}{\mathrm{d}t} = \dfrac{\sec(y^2)}{1+t^2}, \quad y(1)=0</m>.
+      <ol>
+       <li>Find the order of the differential equation. Is it (non)linear, (non)automous, and (non)separable?</li>
+       <li>What method(s) can you use to solve this differential equation?</li>
+       <li>Solve the initial value problem.</li>
+      </ol>
+     </p>
+    </example>
+  </p>
+ </section>
+ <section>
+  <title>First-order linear nonohomogeneous ODEs</title>
+  <p>
+   Recall a first-order ODE is called linear if it can be written in the form <xref ref="def_firstorderlinearode"/>, where it is called homogeneous whenever <m>g(t)=0</m> for all <m>t</m> and nonohomogeneous whenenever there exists some <m>t</m> such that <m>g(t)\neq 0</m>. Notice that if <xref ref="def_firstorderlinearode"/> is homogeneous, then it is separable and if <xref ref="def_firstorderlinearode"/> is not homogeneous, then it is not separable. However, there always exists a function <m>\mu</m>, called the <em>integrating factor</em> that when multiplied to both sides allows us to integrate both sides with respect to <m>t</m>.
+   <theorem>
+    <statement>
+     <p>
+      The integrating factor for <xref ref="def_firstorderlinearode"/> is <m>\mu(t)=e^{\int P(t)\mathrm{d}t}</m>.
+     </p>
+    </statement>
+    <proof>
+     <p>later!</p>
+    </proof>
+   </theorem>
+   <algorithm xml:id="alg_integratingfactormethod">
+    <title>Integrating factor method</title>
+    <p>
+     To solve <xref ref="def_firstorderlinearode"/>, we do the following steps.
+     <ol>
+      <li>Put <xref ref="def_firstorderlinearode"/> into standard form.</li>
+      <li>Find the integrating factor <m>\mu</m>.</li>
+      <li>Multiply both sides of <xref ref="def_firstorderlinearode"/> by <m>\mu</m>.</li>
+      <li>Rewrite the left-hand side using the product rule as <m>\dfrac{\mathrm{d}}{\mathrm{d}t} \Big[ \mu(t)y \Big]</m>, which will always happen if you computed <m>\mu</m> correctly.</li>
+      <li>Integrate both sides with respect to <m>t</m>.</li>
+      <li>Solve the resulting equation for <m>y</m>.</li>
+      <li>If you have an initial condition, then use it to find the constant of integration <m>C</m></li>
+     </ol>
+    </p>
+   </algorithm>
+   It is important to note that <xref ref="alg_integratingfactormethod" /> can only be done on equations of form <xref ref="def_firstorderlinearode" />. All solutions <m>y</m> of <xref ref="def_firstorderlinearode"/> take the form <m>y=y_h+y_p</m>, where <m>y_h</m> is the <em>homogeneous solution</em>, i.e. the solution of the homogeneous analogue of equation <xref ref="def_firstorderlinearode"/> obtained when the right-hand side is set equal to zero for all <m>t</m> and <m>y_p</m> solves <xref ref="def_firstorderlinearode"/> itself. This occurs because of the nature of the homogeneous solution: it disappears when substituted into the ODE (think about why that is)! 
+   <example>
+    <p>
+     Consider the initial value problem <m>(t+1)y'-ty=\dfrac{e^t}{1+t^2}, \quad y(0)=3</m>.
+     <ol>
+      <li>Find the order of the differential equation. Is it (non)linear, (non)automous, and (non)separable?</li>
+      <li>What method(s) can you use to solve this differential equation?</li>
+      <li>Solve the initial value problem.</li>
+     </ol>
+    </p>
+   </example>
+   <example>
+    <p>
+     Consider the differential equation <m>\cos(t)y'-2\sin(t)y=\sec^3(t)</m>.
+     <ol>
+      <li>Find the order of the differential equation. Is it (non)linear, (non)automous, and (non)separable?</li>
+      <li>What method(s) can you use to solve this differential equation?</li>
+      <li>Find an explicit solution to the differential equation.</li>
+     </ol>
+    </p>
+   </example>
+   <example>
+    <p>
+     Consider the differential equation <m>ty'+(t-4)y=8t^5e^{3t}</m>.
+     <ol>
+      <li>Find the order of the differential equation. Is it (non)linear, (non)automous, and (non)separable?</li>
+      <li>What method(s) can you use to solve this differential equation?</li>
+      <li>Find an explicit solution to the differential equation.</li>
+     </ol>
+    </p>
+   </example>
+   <example>
+    <p>
+     Recall <xref ref="sec_mixtures"/>. A <m>1200 \mathrm{gal}</m> tank is filled with <m>600 \mathrm{gal}</m> of pure water. Brine containing <m>5 \dfrac{\mathrm{lb}}{\mathrm{gal}}</m> of salt is pumped into the tank at a rate of <m>6 \dfrac{\mathrm{gal}}{\mathrm{min}}</m>. The well mixed solution is then pumped out at a rate of <m>3 \dfrac{\mathrm{gal}}{\mathrm{min}}</m>. Let <m>A(t)</m> represent the amount of salt in the tank.
+     <ol>
+      <li>Set up the IVP. Find the order of the differential equation. Is the differential equation (non)linear, (non)autonomous, (non)separable?</li>
+      <li>What method(s) can you use to solve this differential equation?</li>
+      <li>Solve the initial value problem.</li>
+     </ol>
+    </p>
+   </example>
+  </p>
+ </section>
+ <section>
+  <title>Exact equations</title>
+  <p>
+   In Calculus 3, we are often interested in level curves of the form <m>F(t,y)=C</m>, where <m>C</m> is an arbitrary constant. If we differentiate with respect to <m>t</m>, we get <m>\dfrac{\mathrm{d}}{\mathrm{d}t} F(t,y) = \dfrac{\mathrm{d}}{\mathrm{d}t} C</m> which simplifies (with "partial derivative" notation) to <m>\dfrac{\partial F}{\partial t} + \dfrac{\partial F}{\partial y} \dfrac{\mathrm{d}y}{\mathrm{d}t}=0</m>. Solving this for <m>\dfrac{\mathrm{d}y}{\mathrm{d}t}</m> then yields the differential equation
+   <md xml:id="eqn_exactode" number="yes">\dfrac{\mathrm{d}y}{\mathrm{d}t} = -\dfrac{\frac{\partial F}{\partial t}}{\frac{\partial F}{\partial y}} =: f(t,y).</md>
+   Some first-order nonlinear, nonseparable ODEs can be solved by hand. To do so, we interpret <xref ref="eqn_exactode" /> in <em>differential form</em> as
+   <md xml:id="eqn_differentialformode" number="yes">M(t,y)\mathrm{d}t + N(t,y) \mathrm{d}y = 0.</md>
+   We use <xref ref="eqn_differentialformode" /> to look for (implicit) solutions of the form <m>F(t,y)=C</m>.
+   <definition>
+    <title>Exact equations</title>
+    <p>
+     The differential form <xref ref="eqn_differentialformode" /> is said to be <em>exact</em> in a region <m>R</m> in the plane if there exists a function <m>F</m> such that <m>\dfrac{\partial F}{\partial t}=M</m> and <m>\dfrac{\partial F}{\partial y}=N</m> for all <m>(t,y) \in R</m>.
+    </p>
+   </definition>
+   <theorem>
+    <title>Test for exactness</title>
+    <p>
+     Suppose <m>M</m> and <m>N</m> have continuous first-order partial derivatives in a region <m>R</m> in the plane. Then <xref ref="eqn_differentialformode"/> is exact on <m>R</m> if and only if <m>\dfrac{\partial M}{\partial y}=\dfrac{\partial N}{\partial t}</m> for all <m>(t,y) \in R</m>.
+    </p>
+   </theorem>
+   <algorithm>
+    <p>
+     Let <xref ref="eqn_differentialformode" /> be exact. To solve it, we do the following.
+     <ol>
+      <li>Integrate <m>M</m> with respect to <m>t</m> to get <m>F(t,y)=\displaystyle\int M(t,y) \mathrm{d}t + g(y)</m> for some unknown function <m>g</m>.</li>
+      <li>Integrate <m>N</m> with respect to <m>y</m> to get <m>F(t,y)=\displaystyle\int N(t,y) \mathrm{d}y + h(t)</m>, for some unknown function <m>h</m>.</li>
+      <li>Compare like and unique terms to find <m>F(t,y)</m>.</li>
+      <li>Write an implicit solution of the form <m>F(t,y)=C</m>.</li>
+     </ol>
+    </p>
+   </algorithm>
+   <example>
+    <p>
+     Consider the differential form <m>\left(e^t \sin(y)+2t\right)\mathrm{d}t + \left(e^t \cos(y)+3 \right)\mathrm{d}y=0</m>.
+     <ol>
+      <li>Find the order of the differential equation. Is it (non)linear, (non)autonomous, and (non)separable?</li>
+      <li>What method(s) can you use to solve this differential equation?</li>
+      <li>Find an implicit solution.</li>
+     </ol>
+    </p>
+   </example>
+   <example>
+    <p>
+     Consider the differential form <m>\left(y^2+2ty\right)\mathrm{d}t - t^2 \mathrm{d}y=0</m>. Show this equation is not exact.
+    </p>
+   </example>
+   <definition>
+    <p>
+     If the differential form <xref ref="eqn_differentialformode" /> is not exact, but there is a function <m>\mu</m> so that <md>\mu(t,y)M(t,y)\mathrm{d}t + \mu(t,y)N(t,y)\mathrm{d}y=0,</md> then the function <m>\mu</m> is called an integrating factor for <xref ref="eqn_differentialformode" />. When using such an integrating factor, it is possible to gain or lose solutions.
+    </p>
+   </definition>
+   <theorem>
+    <p>
+     Suppose that the differential form <xref ref="eqn_differentialformode" /> is not exact.
+    </p> 
+    <p>
+     If <m>\dfrac{\frac{\partial M}{\partial y}-\frac{\partial N}{\partial t}}{N}</m> is continuous and depends only on <m>t</m>, then we can take the integrating factor to be
+     <md>\mu(t,y)\equiv \mu(t) = \exp \left( \displaystyle\int \dfrac{\frac{\partial M}{\partial y}-\frac{\partial N}{\partial t}}{N} \mathrm{d}t \right).</md>
+    </p>
+    <p>
+     If <m>\dfrac{\frac{\partial N}{\partial t} - \frac{\partial M}{\partial y}}{M}</m> is continuous and depends only on <m>y</m>, then we can take the integrating factor to be
+     <md>\mu(t,y)\equiv \mu(y) = \exp \left( \dfrac{\frac{\partial N}{\partial t} - \frac{\partial M}{\partial y}}{M} \right).</md>
+    </p>
+   </theorem>
+   <example>
+    <p>
+     Consider the differential form <m>\left(2t^2+y\right)\mathrm{d}t+\left(t^2y-t\right)\mathrm{d}y=0</m>.
+     <ol>
+      <li>Find the order of the differential equation. Is it (non)linear, (non)autonomous, and (non)separable?</li>
+      <li>What method(s) can you use to solve this differential equation?</li>
+      <li>Find an implicit solution.</li>
+     </ol>
+    </p>
+   </example>
+   <example>
+    <p>
+     Consider the differential form <m>2ty \mathrm{d}t+\left(y^2-3t^2\right)\mathrm{d}y=0</m>.
+     <ol>
+      <li>Find the order of the differential equation. Is it (non)linear, (non)autonomous, and (non)separable?</li>
+      <li>What method(s) can you use to solve this differential equation?</li>
+      <li>Find an implicit solution.</li>
+     </ol>
+    </p>
+   </example>
+   <example>
+    <p>
+     Consider the differential form <m>\left(3y+3y^3\right)\mathrm{d}t+\left(ty^2-t\right)\mathrm{d}y=0</m>.
+     <ol>
+      <li>Show that this equation is not exact.</li>
+      <li>Show that this equation becomes exact when both sides are multiplied by the integrating factor <m>\mu(t,y)=\dfrac{t^2}{y^2}</m>. Find an implicit solution.</li>
+     </ol>
+    </p>
+   </example>
+  </p>
+ </section>
+</chapter>

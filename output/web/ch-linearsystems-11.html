@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: default-modern                 *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Behavior of solutions without solving</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+<link href="_static/pretext/css/theme.css" rel="stylesheet" type="text/css">
+<link href="_static/pretext/css/ol-markers.css" rel="stylesheet" type="text/css">
+<script>
+var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
+  "tex": {
+    "inlineMath": [
+      [
+        "\\(",
+        "\\)"
+      ]
+    ],
+    "tags": "none",
+    "tagSide": "right",
+    "tagIndent": ".8em",
+    "packages": {
+      "[+]": [
+        "base",
+        "extpfeil",
+        "ams",
+        "amscd",
+        "color",
+        "newcommand",
+        "knowl"
+      ]
+    }
+  },
+  "options": {
+    "ignoreHtmlClass": "tex2jax_ignore|ignore-math",
+    "processHtmlClass": "process-math",
+    "renderActions": {
+      "findScript": [
+        10,
+        function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        },
+        ""
+      ]
+    }
+  },
+  "chtml": {
+    "scale": 0.98,
+    "mtextInheritFont": true
+  },
+  "loader": {
+    "load": [
+      "input/asciimath",
+      "[tex]/extpfeil",
+      "[tex]/amscd",
+      "[tex]/color",
+      "[tex]/newcommand",
+      "[pretext]/mathjaxknowl3.js"
+    ],
+    "paths": {
+      "pretext": "_static/pretext/js"
+    }
+  },
+  "startup": {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+  }
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="Ordinary Differential Equations">
+<meta property="book:author" content="Tom Cuchta">
+<meta property="book:author" content="Nick Wintz">
+<script src="_static/pretext/js/jquery.min.js"></script><script src="_static/pretext/js/pretext.js"></script><script src="_static/pretext/js/pretext_add_on.js?x=1"></script><!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = '7.13.5';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script src="_static/prefix-runtime.52176322e2c1dde5.bundle.js"></script><script src="_static/prefix-723.3e6434f80549315a.bundle.js"></script><script src="_static/prefix-runestone.bbf2283c5c1d4f99.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-723.3bccd435914aa0ff.css">
+<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.b12a7b3f0773ebcd.css">
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script src="_static/pretext/js/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><script>// Make *any* div with class 'sagecell-sage' an executable Sage cell
+// Their results will be linked, only within language type
+sagecell.makeSagecell({
+  "inputLocation": "div.sagecell-sage",
+  "linked": true,
+  "linkKey": "linked-sage",
+  "autoeval": false,
+  "languages": [
+    "sage"
+  ],
+  "evalButtonText": "Evaluate (Sage)"
+});
+</script><script>// Make *any* div with class 'sagecell-python' an executable Sage cell
+// Their results will be linked, only within language type
+sagecell.makeSagecell({
+  "inputLocation": "div.sagecell-python",
+  "linked": true,
+  "linkKey": "linked-python",
+  "autoeval": false,
+  "languages": [
+    "python"
+  ],
+  "evalButtonText": "Evaluate (Python)"
+});
+</script>
+</head>
+<body id="changeme" class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner"><div class="title-container">
+<h1 class="heading"><a href="my-great-book.html"><span class="title">Ordinary Differential Equations</span></a></h1>
+<p class="byline">Tom Cuchta, Nick Wintz</p>
+</div></div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><div class="ptx-navbar-contents">
+<button class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><div class="searchbox">
+<div class="searchwidget"><button id="searchbutton" class="searchbutton button" type="button" title="Search book"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8b6;</span><span class="name">Search Book</span></button></div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<div class="search-results-controls">
+<input aria-label="Search term" id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search term"><button title="Close search" id="closesearchresults" class="closesearchresults"><span class="material-symbols-outlined">close</span></button>
+</div>
+<h2 class="search-results-heading">Search Results: </h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div>
+<span class="nav-other-controls"><button id="light-dark-button" class="light-dark-button button" title="Dark Mode"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe51c;</span><span class="name">Dark Mode</span></button></span><span class="treebuttons"><a class="previous-button button" href="ch-linearsystems-10.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="ch-linearsystems.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="ch-linearsystems-12.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+</div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N} \newcommand{\Z}{\mathbb Z} \newcommand{\Q}{\mathbb Q} \newcommand{\R}{\mathbb R}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth2 focused" data-preexpanded-levels="0" data-max-levels="2"><ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-frontmatter"><div class="toc-title-box"><a href="frontmatter.html" class="internal"><span class="title">Front Matter</span></a></div></li>
+<li class="toc-item toc-chapter contains-active">
+<div class="toc-title-box"><a href="ch-linearsystems.html" class="internal"><span class="codenumber">1</span> <span class="title">First-order Differential Equations</span></a></div>
+<ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec_firstorderodes.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Classification of first-order ODEs</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec_malthusiangrowth.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Malthusian growth and decay</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch-linearsystems-5.html" class="internal"><span class="codenumber">1.3</span> <span class="title">Newton’s law of heating and cooling</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch-linearsystems-6.html" class="internal"><span class="codenumber">1.4</span> <span class="title">Kirchhoff’s second law</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section_secondorderchemical.html" class="internal"><span class="codenumber">1.5</span> <span class="title">Second-order chemical reactions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec_mixtures.html" class="internal"><span class="codenumber">1.6</span> <span class="title">Mixtures</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="ch-linearsystems-9.html" class="internal"><span class="codenumber">1.7</span> <span class="title">Verhulst ("logistic") and Gompertz population models</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="ch-linearsystems-9.html#ch-linearsystems-9-3" class="internal"><span class="codenumber">1.7.1</span> <span class="title">Verhulst ("logistic") model</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="ch-linearsystems-9.html#ch-linearsystems-9-4" class="internal"><span class="codenumber">1.7.2</span> <span class="title">Gompertz model</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="ch-linearsystems-10.html" class="internal"><span class="codenumber">1.8</span> <span class="title">Initial value problems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="ch-linearsystems-10.html#ch-linearsystems-10-2" class="internal"><span class="codenumber">1.8.1</span> <span class="title">Types of solutions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="ch-linearsystems-10.html#ch-linearsystems-10-3" class="internal"><span class="codenumber">1.8.2</span> <span class="title">Initial value problems</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section contains-active">
+<div class="toc-title-box"><a href="ch-linearsystems-11.html" class="internal"><span class="codenumber">1.9</span> <span class="title">Behavior of solutions without solving</span></a></div>
+<ul class="structural toc-item-list active">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="ch-linearsystems-11.html#ch-linearsystems-11-3" class="internal"><span class="codenumber">1.9.1</span> <span class="title">Direction fields</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="ch-linearsystems-11.html#ch-linearsystems-11-4" class="internal"><span class="codenumber">1.9.2</span> <span class="title">Euler’s method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="ch-linearsystems-11.html#ch-linearsystems-11-5" class="internal"><span class="codenumber">1.9.3</span> <span class="title">Autonomous ODEs</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch-linearsystems-12.html" class="internal"><span class="codenumber">1.10</span> <span class="title">Separable differential equations</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch-linearsystems-13.html" class="internal"><span class="codenumber">1.11</span> <span class="title">First-order linear nonohomogeneous ODEs</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch-linearsystems-14.html" class="internal"><span class="codenumber">1.12</span> <span class="title">Exact equations</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch2-higherorderodes.html" class="internal"><span class="codenumber">2</span> <span class="title">Higher-order Linear Differential Equations</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch2-higherorderodes-3.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Higher-order homogeneous equations</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch2-higherorderodes-4.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Method of factoring and reduction of order</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch2-higherorderodes-5.html" class="internal"><span class="codenumber">2.3</span> <span class="title">Homogeneous equations with constant coefficients</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch2-higherorderodes-6.html" class="internal"><span class="codenumber">2.4</span> <span class="title">Cauchy-Euler equations</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="ch2-higherorderodes-7.html" class="internal"><span class="codenumber">2.5</span> <span class="title">Method of Undetermined Coefficients</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="ch2-higherorderodes-7.html#ch2-higherorderodes-7-2" class="internal"><span class="codenumber">2.5.1</span> <span class="title">Annihilators</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="ch2-higherorderodes-7.html#ch2-higherorderodes-7-3" class="internal"><span class="codenumber">2.5.2</span> <span class="title">Method of undetermined coefficients (annihilator approach)</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="ch2-higherorderodes-7.html#ch2-higherorderodes-7-4" class="internal"><span class="codenumber">2.5.3</span> <span class="title">Method of undetermined coefficients (superposition approach)</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch2-higherorderodes-8.html" class="internal"><span class="codenumber">2.6</span> <span class="title">Variation of parameters</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch3-laplacetransform.html" class="internal"><span class="codenumber">3</span> <span class="title">The Laplace transform</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch3-laplacetransform-3.html" class="internal"><span class="codenumber">3.1</span> <span class="title">Introduction to the Laplace transform</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch3-laplacetransform-4.html" class="internal"><span class="codenumber">3.2</span> <span class="title">The Laplace transform of initial value problems</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch3-laplacetransform-5.html" class="internal"><span class="codenumber">3.3</span> <span class="title">Translation theorems</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch3-laplacetransform-6.html" class="internal"><span class="codenumber">3.4</span> <span class="title">Dirac delta</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch3-laplacetransform-7.html" class="internal"><span class="codenumber">3.5</span> <span class="title">Convolution</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch3-laplacetransform-8.html" class="internal"><span class="codenumber">3.6</span> <span class="title">Derivatives of Laplace transforms</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec_rollinglistoftrickslaplace.html" class="internal"><span class="codenumber">3.7</span> <span class="title">List of tricks to find the inverse Laplace transform</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec_laplacetransformtable.html" class="internal"><span class="codenumber">3.8</span> <span class="title">Table of Laplace transforms</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch4-linearsystems.html" class="internal"><span class="codenumber">4</span> <span class="title">Linear systems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch4-linearsystems-3.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Introduction to linear systems</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch4-linearsystems-4.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Solutions to linear homogeneous systems</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch4-linearsystems-5.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Variation of parameters</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch4-linearsystems-6.html" class="internal"><span class="codenumber">4.4</span> <span class="title">The Laplace transform of linear systems</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-backmatter"><div class="toc-title-box"><a href="backmatter.html" class="internal"><span class="title">Backmatter</span></a></div></li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="ch-linearsystems-11"><h2 class="heading hide-type">
+<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.9</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Behavior of solutions without solving</span>
+</h2>
+<div class="para" id="ch-linearsystems-11-2">While most differential equations can’t be solved by hand, that doesn’t mean we can’t describe the behavior of their solutions.<div class="autopermalink" data-description="Paragraph"><a href="#ch-linearsystems-11-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<section class="subsection" id="ch-linearsystems-11-3"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.9.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Direction fields</span>
+</h3>
+<div class="para" id="ch-linearsystems-11-3-2">
+<article class="definition definition-like" id="ch-linearsystems-11-3-2-1"><h4 class="heading">
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.9.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Direction fields (also called slope fields).</span>
+</h4>
+<div class="para" id="ch-linearsystems-11-3-2-1-2">A <em class="emphasis">direction field</em> for <a href="sec_firstorderodes.html#def_firstorderode" class="xref" data-knowl="./knowl/xref/def_firstorderode.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 1.1.1">(1.1.1)</a> is a collection of slopes at points <span class="process-math">\((t,y)\)</span> on solution curves. Visually, direction fields represent the approximate "flow of solutions" among a family of solution curves.<div class="autopermalink" data-description="Paragraph"><a href="#ch-linearsystems-11-3-2-1-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 1.9.1: Direction fields (also called slope fields)"><a href="#ch-linearsystems-11-3-2-1" title="Copy heading and permalink for Definition 1.9.1: Direction fields (also called slope fields)" aria-label="Copy heading and permalink for Definition 1.9.1: Direction fields (also called slope fields)">🔗</a></div></article><div class="autopermalink" data-description="Paragraph"><a href="#ch-linearsystems-11-3-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ch-linearsystems-11-3-3">We now consider the differential equation <span class="process-math">\(ty'=y^2+1\text{.}\)</span> First isolate <span class="process-math">\(y'\)</span> to obtain <span class="process-math">\(y'=\dfrac{y^2+1}{t}\text{.}\)</span> We see that we have put this differential equation into the form <a href="sec_firstorderodes.html#def_firstorderode" class="xref" data-knowl="./knowl/xref/def_firstorderode.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 1.1.1">(1.1.1)</a> with <span class="process-math">\(f(t,y)=\dfrac{y^2+1}{t}\text{.}\)</span> That function <span class="process-math">\(f\)</span> gives us the slope at each point <span class="process-math">\((t,y)\)</span> in the plane. It turns out we can write an explicit general solution as <span class="process-math">\(y(t)=\tan(c+\log(t))\text{.}\)</span> We now use this to explore the initial value problem <span class="process-math">\(ty'=y^2+1, \quad y(2)=1\text{.}\)</span> <div id="ch-linearsystems-11-3-3-10" class="ptx-sagecell sagecell-sage"><script type="text/x-sage">import warnings
+warnings.filterwarnings("ignore")
+t = var('t')
+y = var('y')
+c = var('c')
+ysol = tan(c+log(t))
+show(ysol)
+p1 = plot_slope_field( (y*y+1)/t, (t,-3,3), (y,-3,3), axes_labels=['$t$', '$'+'\\mathrm{tan}(c+\\mathrm{log}(t))'+'$'])
+
+#choose c
+cvalue=2
+print("with c="+str(cvalue))
+# Now we would like to plot particular solutions on top of the slope field.
+# Let us plot the solution corresponding to the initial data y(2)=1:
+# This gives us 
+# 1 = y(2) = tan(c+log(2))
+# and solving this for c gives
+# c=arctan(1)-ln(2)=pi/4 - ln(2)
+# substitute this value for c in for the variable cvalue above
+p1 = p1 + plot(ysol(c=cvalue),t,0.2,3, ymin=-3, ymax=3)
+p1 = p1+point((2, 1),marker='x',color='red',size="50")
+p1
+</script></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ch-linearsystems-11-3-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ch-linearsystems-11-3-4">
+<details id="ch-linearsystems-11-3-4-1" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.9.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ch-linearsystems-11-3-4-1-1">Modify the above code to plot the slope field and solution of the IVP <span class="process-math">\(y'=y^2\sin(t), \quad y(1)=-1\)</span> which has general solution <span class="process-math">\(y(t)=\dfrac{1}{c+\cos(t)}\)</span> <div id="ch-linearsystems-11-3-4-1-1-3" class="ptx-sagecell sagecell-sage"><script type="text/x-sage"></script></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ch-linearsystems-11-3-4-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 1.9.2"><a href="#ch-linearsystems-11-3-4-1" title="Copy heading and permalink for Example 1.9.2" aria-label="Copy heading and permalink for Example 1.9.2">🔗</a></div></article></details><div class="autopermalink" data-description="Paragraph"><a href="#ch-linearsystems-11-3-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Subsection 1.9.1: Direction fields"><a href="#ch-linearsystems-11-3" title="Copy heading and permalink for Subsection 1.9.1: Direction fields" aria-label="Copy heading and permalink for Subsection 1.9.1: Direction fields">🔗</a></div></section><section class="subsection" id="ch-linearsystems-11-4"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.9.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Euler’s method</span>
+</h3>
+<div class="para" id="ch-linearsystems-11-4-2">From calculus, we know that tangent lines (or linear approximation) can be used to estimate a differentiable function at some value <span class="process-math">\(t=a\text{.}\)</span> In a similar manner, we would like to approximate the solution of an IVP. <article class="algorithm theorem-like" id="ch-linearsystems-11-4-2-2"><h4 class="heading">
+<span class="type">Algorithm</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.9.3</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Euler’s method.</span>
+</h4>
+<div class="para logical" id="ch-linearsystems-11-4-2-2-2">
+<div class="para">Consider the IVP <a href="ch-linearsystems-10.html#def_firstorderivp" class="xref" data-knowl="./knowl/xref/def_firstorderivp.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 1.8.1">(1.8.1)</a>. <em class="emphasis">Euler’s method with stepsize <span class="process-math">\(h\)</span></em> consists of applying the recurrence relation</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def_firstorderivp.html" id="ch-linearsystems-11-4-2-2-2-3">
+\begin{equation*}
+y_{n+1}=y_n+hf(t_n,y_n), \quad n=0,1,2,\ldots
+\end{equation*}
+</div>
+<div class="para">to calculate the successive approximations <span class="process-math">\(y_1, y_2, \ldots\)</span> to exact solution values <span class="process-math">\(y(1_1),y(t_2),\ldots\)</span> at the points <span class="process-math">\(t_1, t_2, \ldots\text{,}\)</span> respectively.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ch-linearsystems-11-4-2-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ch-linearsystems-11-4-2-2-3">
+<div class="para">Consider the equally spaced points <span class="process-math">\(t_n:=t_0+nh, \quad n=0,1,2,\ldots\text{.}\)</span> At the point <span class="process-math">\((t_0,y_0)\text{,}\)</span> the slope of the solution to <a href="ch-linearsystems-10.html#def_firstorderivp" class="xref" data-knowl="./knowl/xref/def_firstorderivp.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 1.8.1">(1.8.1)</a> is <span class="process-math">\(f(x_0,y_0)\text{.}\)</span> The corresponding tangent line at <span class="process-math">\((t_0,y_0)\)</span> is <span class="process-math">\(y=y_0+(t-t_0)f(t_0,y_0)\text{.}\)</span> Using this line to estimate <span class="process-math">\(y(t_1)\)</span> where <span class="process-math">\(t_1=t_0+h\text{,}\)</span> we have</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def_firstorderivp.html" id="ch-linearsystems-11-4-2-2-3-9">
+\begin{equation*}
+y(t_1) \approx y_1 := y_0 + h f(t_0,y_0).
+\end{equation*}
+</div>
+<div class="para">Similarly, we can use the new line to approximate <span class="process-math">\(y(t_2)\)</span> where <span class="process-math">\(t_2=t_0+2h=t_1+h\)</span> to get</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def_firstorderivp.html" id="ch-linearsystems-11-4-2-2-3-12">
+\begin{equation*}
+y(t_2)\approx y_2:=y_1+hf(t_1,y_1).
+\end{equation*}
+</div>
+<div class="para">And so on. Thus, we have the recurrence relations for <span class="process-math">\(n=0,1,2,\ldots\)</span>
+</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def_firstorderivp.html" id="ch-linearsystems-11-4-2-2-3-14">
+\begin{equation*}
+t_{n+1}=t_n+h,
+\end{equation*}
+</div>
+<div class="para">and</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def_firstorderivp.html" id="ch-linearsystems-11-4-2-2-3-15">
+\begin{equation*}
+y_{n+1}=y_n+hf(t_n,y_n),
+\end{equation*}
+</div>
+<div class="para">which are seeded with the initial value problem’s given data <span class="process-math">\(y(t_0)=y_0\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ch-linearsystems-11-4-2-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Algorithm 1.9.3: Euler’s method"><a href="#ch-linearsystems-11-4-2-2" title="Copy heading and permalink for Algorithm 1.9.3: Euler’s method" aria-label="Copy heading and permalink for Algorithm 1.9.3: Euler’s method">🔗</a></div></article> <details id="ch-linearsystems-11-4-2-3" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.9.4</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para logical" id="ch-linearsystems-11-4-2-3-1">
+<div class="para">Use Euler’s method with <span class="process-math">\(h=0.5\)</span> and <span class="process-math">\(h=0.2\)</span> to approximate the solution of the IVP</div>
+<div class="displaymath process-math" id="ch-linearsystems-11-4-2-3-1-3">
+\begin{equation*}
+y'=f(t,y):=y-t^2+1, \quad y(0)=0.5
+\end{equation*}
+</div>
+<div class="para">for <span class="process-math">\(0 \le t \le 2\text{.}\)</span> It turns out that the exact solution to this IVP is <span class="process-math">\(y(t)=(t+1)^2-0.5e^t\text{.}\)</span> We will learn how to find such solutions later on.<div id="ch-linearsystems-11-4-2-3-1-6" class="ptx-sagecell sagecell-python"><script type="text/x-sage"></script></div>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ch-linearsystems-11-4-2-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 1.9.4"><a href="#ch-linearsystems-11-4-2-3" title="Copy heading and permalink for Example 1.9.4" aria-label="Copy heading and permalink for Example 1.9.4">🔗</a></div></article></details><div class="autopermalink" data-description="Paragraph"><a href="#ch-linearsystems-11-4-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Subsection 1.9.2: Euler’s method"><a href="#ch-linearsystems-11-4" title="Copy heading and permalink for Subsection 1.9.2: Euler’s method" aria-label="Copy heading and permalink for Subsection 1.9.2: Euler’s method">🔗</a></div></section><section class="subsection" id="ch-linearsystems-11-5"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.9.3</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Autonomous ODEs</span>
+</h3>
+<div class="para logical" id="ch-linearsystems-11-5-2">
+<div class="para">Recall the form of an autonomous first-order ODE <a href="sec_firstorderodes.html#def_firstorderautonomous" class="xref" data-knowl="./knowl/xref/def_firstorderautonomous.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 1.1.3">(1.1.3)</a>. Since the independent variable <span class="process-math">\(t\)</span> does not appear in the right-hand side explicitly, we can study the behavior of its solutions and sketch typical solution curves without finding an explicit or implicit solution. Recall from calculus that we can sketch a function by knowing where it is increasing and decreasing, which we find by locating the <em class="emphasis">critical points</em>, i.e. the values of <span class="process-math">\(y\)</span> so that <span class="process-math">\(y'=f(y)=0\text{.}\)</span> There are three types of critical points. A critical point <span class="process-math">\(y=c\)</span> is...</div>
+<ol class="decimal" id="ch-linearsystems-11-5-2-7">
+<li id="ch-linearsystems-11-5-2-7-1">
+<div class="para" id="p-derived-ch-linearsystems-11-5-2-7-1">
+<em class="emphasis">asymptotically stable</em> if as <span class="process-math">\(t \rightarrow \infty\text{,}\)</span> the solution curve tends toward the horizontal line <span class="process-math">\(y=c\text{,}\)</span>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#ch-linearsystems-11-5-2-7-1" title="Copy heading and permalink for Item 1" aria-label="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="ch-linearsystems-11-5-2-7-2">
+<div class="para" id="p-derived-ch-linearsystems-11-5-2-7-2">
+<em class="emphasis">unstable</em> if as <span class="process-math">\(t \rightarrow \infty\text{,}\)</span> the solution curve moves away from the horizontal line <span class="process-math">\(y=c\text{,}\)</span> and</div>
+<div class="autopermalink" data-description="Item 2"><a href="#ch-linearsystems-11-5-2-7-2" title="Copy heading and permalink for Item 2" aria-label="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="ch-linearsystems-11-5-2-7-3">
+<div class="para" id="p-derived-ch-linearsystems-11-5-2-7-3">
+<em class="emphasis">semi-stable</em> if the solution curve moves either towards or away from the line <span class="process-math">\(y=c\text{,}\)</span> depending on on whether the solution it is above or below that line at time <span class="process-math">\(t\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#ch-linearsystems-11-5-2-7-3" title="Copy heading and permalink for Item 3" aria-label="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="para">
+<details id="ch-linearsystems-11-5-2-8" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.9.5</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ch-linearsystems-11-5-2-8-1">Find the critical points of the differential equation <span class="process-math">\(y'=y^3-4y^2\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ch-linearsystems-11-5-2-8-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 1.9.5"><a href="#ch-linearsystems-11-5-2-8" title="Copy heading and permalink for Example 1.9.5" aria-label="Copy heading and permalink for Example 1.9.5">🔗</a></div></article></details>  <details id="ch-linearsystems-11-5-2-9" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.9.6</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para logical" id="ch-linearsystems-11-5-2-9-1">
+<div class="para">Consider the differential equation <span class="process-math">\(\dfrac{\mathrm{d}y}{\mathrm{d}t}=y^2(y^4-16)\text{.}\)</span>
+</div>
+<ol class="decimal" id="ch-linearsystems-11-5-2-9-1-2">
+<li id="ch-linearsystems-11-5-2-9-1-2-1">
+<div class="para" id="p-derived-ch-linearsystems-11-5-2-9-1-2-1">Find the critical points. Classify each critical point as either asymptotically stable, unstable, or semi-stable. Sketch the appropriate phase portrait.</div>
+<div class="autopermalink" data-description="Item 1"><a href="#ch-linearsystems-11-5-2-9-1-2-1" title="Copy heading and permalink for Item 1" aria-label="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="ch-linearsystems-11-5-2-9-1-2-2">
+<div class="para" id="p-derived-ch-linearsystems-11-5-2-9-1-2-2">Sketch the typical solution curves in regions in the plane determined by the graphs of the equilibrium solutions.</div>
+<div class="autopermalink" data-description="Item 2"><a href="#ch-linearsystems-11-5-2-9-1-2-2" title="Copy heading and permalink for Item 2" aria-label="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Paragraph"><a href="#ch-linearsystems-11-5-2-9-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 1.9.6"><a href="#ch-linearsystems-11-5-2-9" title="Copy heading and permalink for Example 1.9.6" aria-label="Copy heading and permalink for Example 1.9.6">🔗</a></div></article></details> <details id="ex_chemicalexamplesautonomous" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.9.7</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para logical" id="ex_chemicalexamplesautonomous-1">
+<div class="para">Suppose two chemicals <span class="process-math">\(A\)</span> and <span class="process-math">\(B\)</span> are combined to form the compound <span class="process-math">\(X\)</span> as was studied in <a href="section_secondorderchemical.html" class="internal" title="Section 1.5: Second-order chemical reactions">Section 1.5</a>. Initially, there are <span class="process-math">\(30\)</span> units of <span class="process-math">\(A\)</span> and <span class="process-math">\(40\)</span> units of <span class="process-math">\(B\text{.}\)</span> For every <span class="process-math">\(2\)</span> units of <span class="process-math">\(B\text{,}\)</span> <span class="process-math">\(3\)</span> units of <span class="process-math">\(A\)</span> are used to form the compound <span class="process-math">\(X\text{.}\)</span> It is observed that <span class="process-math">\(6\)</span> units of <span class="process-math">\(X\)</span> are formed after <span class="process-math">\(10\)</span> minutes.</div>
+<ol class="decimal" id="ex_chemicalexamplesautonomous-1-17">
+<li id="ex_chemicalexamplesautonomous-1-17-1">
+<div class="para" id="p-derived-ex_chemicalexamplesautonomous-1-17-1">Set up the boundary value problem.</div>
+<div class="autopermalink" data-description="Item 1"><a href="#ex_chemicalexamplesautonomous-1-17-1" title="Copy heading and permalink for Item 1" aria-label="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="ex_chemicalexamplesautonomous-1-17-2">
+<div class="para" id="p-derived-ex_chemicalexamplesautonomous-1-17-2">Find the order of the differential equation. Is it (non)linear, (non)automous, and (non)separable?</div>
+<div class="autopermalink" data-description="Item 2"><a href="#ex_chemicalexamplesautonomous-1-17-2" title="Copy heading and permalink for Item 2" aria-label="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="ex_chemicalexamplesautonomous-1-17-3">
+<div class="para" id="p-derived-ex_chemicalexamplesautonomous-1-17-3">What is the limiting amount of <span class="process-math">\(X\)</span> after a long time? How much of <span class="process-math">\(A\)</span> and <span class="process-math">\(B\)</span> remain after a long time?</div>
+<div class="autopermalink" data-description="Item 3"><a href="#ex_chemicalexamplesautonomous-1-17-3" title="Copy heading and permalink for Item 3" aria-label="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex_chemicalexamplesautonomous-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 1.9.7"><a href="#ex_chemicalexamplesautonomous" title="Copy heading and permalink for Example 1.9.7" aria-label="Copy heading and permalink for Example 1.9.7">🔗</a></div></article></details>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ch-linearsystems-11-5-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Subsection 1.9.3: Autonomous ODEs"><a href="#ch-linearsystems-11-5" title="Copy heading and permalink for Subsection 1.9.3: Autonomous ODEs" aria-label="Copy heading and permalink for Subsection 1.9.3: Autonomous ODEs">🔗</a></div></section><div class="autopermalink" data-description="Section 1.9: Behavior of solutions without solving"><a href="#ch-linearsystems-11" title="Copy heading and permalink for Section 1.9: Behavior of solutions without solving" aria-label="Copy heading and permalink for Section 1.9: Behavior of solutions without solving">🔗</a></div></section></div>
+<div id="ptx-content-footer" class="ptx-content-footer">
+<a class="previous-button button" href="ch-linearsystems-10.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="ch-linearsystems-12.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="338 3000 8772 6866" role="img"><title>PreTeXt logo</title><g style="stroke-width:.025in; stroke:currentColor; fill:none"><polyline points="472,3590 472,9732 " style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png" alt="Runstone Academy logo"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png" alt="MathJax logo"></a>
+</div>
+</body>
+</html>

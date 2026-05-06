@@ -5,15 +5,16 @@
   <xi:include href="./docinfo.ptx" />
 
   <book xml:id="my-great-book">
-    <title>newtitle 5</title>
-    <subtitle>An example to get you started</subtitle>
+    <title>Ordinary Differential Equations</title>
 
     <!-- Include frontmatter -->
     <xi:include href="./frontmatter.ptx" />
 
     <!-- Include chapters -->
-    <xi:include href="./ch-chapter-title.ptx" />
-
+    <xi:include href="./ch1-linearsystems.ptx" />
+    <xi:include href="./ch2-higherorderodes.ptx" />
+    <xi:include href="./ch3-laplacetransform.ptx" />
+    <xi:include href="./ch4-linearsystems.ptx" />
 
     <!-- Include backmatter -->
     <xi:include href="./backmatter.ptx" />

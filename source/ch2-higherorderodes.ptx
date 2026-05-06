@@ -1,0 +1,768 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<chapter xml:id="ch2-higherorderodes" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Higher-order Linear Differential Equations</title>
+
+  <introduction>
+    <p> Text before the first section. </p>
+  </introduction>
+  <section>
+    <title>Higher-order homogeneous equations</title>
+    <remark>
+      <p>
+        Suppose an object with mass <m>m</m> (in kilograms <m>kg</m>) hangs vertically at equilibrium on a spring. When the spring is stretched <m>y></m> meters, there is a corresponding restoring force <m>F_R</m> (in newtons <m>N</m>). When the object moves at a velocity <m>v</m>, surrounding medium exerts a corresponding damping force <m>F_D</m> (in newtons <m>N</m>). Initially, the object is released with an initial poisition <m>y_0</m> and an initial velocity <m>y_1</m>. Write a differential equation for the spring mass when there is an external force by <m>f(t)</m>.
+      </p>
+      <p>
+       Here, we treat the downward direction as the positive direction.
+      </p>
+    </remark>
+   <definition>
+    <title>Higher-order linear ODEs</title>
+    <p>
+     An <m>n</m>th-order linear ODE is of the form 
+     <md xml:id="def_nthorderlinear" number="yes">a_n(t)y^{(n)}+a_{n-1}(t)y^{(n-1)}+\ldots+a_2(t)y''+a_1(t)y'+a_0(t)y=g(t),</md>
+     where <m>g</m> is called a forcing function, input, or control. If <m>g(t)=0</m> for all <m>t</m> (on some interval <m>I</m>), then we call <xref ref="def_nthorderlinear"/> <term>homogeneous</term>:
+     <md xml:id="def_nthorderlinearhomogeneous" number="yes">a_n(t)y^{(n)}+a_{n-1}(t)y^{(n-1)}+\ldots+a_2(t)y''+a_1(t)y'+a_0(t)y=0.</md>
+     If <m>g(t)\neq 0</m> for even one value <m>t</m>, then <xref ref="def_nthorderlinear"/> is <term>nonhomogeneous</term>.
+    </p>
+  </definition>
+  <theorem>
+   <title>Existence and uniqueness for second-order linear IVPs</title>
+   <p>
+    Consider the IVP 
+    <md xml:id="def_2ndorderlinear" number="yes">a_2(t)y''+a_1(t)y'+a_0y=g(t), \quad y(t_0)=y_0, y'(t_0)=y_1.</md>
+    Rewriting in <em>standard form</em> as
+    <md>y''+P(t)y'+Q(t)y=f(t),</md>
+    <xref ref="def_2ndorderlinear"/> is guaranteed to have a unique solution if <m>P</m>, <m>Q</m>, and <m>f</m> are all continuous on an open interval <m>I</m> containing <m>t_0</m>. The largest such interval <m>I</m> is called the <term>interval of definition</term> for the IVP.
+   </p>
+  </theorem>
+  <example>
+   <p>
+    Find the largest interval where the IVP is guaranteed a unique solution.
+    <ol>
+     <li><m>(t^2-4)y''+ty=\sqrt{t}, \quad y(3)=4, y'(3)=0</m></li>
+     <li><m>t^2y''+3y'+(1-2t)y=\arcsin(t), \quad y(1/2)=1, y'(1/2)=4</m></li>
+    </ol>
+   </p>
+  </example>
+  <definition>
+   <title>Homogeneous solutions</title>
+   <p>
+    An explicit solution to <xref ref="def_nthorderlinearhomogeneous"/> on some interval <m>I</m> is a function that, when substitued into <xref ref="def_nthorderlinearhomogeneous"/>, results in an identity.
+   </p>
+  </definition>
+  <example>
+   <p>
+    Consider the differential equation <m>ty''-(t+1)y'+y=0</m>. Determine the following are solutions for <m>t>0</m>:
+    <ol>
+     <li><m>y(t)=t</m></li>
+     <li><m>y(t)=e^t</m></li>
+    </ol>
+   </p>
+  </example>
+  <example>
+   <p>
+    Consider the differential equation <m>y'''-2y''-y'+2y=0</m>. Given that <m>y_1(t)=e^t</m> and <m>y_2(t)=e^{-t}</m> are solutions on <m>(-\infty,\infty)</m>, show that the following are also solutions on <m>(-\infty,\infty)</m>:
+    <ol>
+     <li><m>y(t)=0</m></li>
+     <li><m>y(t)=c_1 y_1(t)</m> for an arbitrary constant <m>c_1</m></li>
+     <li><m>y(t)=c_1y_1(t)+c_2y_2(t)</m> for arbitrary constants <m>c_1, c_2</m></li>
+    </ol>
+   </p>
+  </example>
+  <remark>
+    <title>Hyperbolic trigonometric functions</title>
+    <p>
+     Recall the hyperbolic sine is <m>\sinh(t):=\dfrac{e^t-e^{-t}}{2}</m> and the hyperbolic cosine is <m>\cosh(t)=\dfrac{e^t+e^{-t}}{2}</m>.
+    </p>
+  </remark>
+  <theorem xml:id="thm_superpositionprinciple">
+   <title>Superposition principle</title>
+   <p>
+    Let <m>y_1, y_2, \ldots, y_k</m> be solutions to <xref ref="def_nthorderlinearhomogeneous"/> on an interval <m>I</m>. Then the linear combination 
+    <md>y(t)=c_1y_1(t)+c_2y_2(t)+\ldots+c_ky_k(t),</md>
+    for arbitrary constants <m>c_1,\ldots,c_k</m> is also a solution to <xref ref="def_nthorderlinearhomogeneous"/> on <m>I</m>.
+   </p>
+  </theorem>
+  <remark>
+   <p>
+    Recall that for linear equations, a family of solutions represents all possible solutions on <m>I</m>. Given a linear homogeneous ODE and a set of functions contiuous on <m>I</m>, we have the following questions:
+    <ol>
+      <li>Are they really solutions?</li>
+      <li>Are they "different" solutions?</li>
+      <li>Do we have all solutions?</li>
+    </ol>
+   </p>
+  </remark>
+  <definition>
+   <title>Linear independence</title>
+   <p>
+    A set of functions <m>f_1,f_2,\ldots,f_k</m> are called <term>linearly independent</term> on an interval <m>I</m> if and only if the equation
+    <md>c_1f_1(t)+c_2f_2(t)+\ldots+c_k f_k(t)=0</md>
+    holds for all <m>t</m> in <m>I</m> only when <m>c_1=c_2=\ldots=c_k=0</m>. If there are nonzero constants <m>c_1,\ldots,c_k</m> such that for all <m>t</m> in <m>I</m>, <m>c_1f_1(t)+\ldots+c_kf_k(t)=0</m>, then we say that <m>f_1,\ldots,f_k</m> are <term>linearly dependent</term>.
+   </p>
+  </definition>
+  <example>
+    <p>
+      Let <m>f(t)=1</m>, <m>g(t)=t</m>, and <m>h(t)=2t+3</m>. 
+      <ol>
+        <li>Show that <m>f</m> and <m>g</m> are linearly independent on <m>(-\infty,\infty)</m>.</li>
+        <li>Show that <m>f</m> and <m>h</m> are linearly independent on <m>(-\infty,\infty)</m>.</li>
+        <li>Show that <m>g</m> and <m>h</m> are linearly independent on <m>(-\infty,\infty)</m>.</li>
+        <li>Determine if <m>f</m>, <m>g</m>, and <m>h</m> are linearly independent on <m>(-\infty,\infty)</m>.</li>
+      </ol>
+    </p>
+  </example>
+  <example>
+   <p>
+    Let <m>f(t)=t</m> and <m>g(t)=|t|</m>.
+    <ol>
+      <li>Determine if <m>f</m> and <m>g</m> are linearly independent on <m>(0,\infty)</m>.</li>
+      <li>Determine if <m>f</m> and <m>g</m> are linearly independent on <m>(-\infty,0)</m>.</li>
+      <li>Determine if <m>f</m> and <m>g</m> are linearly independent on any interval containing <m>t=0</m>.</li>
+    </ol>
+   </p>
+  </example>
+  <theorem>
+   <title>The Wronskian</title>
+   <p>
+    The set of functions <m>f_1,\ldots,f_n</m> in <m>C^{n-1}(I)</m> are linearly independent on <m>I</m> if and only if the Wronskian
+    <md>W\{f_1,\ldots,f_n\}(t):=\mathrm{det} \begin{bmatrix} f_1(t) &amp; f_2(t) &amp; \ldots &amp; f_n(t) \\ 
+    f_1'(t) &amp; f_2'(t) &amp; \ldots f_n'(t) \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 
+    f_1^{(n-1)}(t) &amp; f_2^{(n-1)}(t) &amp; \ldots &amp; f_n^{(n-1)}(t) \end{bmatrix} \neq 0.</md>
+   </p>
+  </theorem>
+  <example>
+   <p>
+    Determine whether <m>\{t,\ln(t)\}</m> is a linearly independent set on <m>(0,\infty)</m>.
+   </p>
+  </example>
+  <definition>
+   <title>Fundamental set of solutions (FSS)</title>
+   <p>
+    Let <m>y_1,y_2,\ldots,y_n</m> be functions in <m>C^n(I)</m>. Then <m>y_1,y_2,\ldots,y_n</m> form a <term>fundamental set of solutions</term> to <xref ref="def_nthorderlinearhomogeneous"/> on <m>I</m> if
+    <ol>
+     <li><m>y_1,y_2,\ldots,y_n</m> are solutions to <xref ref="def_nthorderlinearhomogeneous"/> on <m>I</m>,</li>
+     <li><m>y_1,y_2,\ldots,y_n</m> are linearly independent on <m>I</m>, and</li>
+     <li>the number of linearly independent solutions on <m>I</m> are equal to the order of <xref ref="def_nthorderlinearhomogeneous"/>.</li>
+    </ol>
+   </p>
+  </definition>
+  <definition>
+   <title>General solution</title>
+   <p>
+    Suppose <m>y_1,y_2,\ldots,y_n</m> form a fundamental set of solutions to <xref ref="def_nthorderlinearhomogeneous"/> on <m>I</m>. Then the linear combination 
+    <md>y(t)=c_1y_1(t)+c_2y_2(t)+\ldots+c_n y_n(t),</md>
+    where <m>c_1,c_2,\ldots,c_n</m> are arbitrary constants is called a <term>general solution</term> to <xref ref="def_nthorderlinearhomogeneous"/> on <m>I</m>. 
+   </p>
+  </definition>
+  <example>
+   <p>
+    Consider the differential equation <m>ty''-(t+1)y'+y=0</m> on <m>(0,\infty)</m>.
+    <ol>
+     <li>Do <m>f(t)=e^t</m> and <m>g(t)=t</m> form a fundamental set of solutions to the differential equation on <m>(0,\infty)</m>? State why or why not. If so, then write a general solution.</li>
+     <li>Do <m>f(t)=e^t</m> and <m>g(t)=4e^t</m> form a fundamental set of solutions to the differential equation on <m>(0,\infty)</m>? State why or why not. If so, then write a general solution.</li>
+     <li>Do <m>f(t)=e^t</m> and <m>g(t)=t+1</m> form a fundamental set of solutions to the differential equation on <m>(0,\infty)</m>? State why or why not. If so, then write a general solution.</li>
+    </ol>
+   </p>
+  </example>
+  <example>
+   <p>
+    Consider the following differential equations. Along with each equation is a given fact. Give a reason why we may or we may not have a fundamental set of solutions.
+    <ol>
+     <li>
+      <m>(t^2-9)y'''-4\sin(t)y'-y=0, (3,\infty)</m><br/> 
+      <p>
+       <em>Known</em>: Three solutions on <m>(3,\infty)</m><br/>
+      </p>
+      <p>
+       What can go wrong?
+      </p>
+     </li>
+     <li>
+      <m>t^2y''+(1-2t)y'+8y=0, (0,\infty)</m><br/> 
+      <p>
+       <em>Known</em>: Two linearly independent solutions on <m>(0,\infty)</m><br/>
+      </p>
+      <p>
+       What can go wrong?
+      </p>
+     </li>
+     <li>
+      <m>y^{(4)}+ty'+(1-4t)y=0, (-\infty,\infty)</m><br/> 
+      <p>
+       <em>Known</em>: Three linearly independent solutions on <m>(-\infty,\infty)</m><br/>
+      </p>
+      <p>
+       What can go wrong?
+      </p>
+     </li>
+     <li>
+      <m>(t-2)y''+(2t-3)y'+4y=0, (2,\infty)</m><br/> 
+      <p>
+       <em>Known</em>: Three linearly independent solutions on <m>(2,\infty)</m><br/>
+      </p>
+      <p>
+       What can go wrong?
+      </p>
+     </li>
+
+    </ol>
+   </p>
+  </example>
+ </section>
+ <section>
+  <title>Method of factoring and reduction of order</title>
+  <p>
+   In this section, we consider second-order linear homogeneous ODEs in the form 
+   <md xml:id="def_2ndorderlinearhomogeneous" number="yes">a_2(t)y''+a_1(t)y'+a_0(t)y=0.</md>
+   To form a FSS to <xref ref="def_2ndorderlinearhomogeneous"/> on an interval <m>I</m>, we need two linearly independent solutions <m>y_1</m> and <m>y_2</m> such that <m>y(t)=c_1 y_1(t)+c_2 y_2(t)</m> is a general solution. We introduce two substitution methods to find a FSS to <xref ref="def_2ndorderlinearhomogeneous"/>: a substitution resulting from factoring a differential operator ("method of factoring") and a technique that can be used to ``vary a parameter" to obtain a solution <m>y_2</m> independent from a known solution <m>y_1</m> ("reduction of order").
+   <algorithm>
+    <title>Method of factoring</title>
+    <p>
+     Using differential operator notation, recall that <xref ref="def_2ndorderlinearhomogeneous"/> can also be written as
+     <md>a_2(t)D^2y+a_1(t)Dy+a_0(t)y=0.</md>
+     Now we would like a factorization of the form
+     <md>\left(b_1(t)D+b_2(t)\right)\left(b_3(t)+b_4(t)D\right)y=0.</md>
+     By substituting <m>u=\left(b_3(t)D+b_4(t)\right)</m>, we can solve a first-order ODE to solve for <m>u</m>. Then as a result, we can use this substitution to solve a first-order ODE for <m>y</m>.
+    </p>
+   </algorithm>
+   <example>
+    <p>
+      Factoring the differential operator <m>ty''+(1-2t)y'+(t-1)y=0</m> on <m>(0,\infty)</m> can be written as <m>tD^2y+(1-2t)Dy+(t-1)y=(D-1)(tD-t)y=0</m> <m>(0,\infty)</m>.
+      <ol>
+      <li>Let <m>u=(tD-t)y</m>. Use this substitution to solve a differential equation in terms of <m>u</m>.</li>
+      <li>Use your result above to solve for <m>y</m>.</li>
+      </ol>
+    </p>
+   </example>
+   <example>
+    <p>
+     Let <m>g(t)=t^2</m>.
+     <ol>
+      <li>Apply the differential operator <m>D(tD-2)</m> to <m>g</m>.</li>
+      <li>Apply the differential operator <m>(tD-2)D</m> to <m>g</m>.</li>
+      <li>What can you conclude about differential operators in general?</li>
+     </ol>
+    </p>
+   </example>
+   Now we assume we know one solution <m>y_1</m> to <xref ref="def_2ndorderlinearhomogeneous"/> on some interval <m>I</m>. We need a second solution <m>y_2</m> that is linearly dependent of <m>y_1</m> so that we obtain a FSS for <xref ref="def_2ndorderlinearhomogeneous"/>. Recall that if <m>z(t)=cy_1(t)</m>, then <m>z</m> is a solution to <xref ref="def_2ndorderlinearhomogeneous"/> by the superposition principle <xref ref="thm_superpositionprinciple"/>.
+  </p>
+  <p>
+  Now suppose <m>v(t)=u(t)y_1(t)</m>. We picked this function <m>v</m> by replacing the constant <m>c</m> in in <m>z</m> with an unknown function <m>v</m>. This is called <em>varying the parameter</em>. By construction, <m>u</m> is linearly independent of <m>y_1</m> on <m>I</m>. However independence alone is not sufficient to have a FSS. So we need to pick the function <m>v</m> that makes <m>u</m> into a solution of <xref ref="def_2ndorderlinearhomogeneous"/> on <m>I</m>.
+  <algorithm>
+   <title>Reduction of order</title>
+   <p>
+    Let <m>y_1</m> be a known solution to <xref ref="def_2ndorderlinearhomogeneous"/> on <m>I</m>.
+    <ol>
+     <li>Suppose <m>y_2(t)=u(t)y_1(t)</m> is another solution to <xref ref="def_2ndorderlinearhomogeneous"/> on <m>I</m>.</li>
+     <li>Substitute <m>y_2</m> into <xref ref="def_2ndorderlinearhomogeneous"/>.</li>
+     <li>Regroup terms by <m>u</m>. Note that the term multiplied to <m>u</m> must vanish.</li>
+     <li>Make a change of variables that allows rewriting the differential equation into a first-order linear separable ODE in terms of the variable <m>w=u'</m>.</li>
+     <li>Solve the ODE for <m>w</m>.</li>
+     <li>Integrate with respect to <m>t</m> to get <m>u</m>. Note the constant of integration can be absorbed.</li>
+     <li>Substitute <m>u</m> into our starting point for <m>y_2</m> in Step 1. to complete the solution.</li>
+    </ol>
+   </p>
+  </algorithm>
+  <example>
+   <p>
+    Use reduction of order to find a second linearly independent solution to the differential equation <m>y''-2y'+y=0</m>, where <m>y_1(t)=e^t</m> is a known solution on <m>(-\infty,\infty)</m>. Write a general solution.
+   </p>
+  </example>
+  <example>
+   <p>
+    Use reduction of order to find a second linearly independent solution to the differential equation <m>t^2y''-3ty'+4y=0</m> on <m>(0,\infty)</m> where <m>y_1(t)=t^2</m> is a known solution. Write a general solution.
+   </p>
+  </example>
+  <example>
+   <p>
+    Use reduction of order to find a second linearly independent solution to the differential equation <m>ty''+(1-2t)y'+(t-1)y=0</m> on <m>(0,\infty)</m> where <m>y_1(t)=e^t</m> is a known solution. Write a general solution.
+   </p>
+  </example>
+ </p>
+ </section>
+ <section>
+  <title>Homogeneous equations with constant coefficients</title>
+  <p>
+   <definition>
+    <title>Spring/mass and circuit problems</title>
+    <p>
+     A second-order linear homogeneous ODE with constant coefficients takes the form
+     <md xml:id="def_2ndorderlinearhomogeneousconstantcoeffs" number="yes">ay''+by'+cy=0,</md>
+     where <m>a, b, c \in \mathbb{R}</m> are constant functions.
+    </p>
+   </definition>
+   Recall the first ODE we solved was of the form
+   <md xml:id="def_1storderlinearhomogeneousconstantcoeffs" number="yes">ay'+by=0,</md>
+   which is a first-order linear homogeneous differential equation with constant coefficients. Recall that the solution was <m>y(t)=Ce^{rt}</m> where <m>r=-\dfrac{b}{a}</m>. Since <xref ref="def_2ndorderlinearhomogeneousconstantcoeffs"/> and <xref ref="def_1storderlinearhomogeneousconstantcoeffs"/> are of the same form, it is reasonable to expect that <m>y(t)=e^{rt}</m> also solves <xref ref="def_2ndorderlinearhomogeneousconstantcoeffs"/> on <m>(-\infty,\infty)</m>. However we need to know the value(s) of <m>r</m> such that this is the case. Substituting <m>y(t)=e^{rt}</m> into <xref ref="def_2ndorderlinearhomogeneousconstantcoeffs"/>, we get
+   <md>ar^2e^{rt}+bre^{rt}+ce^{rt}=0.</md>
+   We then factor out the common factor <m>e^{rt}</m> to get 
+   <md>e^{rt}\big( ar^2+br+c \big)=0.</md>
+   Since <m>e^{rt}</m> is never zero, it can be divided off to leave a polynomial equation in <m>r</m> that we can solve.
+   <definition>
+    <title>Characteristic equation for <xref ref="def_2ndorderlinearhomogeneousconstantcoeffs"/></title>
+    <p>
+     The polynomial
+     <md>ar^2+br+c=0</md>
+     is called the <term>characteristic equation</term> (or <term>auxiliary equation</term>) for <xref ref="def_2ndorderlinearhomogeneousconstantcoeffs"/> and its roots dictate the form of the general solution.
+    </p>
+   </definition>
+   We now summarize what form general solutions take, dependent on the roots of the characteristic equation.
+   <table>
+    <title>General solutions to <xref ref="def_2ndorderlinearhomogeneousconstantcoeffs"/></title>
+    <tabular halign="center">
+     <row header="yes" bottom="minor">
+      <cell><em>Roots</em></cell>
+      <cell><em>General solution</em></cell>
+     </row>
+     <row>
+      <cell>Two real, distinct roots <m>r_1\neq r_2</m></cell>
+      <cell><m>y(t)=c_1e^{r_1t}+c_2e^{r_2t}</m></cell>
+     </row>
+     <row>
+      <cell>One real, repeated root <m>r_1=-\dfrac{b}{2a}</m></cell>
+      <cell><m>y(t)=c_1e^{r_1t}+c_2te^{r_1t}</m></cell>
+     </row>
+     <row>
+      <cell>Complex roots <m>r=\alpha \pm \beta i</m></cell>
+      <cell><m>y(t)=e^{\alpha t}\big[ c_1\cos(\beta t)+c_2\sin(\beta t)\big]</m></cell>
+     </row>
+    </tabular>
+   </table>
+   <example>
+    <title>Real, distinct roots</title>
+    <p>
+     Consider the differential equation <m>y''-5y'+6y=0</m>.
+     <ol>
+      <li>Classify the differential equation by order, linearity, type of coefficients, and whether or not the equation is homogeneous or nonhomogeneous.</li>
+      <li>Solve the differential equation.</li>
+     </ol>
+    </p>
+   </example>
+   <theorem>
+    <title>Repeated roots</title>
+    <p>
+     Suppose <xref ref="def_2ndorderlinearhomogeneousconstantcoeffs"/> has characteristic equation with repeated root <m>r_1=-\dfrac{b}{2a}</m>. Then the general solution takes form
+     <md>y(t)=c_1e^{r_1t}+c_2te^{r_1t}.</md>
+    </p>
+   </theorem>
+   <proof>
+    <p> coming later!</p>
+   </proof>
+   <example>
+    <title>Real, repeated roots</title>
+    <p>
+     Consider the differential equation <m>y''-4y'+4y=0</m>.
+     <ol>
+      <li>Classify the differential equation by order, linearity, type of coefficients, and whether or not the equation is homogeneous or nonhomogeneous.</li>
+      <li>Solve the differential equation.</li>
+     </ol>
+    </p>
+   </example>
+   <definition>
+    <title>Euler's formula</title>
+    <p>
+     Euler's formula says
+     <md>e^{i\theta}=\cos(\theta)+i\sin(\theta).</md>
+    </p>
+   </definition>
+   <theorem>
+    <title>Complex roots</title>
+    <p>
+     Suppose <xref ref="def_2ndorderlinearhomogeneousconstantcoeffs"/> has a characteristic equation with complex roots <m>r=\alpha \pm \beta i</m>. Then the general solution takes form
+     <md>y(t)=e^{\alpha t}\big[ c_1\cos(\beta t)+c_2\sin(\beta t) \big].</md>
+    </p>
+   </theorem>
+   <proof>
+    <p>coming later!</p>
+  </proof>
+  <example>
+   <title>Complex roots</title>
+   <p>
+    Consider the differential equation <m>y''+4y'+13y=0</m>.
+    <ol>
+      <li>Classify the differential equation by order, linearity, type of coefficients, and whether or not the equation is homogeneous or nonhomogeneous.</li>
+      <li>Solve the differential equation.</li>
+    </ol>
+   </p>
+  </example>
+   Any linear homogeneous ODE with constant coefficients takes a form resembling <xref ref="def_1storderlinearhomogeneousconstantcoeffs"/> and <xref ref="def_2ndorderlinearhomogeneousconstantcoeffs"/> and we solve them the same way: assume a solution form <m>y(t)=e^{rt}</m>, substitute it in, and solve the resulting polynomial for <m>r</m>. 
+   <example>
+    <p>
+     Consider the differential equation <m>y'''-2y''-y'+2y=0</m>.
+     <ol>
+      <li>Classify the differential equation by order, linearity, type of coefficients, and whether or not the equation is homogeneous or nonhomogeneous.</li>
+      <li>Solve the differential equation.</li>
+     </ol>
+    </p>
+   </example>
+   <example>
+    <p>
+    Consider the differential equation <m>y^{(4)}-16y=0</m>.
+     <ol>
+      <li>Classify the differential equation by order, linearity, type of coefficients, and whether or not the equation is homogeneous or nonhomogeneous.</li>
+      <li>Solve the differential equation.</li>
+     </ol>
+    </p>
+   </example>
+   <example>
+    <p>
+    Consider the differential equation <m>y^{(4)}-y'''-y'+y=0</m>.
+     <ol>
+      <li>Classify the differential equation by order, linearity, type of coefficients, and whether or not the equation is homogeneous or nonhomogeneous.</li>
+      <li>Solve the differential equation.</li>
+     </ol>
+    </p>
+   </example>
+  </p>
+ </section>
+ <section>
+  <title>Cauchy-Euler equations</title>
+  <p>
+   <definition>
+    <title>Cauchy-Euler equations</title>
+    <p>
+     A second-order linear homogeneous ODE with variable coefficients is <term>Cauchy-Euler</term> if it is of the form
+     <md xml:id="def_2ndordercauchyeuler" number="yes">at^2y''+bty'+cy=0, \quad (0,\infty),</md>
+     where <m>a, b, c \in \mathbb{R}</m>.
+    </p>
+   </definition>
+   <example>
+    <p>
+     Consider the first-order case 
+     <md xml:id="def_firstordercauchyeuler" number="yes">aty'+by=0, \quad t>0,</md>
+     which is a separable ODE. Using separation of variables, we have
+     <md>\displaystyle\int \dfrac{1}{y}\mathrm{d}y = \displaystyle\int\dfrac{m}{x} \mathrm{d}x,</md>
+     where <m>m=-\dfrac{b}{a}</m>. Then, 
+     <md>\ln(|y|)=m\ln(|t|)+k=\ln(|t^m|)+k,</md>
+     or <m>y(t)=ct^m</m>.
+    </p>
+   </example>
+  </p>
+  <p>
+    Since <xref ref="def_2ndordercauchyeuler"/> and <xref ref="def_firstordercauchyeuler"/> are of the same form, it is reasonable to assume that functions of the form <m>y(t)=t^m</m> solve <xref ref="def_2ndordercauchyeuler"/> for <m>t>0</m>. As with constant coefficients, we need to know the value(s) of <m>m</m> such that this is the case. Substituting <m>y(t)=t^m</m> into <xref ref="def_2ndordercauchyeuler"/> using the power rule, we get
+    <md>at^2m(m-1)t^{m-2}+btmt^{m-1}+ct^m=0.</md>
+    Notice the common factor of <m>t^m</m> which we may divide off since <m>t>0</m>, giving us
+    <md>am(m-1)+bm+c=0.</md>
+    This justifies the following definition.
+    <definition>
+     <title>Characteristic polynomial for second-order Cauchy-Euler equations</title>
+     <p>
+      Given <xref ref="def_2ndordercauchyeuler"/>, there is a corresponding polynomial called the <term>characteristic polynomial</term>,
+      <md>am^2+(b-a)m+c=0,</md>
+      in the variable <m>m</m> whose roots determine the form of its (homogeneous) solution.
+     </p>
+    </definition>
+   Using the substitution <m>w=\ln(t)</m> and the chain rule, <xref ref="def_2ndordercauchyeuler"/> can be written as a linear homogeneous ODE with constant coefficients:
+   <md>\dfrac{\mathrm{d}y}{\mathrm{d}t}=\dfrac{\mathrm{d}w}{\mathrm{d}t}\dfrac{\mathrm{d}y}{\mathrm{d}w} = \dfrac{1}{t}\dfrac{\mathrm{d}y}{\mathrm{d}w},</md>
+   which yields
+   <md>\dfrac{\mathrm{d}y}{\mathrm{d}w} = t \dfrac{\mathrm{d}y}{\mathrm{d}t}.</md>
+   Similarly,
+   <md>\dfrac{\mathrm{d}^2y}{\mathrm{d}t^2} = -\dfrac{1}{t^2} \dfrac{\mathrm{d}y}{\mathrm{d}w}+\dfrac{1}{t}\dfrac{\mathrm{d}}{\mathrm{d}t} \dfrac{\mathrm{d}y}{\mathrm{d}w},</md>
+   which becomes
+   <md>t^2 \dfrac{\mathrm{d}^2y}{\mathrm{d}t^2} = \dfrac{\mathrm{d}^2y}{\mathrm{d}w^2}-\dfrac{\mathrm{d}y}{\mathrm{d}w}.</md>
+   Upon substitution, <xref ref="def_2ndordercauchyeuler"/> becomes 
+   <md>ay''+(b-a)y'+cy=0.</md>
+   We will take advantage of this relationship in later sections. Cauchy-Euler equations are also useful in solving more general linear equations with variable coefficients by power series.
+   <remark>
+    <p>
+     Using the subtitution above, the roots of the characertistic polynomial lead to the following forms of the general solution to <xref ref="def_2ndordercauchyeuler"/>:
+<table>
+    <title>General solutions to <xref ref="def_2ndordercauchyeuler"/></title>
+    <tabular halign="center">
+     <row header="yes" bottom="minor">
+      <cell><em>Roots</em></cell>
+      <cell><em>General solution</em></cell>
+     </row>
+     <row>
+      <cell>Two real, distinct roots <m>m_1\neq m_2</m></cell>
+      <cell><m>y(t)=c_1t^{m_1}+c_2t^{m_2}</m></cell>
+     </row>
+     <row>
+      <cell>One real, repeated root <m>m_1=-\dfrac{b-a}{2a}</m></cell>
+      <cell><m>y(t)=c_1t^{m_1}+c_2 t^{m_1}\ln(t)</m></cell>
+     </row>
+     <row>
+      <cell>Complex roots <m>r=\alpha \pm \beta i</m></cell>
+      <cell><m>y(t)=t^{\alpha}\Big[ c_1\cos(\beta \ln(t))+c_2\sin(\beta\ln(t)) \Big]</m></cell>
+     </row>
+    </tabular>
+   </table>
+    </p>
+   </remark>
+   <example>
+    <p>
+     Consider the differential equation <m>t^2y''+2ty'-12y=0, t>0</m>. 
+     <ol>
+      <li>Classify the differential equation by order, linearity, type of coefficients, and whether or not the equation is homogeneous or nonhomogeneous.</li>
+      <li>Solve the differential equation.</li>
+     </ol>
+    </p>
+   </example>
+   <example>
+    <p>
+     Consider the differential equation <m>t^2y''+11ty'+25y=0, t>0</m>. 
+     <ol>
+      <li>Classify the differential equation by order, linearity, type of coefficients, and whether or not the equation is homogeneous or nonhomogeneous.</li>
+      <li>Solve the differential equation.</li>
+     </ol>
+    </p>
+   </example>
+   <example>
+    <p>
+     Consider the differential equation <m>t^2y''-3ty'+20y=0, t>0</m>. 
+     <ol>
+      <li>Classify the differential equation by order, linearity, type of coefficients, and whether or not the equation is homogeneous or nonhomogeneous.</li>
+      <li>Solve the differential equation.</li>
+     </ol>
+    </p>
+   </example>
+
+  </p>
+ </section>
+ <section>
+  <title>Method of Undetermined Coefficients</title>
+  <subsection>
+   <title>Annihilators</title>
+   <p>
+    <example>
+      <p>
+       Consider <m>y''-5y'+6y=0</m> and assume <m>y(t)=e^{rt}</m>. Solve this ODE in the usual way and also explore how it can be factored with differential operators. Notice the similarities in these two approaches.
+      </p>
+    </example> 
+    <definition>
+     <title>Annihilators</title>
+     <p>
+      Let <m>g</m> be a suitably differentiable function of <m>t</m>. A differential operator <m>L</m> is an <term>annihilator</term> of <m>g</m> if <m>L[g](t)=0</m> for all <m>t</m>.
+     </p>
+    </definition>
+    <example>
+     <title>Basic annihilators</title>
+     <p>
+      Find an annihilator for the given function.
+      <ol>
+       <li>Let <m>g(t)=t^3</m></li>
+       <li>Let <m>g(t)=\sin(t)</m></li>
+      </ol>
+     </p>
+    </example>
+    <table>
+     <title>Table of annihilators</title>
+     <tabular halign="center">
+      <row header="yes" bottom="minor">
+       <cell><em>Roots</em></cell>
+       <cell><em><m>g</m></em></cell>
+       <cell><em>Characteristic equation</em></cell>
+       <cell><em>Annihilator</em></cell>
+      </row>
+      <row>
+       <cell><line><m>r=0</m></line><line>mult <m>n</m></line></cell>
+       <cell><m>g(t)=c_0+c_1t+c_2t^2+\ldots+c_nt^{n-1}</m></cell>
+       <cell><m>r^n=0</m></cell>
+       <cell><m>D^n</m></cell>
+      </row>
+      <row>
+       <cell><line><m>r=\alpha</m></line><line>mult <m>n</m></line></cell>
+       <cell><m>g(t)=c_1e^{\alpha t}+c_2te^{\alpha t}+\ldots+c_nt^{n-1}e^{\alpha t}</m></cell>
+       <cell><m>(r-\alpha)^n=0</m></cell>
+       <cell><m>(D-\alpha)^n</m></cell>
+      </row>
+      <row>
+       <cell><line><m>r=\alpha \pm \beta i</m></line><line>mult <m>n</m></line></cell>
+       <cell><m>\begin{multline*}g(t)=e^{\alpha t}\left( a_0 \cos(\beta t)+b_0\sin(\beta t) \right) \\ 
+        + te^{\alpha t}\left(a_1\cos(\beta t)+b_1\sin(\beta t)\right)+ \ldots \\
+         + c_{n-1}t^{n-1}\left(a_{n-1}\cos(\beta t)+b_{n-1}\sin(\beta t)\right)\end{multline*}</m></cell>
+       <cell><m>[(r-\alpha)^2+\beta^2]^n=0</m></cell>
+       <cell><m>[(D-\alpha)^2+\beta^2]^n</m></cell>
+      </row>
+     </tabular>
+    </table>
+    <algorithm>
+     <title>Finding smallest annihilators for a given <m>g</m></title>
+     <p>
+      <ol>
+       <li>Identify the roots of <m>g</m>. Terms with the same roots go together.</li>
+       <li>Build the smallest characteristic equation for <m>g</m>.</li>
+       <li>Change the <m>r</m> into a <m>D</m> to get the smallest annihilator</li>
+      </ol>
+     </p>
+    </algorithm>
+    <example>
+     <p>
+      <ol>
+       <li><m>g(t)=3t\cos(2t)+8e^{2t}</m></li>
+       <li><m>g(t)=4+7t^2+3e^{2t}\sin(t)</m></li>
+       <li><m>g(t)=4e^{-t}\sin(2t)+5\cos(2t)</m></li>
+     </ol>
+     </p>
+    </example>
+   </p>
+  </subsection>
+  <subsection>
+   <title>Method of undetermined coefficients (annihilator approach)</title>
+   <p>
+    Consider the linear nohomogeneous ODE with constant coefficients
+    <md xml:id="def_2ndorderlinearnonhomogeneousconstantcoefficients" number="yes">ay''+by'+cy=g(t)</md>
+    For our first nonohomogeneous method, we want the terms of <m>g(t)</m> to contain functions associated with roots from the characteristic equation. Thus, finding a solution to <xref ref="def_2ndorderlinearnonhomogeneousconstantcoefficients" /> is equivalent to solving a higher-order linear homogeneous ODE with constant coefficients.
+    <definition>
+     <title>Homogeneous and nonohomogeneous solutions</title>
+     <p>
+      Solutions to <xref ref="def_2ndorderlinearnonhomogeneousconstantcoefficients" /> on <m>(-\infty,\infty)</m> are of the form <m>y=y_h+y_p</m>, where <m>y_h</m> is the <term>homogeneous solution</term>, i.e. the solution that solves <xref ref="def_2ndorderlinearnonhomogeneousconstantcoefficients" /> when <m>g(t)=0</m> for all <m>t</m>. The homogeneous solution always contains one or more arbitrary constants. The term <m>y_p</m> is the <term>nonhomogeneous solution</term>, i.e. the solution that solves <xref ref="def_2ndorderlinearhomogeneousconstantcoeffs" /> when <m>g(t)\neq 0</m> for all <m>t</m>. The nonhomogeneous solution includes a known coefficient.
+     </p>
+    </definition>
+    <algorithm>
+     <title>Method of undetermined coefficients</title>
+     <p>
+      <ol>
+       <li>Find the homogeneous solution <m>y_h</m>.</li>
+       <li>Identify the roots of <m>g</m>.</li>
+       <li>Find the smallest characteristic equation for <m>g</m>.</li>
+       <li>Apply the annihilator to both sides (on the left) to get a higher-order, linear, homogeneous ODE with constant coefficients.</li>
+       <li>Solve by assuming <m>y(t)=e^{rt}</m> and write the roots right-to-left.</li>
+       <li>Identify the terms of <m>y_p</m>.</li>
+       <li>Substitute <m>y_p</m> into <xref ref="def_2ndorderlinearnonhomogeneousconstantcoefficients" /> to determine its coefficients.</li>
+       <li>Write a general solution.</li>
+      </ol>
+     </p>
+    </algorithm>
+    <example>
+     <p>
+      Consider the differential equation <m>y''+4y=6t+2+5e^{2t}</m>. 
+      <ol>
+       <li>Classify the differential equation by order, linearity, type of coefficients, and whether it is homogeneous or nonhomogeneous.</li>
+       <li>What method(s) can you use to solve this differential equation?</li>
+       <li>Find the general solution.</li>
+      </ol>
+     </p>
+    </example>
+    <example>
+     <p>
+      Consider the differential equation <m>y'''-y=4e^t</m>. 
+      <ol>
+       <li>Classify the differential equation by order, linearity, type of coefficients, and whether it is homogeneous or nonhomogeneous.</li>
+       <li>What method(s) can you use to solve this differential equation?</li>
+       <li>Find the general solution.</li>
+      </ol>
+     </p>
+    </example>    
+   </p>
+  </subsection>
+  <subsection>
+   <title>Method of undetermined coefficients (superposition approach)</title>
+   <p>
+    We don't always have to use an annhilator with the method of undetermined coefficients. IF we compare the roots of <m>y_h</m> and <m>y_p</m>, we can identify any multiplicities and find the terms of <m>y_p</m>. We will determine the coefficients of <m>y_p</m> the same as before.
+    <example>
+     <p>
+      Consider the differential equation <m>y''+4y=6\sin(2t)</m>. 
+      <ol>
+       <li>Classify the differential equation by order, linearity, type of coefficients, and whether it is homogeneous or nonhomogeneous.</li>
+       <li>What method(s) can you use to solve this differential equation?</li>
+       <li>Find the general solution.</li>
+      </ol>
+     </p>
+    </example>    
+    <example>
+     <p>
+      Consider the differential equation <m>t^2y''-2ty'=4t</m> with <m>t>0</m>. 
+      <ol>
+       <li>Classify the differential equation by order, linearity, type of coefficients, and whether it is homogeneous or nonhomogeneous.</li>
+       <li>What method(s) can you use to solve this differential equation?</li>
+       <li>Find the general solution.</li>
+      </ol>
+     </p>
+    </example>   
+   </p>
+  </subsection>
+ </section>
+ <section>
+  <title>Variation of parameters</title>
+  <p>
+   In the previous section, we saw that the method of undetermined coefficients is a delicate method. In this section, we consider second-order linear nonhomogeneous ODEs of the form
+   <md xml:id="def_2ndorderlinearnonohomogeneous" number="yes">a_2(t)y''+a_1(t)y'+a_0(t)y=g(t),</md>
+   where <m>g</m> is a continuous function of <m>t</m>. While the method of undetermined coefficients was an algebra ("bookkeeping") method, we now introduce a calculus method that applies to a wider range of linear nonohomogeneous ODEs.
+   <lemma>
+    <title>Cramer's rule (2x2 case)</title>
+    <p>
+     Consider the linear system
+     <md>\left\{ \begin{array}{ll}
+      ax+by=s \\ 
+      cx+dy=t.
+      \end{array} \right.</md>
+      If <m>ad-bc \neq 0</m>, then the system has a unique solution given by
+      <md>x = \dfrac{\mathrm{det}\begin{bmatrix} s&amp;b\\ t&amp;d\end{bmatrix}}{\mathrm{det}\begin{bmatrix}a&amp;b \\ c&amp;d\end{bmatrix}} \text{ and } y=\dfrac{\mathrm{det}\begin{bmatrix} a&amp; s \\ c&amp; t \end{bmatrix}}{\mathrm{det}\begin{bmatrix} a&amp; b \\ c&amp; d \end{bmatrix}}</md>
+    </p>
+   </lemma>
+   <proof>
+    <p>later!</p>
+   </proof>
+   Recall from the superposition principle (Theorem <xref ref="thm_superpositionprinciple" />) that any scalar multiple of a homogeneous solution to <xref ref="def_2ndorderlinearnonohomogeneous" /> on an interval <m>I</m> is also a solution on <m>I</m>. For <xref ref="def_2ndorderlinearnonohomogeneous" />, a homogeneous solution on <m>I</m> can be written as
+   <md>y_h(t)=c_1y_1(t) + c_2y_2(t).</md>
+   To satisfy the right-hand side when <m>g(t) \neq 0</m>, we can "vary the parameters" to get
+   <md xml:id="def_variationofparametersparticularsolution" number="yes">y_p(t)=u_1(t)y_1(t)+u_2(t)y_2(t).</md>
+   <theorem>
+    <title>Variation of parameters</title>
+    <p>
+     Suppose <m>y_1</m> and <m>y_2</m> represent the homogeneous solutions to 
+     <md xml:id="def_2ndorderlinearnonohomogeneousSTANDARDFORM" number="yes">y''+P(t)y'+Q(t)y=f(t)</md>
+     on some interval <m>I</m>. Then the particular solution to <xref ref="def_2ndorderlinearnonohomogeneousSTANDARDFORM" /> is of the form <xref ref="def_variationofparametersparticularsolution" />, where <m>u_1(t)=-\displaystyle\int \dfrac{y_2(t)f(t)}{W\{y_1,y_2\}(t)} \mathrm{d}t</m> and <m>u_2(t)=\displaystyle\int \dfrac{y_1(t)f(t)}{W\{y_1,y_2\}(t)} \mathrm{d}t</m>.
+    </p>
+   </theorem>
+   <proof>
+    <p>later!</p>
+  </proof>
+  <algorithm>
+   <title>Process for variation of parameters</title>
+    <p>
+     <ol>
+      <li>Solve for <m>y_h</m>.</li>
+      <li>Put the ODE into standard form. This step is <em>necessary</em>!</li>
+      <li>Calculate the Wronskian. Once we have <m>W\{y_1,y_2\}</m>, we must stick with our choices of <m>y_1</m> and <m>y_2</m>.</li>
+      <li>Assume <m>y_p</m> is in the form <xref ref="def_variationofparametersparticularsolution" />.</li>
+      <li>Substitute <m>y_p</m> into the ODE in <em>standard form</em>.</li>
+      <li>Use Cramer's rule to solve <m>u_i'</m>.</li>
+      <li>Integrate and substitute into <m>y_p</m>, combining any like terms.</li>
+      <li>Check if any terms of <m>y_p</m> are absorbed by <m>y_h</m>.</li>
+      <li>Write a general solution and evaluate initial conditions, if any.</li>
+     </ol>
+    </p>
+  </algorithm>
+  <example>
+   <p>
+    Consider the differential equation <m>2y''-4y'+2y=\dfrac{4e^t}{t^2}</m> with <m>t>0</m>. 
+    <ol>
+     <li>Classify the differential equation by order, linearity, type of coefficients, and whether it is homogeneous or nonhomogeneous.</li>
+     <li>What method(s) can you use to solve this differential equation?</li>
+     <li>Find the general solution.</li>
+    </ol>
+   </p>
+  </example>   
+  <example>
+   <p>
+    Consider the differential equation <m>t^2y''-ty'+y=\dfrac{3t}{\ln(t)}</m> with <m>t>1</m>. 
+    <ol>
+     <li>Classify the differential equation by order, linearity, type of coefficients, and whether it is homogeneous or nonhomogeneous.</li>
+     <li>What method(s) can you use to solve this differential equation?</li>
+     <li>Find the general solution.</li>
+    </ol>
+   </p>
+  </example> 
+  <example>
+   <p>
+    Consider the differential equation <m>t^2y''-2ty'+2y=\dfrac{4t^3}{1+t^2}</m> with <m>t>0</m>. 
+    <ol>
+     <li>Classify the differential equation by order, linearity, type of coefficients, and whether it is homogeneous or nonhomogeneous.</li>
+     <li>What method(s) can you use to solve this differential equation?</li>
+     <li>Find the general solution.</li>
+    </ol>
+   </p>
+  </example> 
+  <example>
+   <p>
+    Let <m>y''+y=f(t)</m>, where <m>f</m> is a continuous function on <m>(-\infty,\infty)</m>. Show that a general solution is of the form <m>y(t)=c_1\cos(t)+c_2\sin(t)+\displaystyle\int_0^t f(s)\sin(t-s)\mathrm{d}s</m>. 
+   </p>
+  </example>
+  </p>
+ </section>
+</chapter>

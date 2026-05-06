@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<chapter xml:id="ch3-laplacetransform" xmlns:xi="http://www.w3.org/2001/XInclude">
+ <title>The Laplace transform</title>
+
+ <introduction>
+  <p> Text before the first section. </p>
+ </introduction>
+ <section>
+  <title>Introduction to the Laplace transform</title>
+  <p>
+   In this chapter, we want to develop another method for solving linear nonhomogeneous initial value problems of the form 
+   <md xml:id="def_secondordernonhomogeneous" number="yes">\left\{ \begin{array}{ll} my''+\beta y' + ky = f(t) \\ y(0)=y_0, y'(0)=y_1, \end{array}\right.</md>
+   where <m>f</m> is a piecewise-defined function of <m>t</m>, possibly acting at a single moment in time. For example, we might introduce an external forcing function after our spring mass has already been in motion for some time. Or we could have a sudden shock in a circuit. We want a method that not only solves the ODE, but also smooths these discontinuities along the way.
+   <figure>
+    <image>
+     <latex-image>
+      \begin{tikzpicture}[scale=0.5, transform shape]
+       \node[draw, text width=0.9cm, font=\footnotesize] at (0,0) {\small (3.1.1)};
+       \draw[->] (0.6,0)--(1.3,0);
+       \node at (0.9,0.2) {\scalebox{0.7}{$\mathcal{L}$}};
+       \node[draw, text width=1.1cm, font=\footnotesize] at (2,0) {\small Algebra \\ Problem};
+       \draw[->] (2.7,0)--(3.25,0);
+       \node at (3.0,0.2) {\scalebox{0.7}{$\mathcal{L}^{-1}$}};
+       \node[draw, text width=1.2cm, font=\footnotesize] at (4,0) {\small Solution};
+      \end{tikzpicture}
+     </latex-image>
+    </image>
+   </figure>
+   <definition xml:id="def_laplacetransform">
+    <title>The Laplace transform</title>
+    <p>
+     Let <m>f</m> be defined for <m>t\geq 0</m>. The <term>Laplace transform</term> of <m>f</m> is defined by
+     <md>F(s)=\mathcal{L}\{f\}(s):=\displaystyle\int_0^{\infty} e^{-st}f(t)\mathrm{d}t,</md>
+     which is an improper integral that converges for certain values of <m>s</m>.
+    </p>
+   </definition>
+   <example>
+    <p>
+     Evaluate <m>\displaystyle\int_0^1 x^2\cos(y) \mathrm{d}x</m>.
+    </p>
+   </example>
+   <theorem xml:id="thm_linearpropertieslaplacetransform">
+    <title>Linear properties of the Laplace transform</title>
+    <p>
+     Suppose the Laplace transforms of <m>f</m> and <m>g</m> both exist and let <m>\alpha \in \mathbb{R}</m>. Then,
+     <ol>
+      <li><m>\mathcal{L}\{\alpha f\}(s)=\alpha \mathcal{L}\{f\}(s)</m>, and</li>
+      <li><m>\mathcal{L}\{f \pm g\}(s) = \mathcal{L}\{f\}(s) \pm \mathcal{L}\{g\}(s)</m>.</li>
+     </ol>
+    </p>
+   </theorem>
+   <example>
+    <p>
+     Let <m>f(t)=1</m>. Find the values of <m>s</m> so that <m>\mathcal{L}\{f\}(s)</m> exists.
+    </p>
+   </example>
+   <example>
+    <p>
+     Find the Laplace transform of <m>f(t)=e^{3t}</m>. Find the values of <m>s</m> so that <m>\mathcal{L}\{f\}(s)</m> exists.
+    </p>
+   </example>
+   <example>
+    <p>
+     Find the Laplace transform of <m>f(t)=\cos(3t)</m>.
+    </p>
+   </example>
+   <example>
+    <p>
+     Sketch the function. Determine whether <m>f</m> is continuous, piecewise continuous, or nowhere continuous.
+     <ol>
+      <li><m>f(t)=\left\{ \begin{array}{ll} \cos(t), &amp; \quad 0 \leq t &lt; \dfrac{\pi}{2} \\ t, &amp;\quad \dfrac{\pi}{2}\leq t \leq 2\pi.\end{array}\right.</m></li>
+      <li><m>f(t)=\left\{ \begin{array}{ll} 1, &amp; \quad t \in \mathbb{Q} \\ 0, &amp; \text{otherwise} \end{array}\right.</m></li>
+     </ol>
+    </p>
+   </example>
+   <definition>
+    <title>Exponential order</title>
+    <p>
+     Let <m>c>0</m>. A function <m>f</m> is said to be of <term>exponential order <m>c</m></term> if there exist <m>M,T > 0</m> such that for all <m>t \geq T</m>, 
+     <md>|f(t)| \leq Me^{ct}.</md>
+    </p>
+   </definition>
+   <theorem xml:id="thm_suffcondexistencelaplace">
+    <title>Sufficient condition for existence of Laplace transform</title>
+    <p>
+     Suppose <m>f</m> is piecewise continous on <m>t \geq 0</m> and is of exponential order <m>c</m>. Then the Laplace transform exists for all <m>s>c</m>.
+    </p>
+   </theorem>
+   <proof>
+    <p>later!</p>
+   </proof>
+   <corollary>
+    <title>Limiting property of <m>F(s)</m></title>
+    <p>
+     Let <m>F</m> be the Laplace transform of <m>f</m>. Then, 
+     <md>\displaystyle\lim_{s \rightarrow \infty} F(s) = 0.</md>
+    </p>
+   </corollary>
+   <definition xml:id="def_heavisidefunction">
+    <title>Heaviside function</title>
+    <p>
+     The <term>Heaviside function</term>, also called the unit step function, is given by
+     <md>\mathcal{U}(t-a)=\left\{ \begin{array}{ll} 0, &amp; \quad 0\leq t &lt; a \\ 1, &amp; \quad t\geq a. \end{array}\right.</md>
+    </p>
+   </definition>
+   <theorem xml:id="thm_heavisideproperties">
+    <title>Properties of the Heaviside function</title>
+    <p>
+     The following are true about the Heaviside function for <m>t\geq 0</m>.
+     <ol>
+      <li><m>\mathcal{U}(t-0)=1</m></li>
+      <li><m>\mathcal{L}\{\mathcal{U}(t-a)\}(s)=\dfrac{e^{-as}}{s}</m>  for <m>s>0</m></li>
+      <li>The Heaviside function allows compact expressions of piecewise functions in the following way:
+        <md>f(t)=\left\{ \begin{array}{ll} g(t), &amp; \quad 0\leq t &lt; a \\ 
+          h(t), &amp; \quad t \geq a \end{array}\right. = g(t)\Big( 1-\mathcal{U}(t-a) \Big) + h(t)\mathcal{U}(t-b)</md></li>
+     </ol>
+    </p>
+   </theorem>
+   <example>
+    <p>
+     Find the Laplace transform of the function <m>\mathcal{U}(t-a)</m>. Find the values of <m>s</m> such that the Laplace transform exists.
+    </p>
+   </example>
+   <definition>
+    <title>Gamma function</title>
+    <p>
+     The <term>gamma function</term> is defined by
+     <md>\Gamma(z) = \displaystyle\int_0^{\infty} e^{-t}t^{z-1} \mathrm{d}t, \quad \mathrm{Re}(z)>0.</md>
+     It represents an extension of the factorial function to complex numbers.
+    </p>
+   </definition>
+   <theorem>
+    <title>Recursive property of the gamma function</title>
+    <p>
+     If <m>\mathrm{Re}(z)>0</m>, then <m>\Gamma(z+1)=z\Gamma(z)</m>.
+    </p>
+   </theorem>
+   <proof>
+    <p>
+      later!
+    </p>
+  </proof>
+  <example>
+   <p>
+    Show that <m>\mathscr{L}\{t^r\}(s)=\dfrac{\Gamma(r+1)}{s^{r+1}}</m> for <m>r>-1</m>.
+   </p>
+  </example>
+  </p>
+ </section>
+ <section>
+  <title>The Laplace transform of initial value problems</title>
+  <p>
+   To solve initial value problems, we need an idea of an inverse Laplace transform.
+   <definition>
+    <title>Inverse Laplace transform</title>
+    <p>
+     Suppose <m>f</m> and <m>f'</m> are piecewise continuous on <m>t \geq 0</m> and let <m>f</m> be of exponential order <m>c</m> for <m>t \geq 0</m>. Since <m>F</m> is the Laplace transform of <m>f</m>, the corresponding <term>inverse Laplace transform</term> of <m>F</m> is
+     <md xml:id="def_inverselaplacetransform" number="yes">f(t) = \mathscr{L}^{-1}\{F\}(t) = \dfrac{1}{2\pi i} \displaystyle\lim_{R\rightarrow\infty} \displaystyle\int_{\gamma-iR}^{\gamma+iR} e^{st}F(s)\mathrm{d}s,</md>
+     where <m>\gamma>c</m>.
+    </p>
+   </definition>
+   The integral <xref ref="def_inverselaplacetransform"/> is called a Bromwich contour integral and understanding it requires an understanding of residues in complex analysis. However, we are still able to use and apply it to solve differential equations without using that deeper theory. For our purposes, we will have a function <m>F</m> and ask the question "what function is this <m>F</m> the Laplace transform of?". To answer the question, we will use a table instead of trying to compute the integral <xref ref="def_inverselaplacetransform"/>. 
+   <theorem>
+    <title>Uniqueness of inverse Laplace transforms</title>
+    <p>
+     Suppose that the function <m>f</m> and <m>g</m> satisfy the assumptiuons of <xref ref="thm_suffcondexistencelaplace"/> so we know their respective Laplace transforms <m>F</m> and <m>G</m> exist. If <m>F(s)=G(s)</m> for all <m>s&gt; c</m>, then <m>f(t)=g(t)</m> whenever both <m>f</m> and <m>g</m> are continuous.
+    </p>
+   </theorem>
+   <theorem>
+    <title>Linear properties of the inverse Laplace transform</title>
+    <p>
+     Suppose that the inverse Laplace transforms of <m>F</m> and <m>G</m> are, respectively, <m>f</m> and <m>g</m> and let <m>\alpha \in \mathbb{R}</m>. Then,
+     <ol>
+      <li><m>\mathcal{L}^{-1}\{\alpha F\}(t) = \alpha \mathcal{L}^{-1}\{F\}(t),</m></li>
+      <li><m>\mathcal{L}^{-1}\{F \pm \}(t) = \mathcal{L}^{-1}\{F\}(t) \pm \mathcal{L}^{-1}\{G\}(t).</m></li>
+     </ol>
+    </p>
+   </theorem>
+   <proof>
+    <p>later!</p>
+   </proof>
+   Some inverse Laplace transforms you need to take to solve differential equations don't always appear exactly as they are in the table. It sometimes requires careful algebraic manipulation, see <xref ref="sec_rollinglistoftrickslaplace"/> to turn a given expression into something we can use the table in <xref ref="sec_laplacetransformtable"/> to compute.
+   <example>
+    <p>
+     Find the inverse Laplace transform of the following functions.
+     <ol>
+      <li><m>F(s)=\dfrac{1}{s^4} - \dfrac{1}{2s-1} + \dfrac{2}{s^2+9}</m></li>
+      <li><m>G(s)=\dfrac{s}{s^2+2s-3}</m></li>
+      <li><m>H(s)=\dfrac{2s+1}{s(s^2+4)}</m></li>
+     </ol>
+    </p>
+   </example>
+   <theorem>
+    <title>Laplace transforms of derivatives</title>
+    <p>
+     Suppose <m>f</m> is piecewise continuous and smooth on <m>t\geq 0</m> with exponential order <m>c</m>. Let <m>F</m> be the Laplace transform of <m>f</m>. Then,
+     <md>\mathcal{L}\{f'\}(s)=sF(s)-f(0).</md>
+     Furthermore, if <m>f</m> and <m>f'</m> are piecewise continuous and smooth on <m>t\geq 0</m> and are of exponential order <m>c</m>, then
+     <md>\mathcal{L}\{f''\}(s)=s^2F(s)-sf(0)-f'(0).</md>
+    </p>
+   </theorem>
+   <proof>
+    <p>later!</p>
+   </proof>
+   <corollary>
+    <title>Laplace transform of higher derivatives</title>
+    <p>
+     Suppose that <m>f, f', \ldots, f^{(n-1)}</m> are piecewise continuous and smooth for <m>t \geq 0</m> with exponential order <m>c</m>. Then,
+     <md>\mathcal{L}\{f^{(n)}\}(s)=s^nF(s)-s^{n-1}f(0) - s^{n-2}f'(0)-\ldots - sf^{(n-2)}(0)-f^{(n-1)}(0).</md>
+    </p>
+   </corollary>
+   <example>
+    <p>
+     The transfer function <m>H</m> of a linear system is defined as the ratio of the Laplace transform of the output function <m>y</m> to the Laplace transform of the input function <m>g</m> under the assumption that all initial conditions are zero. That is, <m>H(s)=\dfrac{Y(s)}{G(s)}</m>. Find the transfer function associated with the differential equaiton <m>ay''+by'+cy=g(t)</m> for <m>t\geq 0</m>, where <m>y</m> and <m>g</m> are both of exponential order.
+    </p>
+   </example>
+   <algorithm>
+    <title>Solving IVPs with the Laplace transform</title>
+    <p>
+     There are four basic steps to solving any initial value problem using the Laplace transform.
+     <ol>
+      <li>Take the Laplace transform of both sides to get an algebraic expression in the frequency variable <m>s</m>.</li>
+      <li>Solve the algebraic expression for <m>Y(s)</m>.</li>
+      <li>Use our algebraic techniques to simplify <m>Y(s)</m> into more familiar terms.</li>
+      <li>Take the inverse Laplace transform of both sides to find the solution <m>y</m>.</li>
+     </ol>
+    </p>
+   </algorithm>
+   <example>
+    <p>
+     Use the Laplace transform to solve the initial value problem 
+     <md>y'+3y=4e^t, \quad y(0)=1.</md>
+    </p>
+   </example>
+  </p>
+ </section>
+ <section>
+  <title>Translation theorems</title>
+  <p>
+   It is not always convenient to use <xref ref="def_laplacetransform"/> to calculate a Laplace transform. 
+   <theorem xml:id="thm_firsttranslationthm">
+    <title>First translation theorem (along <m>s</m>-axis)</title>
+    <p>
+     Let <m>f</m> be piecewise continuous on <m>t\geq 0</m> and of exponential order <m>c</m>. If <m>F</m> is the Laplace transform of <m>f</m> and <m>h(t)=e^{at}f(t)</m>, then
+     <md>\mathcal{L}\{h\}(s)=F(s-a), s>c+a,</md>
+     and
+     <md>\mathcal{L}^{-1}\{F(s-a)\}(t)=e^{at}f(t), t>0.</md>
+    </p>
+   </theorem>
+   <proof>
+    <p>later!</p>
+  </proof>
+  <example>
+    <p>
+     Find the Laplace transform of...
+     <ol>
+      <li><m>f(t)=t^2e^{4t}</m></li>
+      <li><m>g(t)=e^{-t}\sin(3t)</m></li>
+     </ol>
+    </p>
+  </example>
+  <example>
+    <p>
+      Find the invers Laplace transform of...
+      <ol>
+        <li><m>F(s)=\dfrac{s}{s^2+4s+13}</m></li>
+        <li><m>G(s)=\dfrac{s}{(s+3)^2}</m></li>
+      </ol>
+    </p>
+  </example>
+  <example>
+   <p>
+    Use the Laplace transform to solve the initial value problem
+    <md>y''+6y'+25y=0, y(0)=2, y'(0)=3.</md>
+   </p>
+  </example>
+  <example>
+   <p>
+    Use the Laplace transform to solve the initial value problem
+    <md>y'+4y=e^{-4t}, y(0)=1</md>
+   </p>
+  </example>
+  <example>
+    <p>
+     Sketch the following piecewise function. Use <xref ref="thm_heavisideproperties"/> to rewrite it a more compact form.
+     <md>f(t)=\left\{ \begin{array}{ll}
+      \sin(t), &amp; \quad 0\leq t &lt; \pi \\ 
+      \cos(t), &amp; \quad t\geq \pi.
+      \end{array}\right.</md>
+    </p>
+  </example>
+  <theorem xml:id="thm_secondtranslationthm">
+    <title>Second translation theorem</title>
+    <p>
+     Let <m>f</m> be piecewise continuous on <m>t \geq 0</m> and of exponential order <m>c</m>. If <m>a>0</m>, then
+     <md>\mathcal{L}\{f(t-a)\mathcal{U}(t-a)\}(s)=e^{-as}F(s).</md>
+     An alternative way to express the same formula is
+     <md>\mathcal{L}\{g(t)\mathcal{U}(t-a)\}(s)=e^{-as}\mathcal{L}\{g(t+a)\}(s).</md>
+     The inverse form is
+     <md>\mathcal{L}^{-1}\{e^{-as}F(s)\}(t) = f(t-a)\mathcal{U}(t-a).</md>
+    </p>
+  </theorem>
+  <example>
+   <p>
+    Find the inverse Laplace transform of...
+    <ol>
+     <li><m>F(s)=\dfrac{e^{-\frac{3\pi}{2}s}}{s^2+1}</m></li>
+     <li><m>G(s)=\dfrac{e^{-s}}{(s-1)^2}</m></li>
+    </ol>
+   </p>
+  </example>
+  <example>
+   <p>
+    Solve the initial value problem
+    <md>y'+y=\mathcal{U}(t-s), y(0)=1.</md>
+   </p>
+  </example>
+  <theorem>
+    <title>Laplace transform of periodic functions</title>
+   <p>
+    Let <m>f</m> be piecewise continuous on <m>t \geq 0</m> and of exponential order. If <m>f</m> is periodic with period <m>T</m>, i.e. <m>f(t+T)=f(t)</m> for all <m>t</m>, then 
+    <md>\mathcal{L}\{f\}(s)=\dfrac{1}{1-e^{-sT}} \displaystyle\int_0^T e^{-st}f(t)\mathrm{d}t.</md>
+   </p>
+  </theorem>
+  <proof>
+   <p>later!</p>
+  </proof>
+  <example>
+   <p>
+    Find the Laplace transform of the <m>T=1</m>-periodic square wave function
+    <m>f(t)=\left\{ \begin{array}{ll}
+        1, &amp; \quad t \in (2n,2n+1), n=0,1,2,\ldots \\ 
+        -1, &amp; \quad t \in (2n+1,2n+2), n=0,1,2,\ldots
+      \end{array}\right.</m>
+    </p>
+  </example>
+  <example>
+   <p>
+    Find the Laplace transform of the <m>T=a</m>-periodic extension of the line <m>at</m> for <m>0 &lt; t &lt; a</m>.
+   </p>
+  </example>
+  </p>
+ </section>
+ <section>
+  <title>Dirac delta</title>
+  <p>
+   In this section, we discuss how we can model an instantaneous force acting at a single moment in time. First, we discuss the unit impulse, which is a force acting over a time interval.
+   <definition>
+    <title>Unit impulse</title>
+    <p>
+     The piecewise function
+     <md>\delta_{\epsilon}(t-a)=\left\{ \begin{array}{ll}
+      0, &amp; \quad 0 \leq t &lt; a-\epsilon \\ 
+      \dfrac{1}{2\epsilon}, &amp; \quad a-\epsilon \leq t &lt; a+\epsilon \\ 
+      0, &amp; \quad t \geq a+\epsilon
+      \end{array}\right.</md>
+      is called a <term>unit impulse</term> since 
+      <md>\displaystyle\int_0^{\infty} \delta_{\epsilon}(t-a)\mathrm{d}t = 1.</md>
+    </p>
+   </definition>
+   The Dirac delta is vaguely the limit as <m>\epsilon</m> tends to zero in the unit impulse. But this is not actually a function! However, we will not worry too much about that fact and treat it in our calculus as if it were a function.
+   <definition xml:id="def_diracdelta">
+    <title>Dirac delta</title>
+    <p>
+     The <term>Dirac delta</term> can be thought of as 
+     <md>\delta(t-a)=\displaystyle\lim_{\epsilon \rightarrow 0} \delta_{\epsilon}(t-a) = \left\{ \begin{array}{ll}
+      0, &amp; \quad t \neq a \\ 
+      \infty, &amp; \quad t=a.
+      \end{array}\right.</md>
+    </p>
+   </definition>
+   Although <xref ref="def_diracdelta"/> does not actually define a real-valued function (since <m>\infty</m> is not a real number!), this expression captures the idea of an instantaneous impulse. A "true" definition of it can come out of the theory of distributions, which is beyond the scope of our course in ordinary differential equations. Nonetheless, it does possess many properties useful in differential equations.
+   <theorem>
+    <title>Special properties of Dirac delta</title>
+    <p>
+      Let <m>a\in\mathbb{R}</m>.
+     <ol>
+      <li><emph>Unit impulse property</emph>: <m>\displaystyle\int_0^{\infty} \delta(t-a)\mathrm{d}t=1</m></li>
+      <li><emph>Sifting property</emph>: If <m>f</m> is continuous, then <m>\displaystyle\int_0^{\infty} f(t)\delta(t-a)\mathrm{d}t=f(a)</m>.</li>
+      <li><m>\mathcal{L}\{\delta(t-a)\}(s)=e^{-as}</m></li>
+     </ol>
+    </p>
+   </theorem>
+   <example>
+    <p>
+     Compute the following integrals.
+     <ol>
+      <li><m>\displaystyle\int_0^{\infty} e^t \delta(t-2)\mathrm{d}t</m></li>
+      <li><m>\displaystyle\int_0^{\infty} \sin(t)\delta(t-\frac{3\pi}{2}) \mathrm{d}t</m></li>
+     </ol>
+    </p>
+   </example>
+   <example>
+    <p>
+     Consider the initial value problem
+     <md>y''+y=\delta(t-\frac{\pi}{2})+\delta(t-2\pi), y(0)=1, y'(0)=0.</md>
+     Solve this IVP and graph the solution.
+    </p>
+   </example>
+   <example>
+    <p>
+     Consider the initial value problem
+     <md>y''-6y'+9y=\delta(t-2), y(0)=0, y'(0)=1.</md>
+     Solve this IVP and find the exact value of <m>y(1)</m> and <m>y(4)</m>.
+    </p>
+   </example>
+  </p>
+ </section>
+ <section>
+  <title>Convolution</title>
+  <p>
+   <xref ref="thm_linearpropertieslaplacetransform"/> shows that the Laplace transform of a sum is a sum of Laplace transforms. One might wonder if the Laplace transform of a product is the product of Laplace transforms. Unfortunately, that simply isn't true (see if you can figure out why)! However, there is a special type of function "multiplication", called a convolution, whose Laplace transform is a product of Laplace transforms.
+   <definition>
+    <title>Convolution</title>
+    <p>
+     Let <m>f</m> and <m>g</m> be piecewise continuous on <m>t\geq 0</m>. The <term>convolution</term> of <m>f</m> and <m>g</m>, written <m>f*g</m> is defined by
+     <md>(f*g)(t)=\displaystyle\int_0^t f(\tau)g(t-\tau)\mathrm{d}\tau.</md>
+    </p>
+   </definition>
+   <example>
+    <p>
+     If <m>f(t)=t^2</m> and <m>g(t)=t</m>, then compute <m>(f*g)(t)</m>.
+    </p>
+   </example>
+   <theorem>
+    <title>Properties of convolution</title>
+    <p>
+     Let <m>f</m>, <m>g</m>, and <m>h</m> be piecewise continuous on <m>t \geq 0</m>. Then,
+     <ol>
+      <li><m>f*g=g*f</m>,</li>
+      <li><m>f*(g+h)=(f*g)+(f*h)</m>,</li>
+      <li><m>(f*g)*h=f*(g*h)</m>, and</li>
+      <li><m>f*0=0</m>.</li>
+     </ol>
+    </p>
+   </theorem>
+   <proof>
+    <p>later!</p>
+  </proof>
+  <theorem>
+   <title>Convolution theorem</title>
+   <p>
+    Let <m>f</m>, <m>g</m>, and <m>h</m> be piecewise continuous on <m>t\geq 0</m> and of exponential order. Then,
+    <md>\mathcal{L}\{f*g\}(s)=\mathcal{L}\{f\}(s) \mathcal{L}\{g\}(s) \equiv F(s)G(s).</md>
+   </p>
+  </theorem>
+  <example>
+   <p>
+    Take the Laplace transform of...
+    <ol>
+     <li><m>f(t)=t*\cos(t)</m></li>
+     <li><m>g(t)=\displaystyle\int_0^t e^{\tau}\sin(t-\tau)\mathrm{d}\tau</m></li>
+     <li><m>h(t)=e^{-t}*t^2e^t</m></li>
+     <li><m>i(t)=\displaystyle\int_0^t \cos\left(3(t-\tau)\right)\mathrm{d}\tau</m></li>
+    </ol>
+   </p>
+  </example>
+  <definition>
+   <title>Duhamel's principle</title>
+   <p>
+    Consider the spring-mass equation <m>ay''+by+cy=g(t), y(0)=y'(0)=0</m>. Recall the transfer function 
+    <md>H(s)=\dfrac{Y(s)}{G(s)}=\dfrac{1}{as^2+bs+c}.</md>
+    Its corresponding inverse <m>h(t)=\mathcal{L}^{-1}\{H\}(t)</m> is called the <term>weight</term> of the system. Then the convolution <m>\displaystyle\int_0^t h(\tau)g(t-\tau)\mathrm{d}\tau</m> is called the <term>Duhamel's principle</term> of the system.
+   </p>
+  </definition>
+  <example> 
+   <p>
+    Let <m>y''+6y'+10y=g(t)</m>, where <m>g</m> is arbitrary but piecewise continuous on <m>t \geq 0</m>. Express <m>y</m> using Duhamel's principle.
+   </p>
+  </example>
+  <definition>
+   <title>Integro-differential equations</title>
+   <p>
+    A <term>first-order integro-differential equation</term> takes the form
+    <md>y'(t)+\displaystyle\int_0^t y(\tau)g(t-\tau)\mathrm{d}\tau=h(t),</md>
+    where <m>g</m> and <m>h</m> are known functions.
+   </p>
+  </definition>
+  Integro-differential equations are useful when hte position/response variable is written in terms of itself. This is partiuclarly true for LRC circuits. 
+  <example> 
+   <p>
+    Recall that for a single-loop or series circuit, Kirchoff's second law states that the sum of the voltage drops across an indcutor, resistor, and capacitor is equal to the impressed voltage <m>E(t)</m>. Then the current <m>i(t)</m> is governed by <m>Li'(t)+Ri(t)+\dfrac{1}{C} \displaystyle\int_0^t i(\tau)\mathrm{d}\tau=E(t)</m>.
+   </p>
+  </example>
+  <example>
+   <p>
+    Solve the integro-differential equation
+    <md>y'(t)+\displaystyle\int_0^t e^{-2\tau}y(t-\tau)\mathrm{d}\tau=1, y(0)=1.</md>
+   </p>
+  </example>
+  <example>
+   <p>
+    Find the current <m>i(t)</m> in a single-loop LRC circuit where <m>L=1 \text{h}</m>, <m>R=4 \Omega</m>, <m>C=0.25 f</m>, <m>i(0)=0</m>, and the impressed voltage is <m>E(t)=e^{-2t}</m>.
+   </p>
+ </example>
+
+  </p>
+ </section>
+ <section>
+  <title>Derivatives of Laplace transforms</title>
+  <p>
+   In previous sectrions, we have calculate the Laplace transform of derivatives. Now we calculate the derivative of the transform itself.
+   <theorem>
+    <title>Differentiation of Laplace transform</title>
+    <p>
+     Let <m>f</m> be piecewise continuous for <m>t \geq 0</m> and of exponential order. Then for <m>n \in \{1,2,3,\ldots\}</m>, 
+     <md>\mathcal{L}\{t^n f(t)\}(s) = (-1)^n F^{(n)}(s).</md>
+    </p>
+   </theorem>
+   <proof>
+    <p>later!</p>
+  </proof>
+  <example>
+   <p>Find the Laplace transform of...
+    <ol>
+     <li><m>f(t)=te^{3t}</m></li>
+     <li><m>g(t)=t\cos(2t)</m></li>
+    </ol>
+   </p>
+  </example>
+  Some inverse Laplace transforms are easier to calculate by taking the derivative of <m>F</m> first:
+  <md>f(t)=\mathcal{L}^{-1}\{F\}(t) = -\dfrac{1}{t} \mathcal{L}^{-1}\{F'\}(t).</md>
+  <example>
+   <p>
+    Find the inverse Laplace transform of...
+    <ol>
+     <li><m>F(s)=\arctan(s)</m></li>
+     <li><m>G(s)=\ln\left(\dfrac{s+2}{s-2}\right)</m></li>
+    </ol>
+   </p>
+  </example>
+  <example>
+   <p>
+    Use the Laplace transform to solve
+    <md>y''+2ty'-4y=1, y(0)=0, y'(0)=0.</md>
+   </p>
+  </example>
+  </p>
+ </section>
+ <section xml:id="sec_rollinglistoftrickslaplace">
+  <title>List of tricks to find the inverse Laplace transform</title>
+  <p>
+   These algebraic tricks can be used to manipulate an expression for finding inverse Laplace transforms.
+   <ol>
+    <li>Multiply top and bottom by the same quantity. Doing this amounts to "multiplying by a convenient form of one".</li>
+    <li>Use the linearity properties of the inverse Laplace transform</li>
+    <li>Use partial fractions to break an expression into smaller pieces.</li>
+    <li>Use the inverse form of <xref ref="thm_firsttranslationthm"/>.</li>
+    <li>Add and subtract a constant in the numerator.</li>
+    <li>Complete the square in the denominator.</li>
+    <li>Use the inverse form of <xref ref="thm_secondtranslationthm"/>.</li>
+   </ol>
+
+  </p>
+ </section>
+ <section xml:id="sec_laplacetransformtable">
+  <title>Table of Laplace transforms</title>
+  <p>
+   <table>
+    <title>Laplace transform table</title>
+    <tabular halign="center">
+     <row header="yes" bottom="minor">
+      <cell><m>f(t)=</m></cell>
+      <cell><m>\mathcal{L}\{f\}(s)\equiv F(s)=</m></cell>
+     </row>
+     <row>
+      <cell><m>1</m></cell>
+      <cell><m>\dfrac{1}{s}</m></cell>
+     </row>
+     <row>
+      <cell><m>e^{at}</m></cell>
+      <cell><m>\dfrac{1}{s-a}</m></cell>
+     </row>
+     <row>
+      <cell><m>t^n</m></cell>
+      <cell><m>\dfrac{n!}{s^{n+1}}, n=1,2,3,\ldots</m></cell>
+     </row>
+     <row>
+      <cell><m>\sin(kt)</m></cell>
+      <cell><m>\dfrac{k}{s^2+k^2}</m></cell>
+     </row>
+     <row>
+      <cell><m>\cos(kt)</m></cell>
+      <cell><m>\dfrac{s}{s^2+k^2}</m></cell>
+     </row>
+     <row>
+      <cell><m>f'(t)</m></cell>
+      <cell><m>sF(s)-f(0)</m></cell>
+     </row>
+     <row>
+      <cell><m>f''(t)</m></cell>
+      <cell><m>s^2F(s)-sf(0)-f'(0)</m></cell>
+     </row>
+     <row>
+      <cell><m>e^{at}f(t)</m></cell>
+      <cell><m>F(s-a)</m></cell>
+     </row>
+     <row>
+      <cell><m>\mathcal{U}(t-a)</m></cell>
+      <cell><m>\dfrac{e^{-as}}{s}</m></cell>
+     </row>
+     <row>
+      <cell><m>f(t-a)\mathcal{U}(t-a)</m></cell>
+      <cell><m>e^{-as}F(s)</m></cell>
+     </row>
+     <row>
+      <cell><m>\delta(t-a)</m></cell>
+      <cell><m>e^{-as}</m></cell>
+     </row>
+     <row>
+      <cell><m>(f*g)(t)</m></cell>
+      <cell><m>F(s)G(s)</m></cell>
+     </row>
+     <row><m>t^nf(t)</m></row>
+     <row><m>(-1)^nF^{(n)}(s)</m></row>
+    </tabular>
+   </table>
+  </p>
+ </section>
+</chapter>

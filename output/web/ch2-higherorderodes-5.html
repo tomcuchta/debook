@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: default-modern                 *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Homogeneous equations with constant coefficients</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+<link href="_static/pretext/css/theme.css" rel="stylesheet" type="text/css">
+<link href="_static/pretext/css/ol-markers.css" rel="stylesheet" type="text/css">
+<script>
+var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
+  "tex": {
+    "inlineMath": [
+      [
+        "\\(",
+        "\\)"
+      ]
+    ],
+    "tags": "none",
+    "tagSide": "right",
+    "tagIndent": ".8em",
+    "packages": {
+      "[+]": [
+        "base",
+        "extpfeil",
+        "ams",
+        "amscd",
+        "color",
+        "newcommand",
+        "knowl"
+      ]
+    }
+  },
+  "options": {
+    "ignoreHtmlClass": "tex2jax_ignore|ignore-math",
+    "processHtmlClass": "process-math",
+    "renderActions": {
+      "findScript": [
+        10,
+        function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        },
+        ""
+      ]
+    }
+  },
+  "chtml": {
+    "scale": 0.98,
+    "mtextInheritFont": true
+  },
+  "loader": {
+    "load": [
+      "input/asciimath",
+      "[tex]/extpfeil",
+      "[tex]/amscd",
+      "[tex]/color",
+      "[tex]/newcommand",
+      "[pretext]/mathjaxknowl3.js"
+    ],
+    "paths": {
+      "pretext": "_static/pretext/js"
+    }
+  },
+  "startup": {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+  }
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="Ordinary Differential Equations">
+<meta property="book:author" content="Tom Cuchta">
+<meta property="book:author" content="Nick Wintz">
+<script src="_static/pretext/js/jquery.min.js"></script><script src="_static/pretext/js/pretext.js"></script><script src="_static/pretext/js/pretext_add_on.js?x=1"></script><!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = '7.13.5';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script src="_static/prefix-runtime.52176322e2c1dde5.bundle.js"></script><script src="_static/prefix-723.3e6434f80549315a.bundle.js"></script><script src="_static/prefix-runestone.bbf2283c5c1d4f99.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-723.3bccd435914aa0ff.css">
+<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.b12a7b3f0773ebcd.css">
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script src="_static/pretext/js/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script>
+</head>
+<body id="changeme" class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner"><div class="title-container">
+<h1 class="heading"><a href="my-great-book.html"><span class="title">Ordinary Differential Equations</span></a></h1>
+<p class="byline">Tom Cuchta, Nick Wintz</p>
+</div></div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><div class="ptx-navbar-contents">
+<button class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><div class="searchbox">
+<div class="searchwidget"><button id="searchbutton" class="searchbutton button" type="button" title="Search book"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8b6;</span><span class="name">Search Book</span></button></div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<div class="search-results-controls">
+<input aria-label="Search term" id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search term"><button title="Close search" id="closesearchresults" class="closesearchresults"><span class="material-symbols-outlined">close</span></button>
+</div>
+<h2 class="search-results-heading">Search Results: </h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div>
+<span class="nav-other-controls"><button id="light-dark-button" class="light-dark-button button" title="Dark Mode"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe51c;</span><span class="name">Dark Mode</span></button></span><span class="treebuttons"><a class="previous-button button" href="ch2-higherorderodes-4.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="ch2-higherorderodes.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="ch2-higherorderodes-6.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+</div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N} \newcommand{\Z}{\mathbb Z} \newcommand{\Q}{\mathbb Q} \newcommand{\R}{\mathbb R}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth2 focused" data-preexpanded-levels="0" data-max-levels="2"><ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-frontmatter"><div class="toc-title-box"><a href="frontmatter.html" class="internal"><span class="title">Front Matter</span></a></div></li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-linearsystems.html" class="internal"><span class="codenumber">1</span> <span class="title">First-order Differential Equations</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec_firstorderodes.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Classification of first-order ODEs</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec_malthusiangrowth.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Malthusian growth and decay</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch-linearsystems-5.html" class="internal"><span class="codenumber">1.3</span> <span class="title">Newton’s law of heating and cooling</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch-linearsystems-6.html" class="internal"><span class="codenumber">1.4</span> <span class="title">Kirchhoff’s second law</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section_secondorderchemical.html" class="internal"><span class="codenumber">1.5</span> <span class="title">Second-order chemical reactions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec_mixtures.html" class="internal"><span class="codenumber">1.6</span> <span class="title">Mixtures</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="ch-linearsystems-9.html" class="internal"><span class="codenumber">1.7</span> <span class="title">Verhulst ("logistic") and Gompertz population models</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="ch-linearsystems-9.html#ch-linearsystems-9-3" class="internal"><span class="codenumber">1.7.1</span> <span class="title">Verhulst ("logistic") model</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="ch-linearsystems-9.html#ch-linearsystems-9-4" class="internal"><span class="codenumber">1.7.2</span> <span class="title">Gompertz model</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="ch-linearsystems-10.html" class="internal"><span class="codenumber">1.8</span> <span class="title">Initial value problems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="ch-linearsystems-10.html#ch-linearsystems-10-2" class="internal"><span class="codenumber">1.8.1</span> <span class="title">Types of solutions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="ch-linearsystems-10.html#ch-linearsystems-10-3" class="internal"><span class="codenumber">1.8.2</span> <span class="title">Initial value problems</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="ch-linearsystems-11.html" class="internal"><span class="codenumber">1.9</span> <span class="title">Behavior of solutions without solving</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="ch-linearsystems-11.html#ch-linearsystems-11-3" class="internal"><span class="codenumber">1.9.1</span> <span class="title">Direction fields</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="ch-linearsystems-11.html#ch-linearsystems-11-4" class="internal"><span class="codenumber">1.9.2</span> <span class="title">Euler’s method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="ch-linearsystems-11.html#ch-linearsystems-11-5" class="internal"><span class="codenumber">1.9.3</span> <span class="title">Autonomous ODEs</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch-linearsystems-12.html" class="internal"><span class="codenumber">1.10</span> <span class="title">Separable differential equations</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch-linearsystems-13.html" class="internal"><span class="codenumber">1.11</span> <span class="title">First-order linear nonohomogeneous ODEs</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch-linearsystems-14.html" class="internal"><span class="codenumber">1.12</span> <span class="title">Exact equations</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter contains-active">
+<div class="toc-title-box"><a href="ch2-higherorderodes.html" class="internal"><span class="codenumber">2</span> <span class="title">Higher-order Linear Differential Equations</span></a></div>
+<ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch2-higherorderodes-3.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Higher-order homogeneous equations</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch2-higherorderodes-4.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Method of factoring and reduction of order</span></a></div></li>
+<li class="toc-item toc-section active"><div class="toc-title-box"><a href="ch2-higherorderodes-5.html" class="internal"><span class="codenumber">2.3</span> <span class="title">Homogeneous equations with constant coefficients</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch2-higherorderodes-6.html" class="internal"><span class="codenumber">2.4</span> <span class="title">Cauchy-Euler equations</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="ch2-higherorderodes-7.html" class="internal"><span class="codenumber">2.5</span> <span class="title">Method of Undetermined Coefficients</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="ch2-higherorderodes-7.html#ch2-higherorderodes-7-2" class="internal"><span class="codenumber">2.5.1</span> <span class="title">Annihilators</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="ch2-higherorderodes-7.html#ch2-higherorderodes-7-3" class="internal"><span class="codenumber">2.5.2</span> <span class="title">Method of undetermined coefficients (annihilator approach)</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="ch2-higherorderodes-7.html#ch2-higherorderodes-7-4" class="internal"><span class="codenumber">2.5.3</span> <span class="title">Method of undetermined coefficients (superposition approach)</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch2-higherorderodes-8.html" class="internal"><span class="codenumber">2.6</span> <span class="title">Variation of parameters</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch3-laplacetransform.html" class="internal"><span class="codenumber">3</span> <span class="title">The Laplace transform</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch3-laplacetransform-3.html" class="internal"><span class="codenumber">3.1</span> <span class="title">Introduction to the Laplace transform</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch3-laplacetransform-4.html" class="internal"><span class="codenumber">3.2</span> <span class="title">The Laplace transform of initial value problems</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch3-laplacetransform-5.html" class="internal"><span class="codenumber">3.3</span> <span class="title">Translation theorems</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch3-laplacetransform-6.html" class="internal"><span class="codenumber">3.4</span> <span class="title">Dirac delta</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch3-laplacetransform-7.html" class="internal"><span class="codenumber">3.5</span> <span class="title">Convolution</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch3-laplacetransform-8.html" class="internal"><span class="codenumber">3.6</span> <span class="title">Derivatives of Laplace transforms</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec_rollinglistoftrickslaplace.html" class="internal"><span class="codenumber">3.7</span> <span class="title">List of tricks to find the inverse Laplace transform</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec_laplacetransformtable.html" class="internal"><span class="codenumber">3.8</span> <span class="title">Table of Laplace transforms</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch4-linearsystems.html" class="internal"><span class="codenumber">4</span> <span class="title">Linear systems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch4-linearsystems-3.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Introduction to linear systems</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch4-linearsystems-4.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Solutions to linear homogeneous systems</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch4-linearsystems-5.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Variation of parameters</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="ch4-linearsystems-6.html" class="internal"><span class="codenumber">4.4</span> <span class="title">The Laplace transform of linear systems</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-backmatter"><div class="toc-title-box"><a href="backmatter.html" class="internal"><span class="title">Backmatter</span></a></div></li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="ch2-higherorderodes-5"><h2 class="heading hide-type">
+<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.3</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Homogeneous equations with constant coefficients</span>
+</h2>
+<div class="para logical" id="ch2-higherorderodes-5-2">
+<div class="para">
+<article class="definition definition-like" id="ch2-higherorderodes-5-2-1"><h3 class="heading">
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.3.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Spring/mass and circuit problems.</span>
+</h3>
+<div class="para logical" id="ch2-higherorderodes-5-2-1-2">
+<div class="para">A second-order linear homogeneous ODE with constant coefficients takes the form</div>
+<div class="displaymath process-math" id="def_2ndorderlinearhomogeneousconstantcoeffs">
+\begin{equation}
+ay''+by'+cy=0,\tag{2.3.1}
+\end{equation}
+</div>
+<div class="para">where <span class="process-math">\(a, b, c \in \mathbb{R}\)</span> are constant functions.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ch2-higherorderodes-5-2-1-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 2.3.1: Spring/mass and circuit problems"><a href="#ch2-higherorderodes-5-2-1" title="Copy heading and permalink for Definition 2.3.1: Spring/mass and circuit problems" aria-label="Copy heading and permalink for Definition 2.3.1: Spring/mass and circuit problems">🔗</a></div></article> Recall the first ODE we solved was of the form</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_1storderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_1storderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html" id="def_1storderlinearhomogeneousconstantcoeffs">
+\begin{equation}
+ay'+by=0,\tag{2.3.2}
+\end{equation}
+</div>
+<div class="para">which is a first-order linear homogeneous differential equation with constant coefficients. Recall that the solution was <span class="process-math">\(y(t)=Ce^{rt}\)</span> where <span class="process-math">\(r=-\dfrac{b}{a}\text{.}\)</span> Since <a href="ch2-higherorderodes-5.html#def_2ndorderlinearhomogeneousconstantcoeffs" class="xref" data-knowl="./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 2.3.1">(2.3.1)</a> and <a href="ch2-higherorderodes-5.html#def_1storderlinearhomogeneousconstantcoeffs" class="xref" data-knowl="./knowl/xref/def_1storderlinearhomogeneousconstantcoeffs.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 2.3.2">(2.3.2)</a> are of the same form, it is reasonable to expect that <span class="process-math">\(y(t)=e^{rt}\)</span> also solves <a href="ch2-higherorderodes-5.html#def_2ndorderlinearhomogeneousconstantcoeffs" class="xref" data-knowl="./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 2.3.1">(2.3.1)</a> on <span class="process-math">\((-\infty,\infty)\text{.}\)</span> However we need to know the value(s) of <span class="process-math">\(r\)</span> such that this is the case. Substituting <span class="process-math">\(y(t)=e^{rt}\)</span> into <a href="ch2-higherorderodes-5.html#def_2ndorderlinearhomogeneousconstantcoeffs" class="xref" data-knowl="./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 2.3.1">(2.3.1)</a>, we get</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_1storderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_1storderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html" id="ch2-higherorderodes-5-2-13">
+\begin{equation*}
+ar^2e^{rt}+bre^{rt}+ce^{rt}=0.
+\end{equation*}
+</div>
+<div class="para">We then factor out the common factor <span class="process-math">\(e^{rt}\)</span> to get</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_1storderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_1storderlinearhomogeneousconstantcoeffs.html ./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html" id="ch2-higherorderodes-5-2-15">
+\begin{equation*}
+e^{rt}\big( ar^2+br+c \big)=0.
+\end{equation*}
+</div>
+<div class="para">Since <span class="process-math">\(e^{rt}\)</span> is never zero, it can be divided off to leave a polynomial equation in <span class="process-math">\(r\)</span> that we can solve. <article class="definition definition-like" id="ch2-higherorderodes-5-2-18"><h3 class="heading">
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.3.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Characteristic equation for (2.3.1).</span>
+</h3>
+<div class="para logical" id="ch2-higherorderodes-5-2-18-2">
+<div class="para">The polynomial</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html" id="ch2-higherorderodes-5-2-18-2-1">
+\begin{equation*}
+ar^2+br+c=0
+\end{equation*}
+</div>
+<div class="para">is called the <dfn class="terminology">characteristic equation</dfn> (or <dfn class="terminology">auxiliary equation</dfn>) for <a href="ch2-higherorderodes-5.html#def_2ndorderlinearhomogeneousconstantcoeffs" class="xref" data-knowl="./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 2.3.1">(2.3.1)</a> and its roots dictate the form of the general solution.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ch2-higherorderodes-5-2-18-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 2.3.2: Characteristic equation for (2.3.1)"><a href="#ch2-higherorderodes-5-2-18" title="Copy heading and permalink for Definition 2.3.2: Characteristic equation for (2.3.1)" aria-label="Copy heading and permalink for Definition 2.3.2: Characteristic equation for (2.3.1)">🔗</a></div></article> We now summarize what form general solutions take, dependent on the roots of the characteristic equation. <figure class="table table-like" id="ch2-higherorderodes-5-2-19"><figcaption><span class="type">Table</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.3.3<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>General solutions to (2.3.1)<div class="autopermalink" data-description="Table 2.3.3: General solutions to (2.3.1)"><a href="#ch2-higherorderodes-5-2-19" title="Copy heading and permalink for Table 2.3.3: General solutions to (2.3.1)" aria-label="Copy heading and permalink for Table 2.3.3: General solutions to (2.3.1)">🔗</a></div></figcaption><div class="tabular-box natural-width"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="c m b1 r0 l0 t0 lines"><em class="emphasis">Roots</em></th>
+<th scope="col" class="c m b1 r0 l0 t0 lines"><em class="emphasis">General solution</em></th>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">Two real, distinct roots <span class="process-math">\(r_1\neq r_2\)</span>
+</td>
+<td class="c m b0 r0 l0 t0 lines"><span class="process-math">\(y(t)=c_1e^{r_1t}+c_2e^{r_2t}\)</span></td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">One real, repeated root <span class="process-math">\(r_1=-\dfrac{b}{2a}\)</span>
+</td>
+<td class="c m b0 r0 l0 t0 lines"><span class="process-math">\(y(t)=c_1e^{r_1t}+c_2te^{r_1t}\)</span></td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">Complex roots <span class="process-math">\(r=\alpha \pm \beta i\)</span>
+</td>
+<td class="c m b0 r0 l0 t0 lines"><span class="process-math">\(y(t)=e^{\alpha t}\big[ c_1\cos(\beta t)+c_2\sin(\beta t)\big]\)</span></td>
+</tr>
+</table></div></figure> <details id="ch2-higherorderodes-5-2-20" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.3.4</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Real, distinct roots.</span>
+</h3></summary><article class="example example-like knowl__content"><div class="para logical" id="ch2-higherorderodes-5-2-20-2">
+<div class="para">Consider the differential equation <span class="process-math">\(y''-5y'+6y=0\text{.}\)</span>
+</div>
+<ol class="decimal" id="ch2-higherorderodes-5-2-20-2-2">
+<li id="ch2-higherorderodes-5-2-20-2-2-1">
+<div class="para" id="p-derived-ch2-higherorderodes-5-2-20-2-2-1">Classify the differential equation by order, linearity, type of coefficients, and whether or not the equation is homogeneous or nonhomogeneous.</div>
+<div class="autopermalink" data-description="Item 1"><a href="#ch2-higherorderodes-5-2-20-2-2-1" title="Copy heading and permalink for Item 1" aria-label="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="ch2-higherorderodes-5-2-20-2-2-2">
+<div class="para" id="p-derived-ch2-higherorderodes-5-2-20-2-2-2">Solve the differential equation.</div>
+<div class="autopermalink" data-description="Item 2"><a href="#ch2-higherorderodes-5-2-20-2-2-2" title="Copy heading and permalink for Item 2" aria-label="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Paragraph"><a href="#ch2-higherorderodes-5-2-20-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 2.3.4: Real, distinct roots"><a href="#ch2-higherorderodes-5-2-20" title="Copy heading and permalink for Example 2.3.4: Real, distinct roots" aria-label="Copy heading and permalink for Example 2.3.4: Real, distinct roots">🔗</a></div></article></details> <article class="theorem theorem-like" id="ch2-higherorderodes-5-2-21"><h3 class="heading">
+<span class="type">Theorem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.3.5</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Repeated roots.</span>
+</h3>
+<div class="para logical" id="ch2-higherorderodes-5-2-21-2">
+<div class="para">Suppose <a href="ch2-higherorderodes-5.html#def_2ndorderlinearhomogeneousconstantcoeffs" class="xref" data-knowl="./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 2.3.1">(2.3.1)</a> has characteristic equation with repeated root <span class="process-math">\(r_1=-\dfrac{b}{2a}\text{.}\)</span> Then the general solution takes form</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html" id="ch2-higherorderodes-5-2-21-2-3">
+\begin{equation*}
+y(t)=c_1e^{r_1t}+c_2te^{r_1t}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ch2-higherorderodes-5-2-21-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 2.3.5: Repeated roots"><a href="#ch2-higherorderodes-5-2-21" title="Copy heading and permalink for Theorem 2.3.5: Repeated roots" aria-label="Copy heading and permalink for Theorem 2.3.5: Repeated roots">🔗</a></div></article> <details id="ch2-higherorderodes-5-2-22" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h3 class="heading"><span class="type">Proof<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h3></summary><article class="hiddenproof knowl__content"><div class="para" id="ch2-higherorderodes-5-2-22-1">coming later!<div class="autopermalink" data-description="Paragraph"><a href="#ch2-higherorderodes-5-2-22-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Proof 1"><a href="#ch2-higherorderodes-5-2-22" title="Copy heading and permalink for Proof 1" aria-label="Copy heading and permalink for Proof 1">🔗</a></div></article></details> <details id="ch2-higherorderodes-5-2-23" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.3.6</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Real, repeated roots.</span>
+</h3></summary><article class="example example-like knowl__content"><div class="para logical" id="ch2-higherorderodes-5-2-23-2">
+<div class="para">Consider the differential equation <span class="process-math">\(y''-4y'+4y=0\text{.}\)</span>
+</div>
+<ol class="decimal" id="ch2-higherorderodes-5-2-23-2-2">
+<li id="ch2-higherorderodes-5-2-23-2-2-1">
+<div class="para" id="p-derived-ch2-higherorderodes-5-2-23-2-2-1">Classify the differential equation by order, linearity, type of coefficients, and whether or not the equation is homogeneous or nonhomogeneous.</div>
+<div class="autopermalink" data-description="Item 1"><a href="#ch2-higherorderodes-5-2-23-2-2-1" title="Copy heading and permalink for Item 1" aria-label="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="ch2-higherorderodes-5-2-23-2-2-2">
+<div class="para" id="p-derived-ch2-higherorderodes-5-2-23-2-2-2">Solve the differential equation.</div>
+<div class="autopermalink" data-description="Item 2"><a href="#ch2-higherorderodes-5-2-23-2-2-2" title="Copy heading and permalink for Item 2" aria-label="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Paragraph"><a href="#ch2-higherorderodes-5-2-23-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 2.3.6: Real, repeated roots"><a href="#ch2-higherorderodes-5-2-23" title="Copy heading and permalink for Example 2.3.6: Real, repeated roots" aria-label="Copy heading and permalink for Example 2.3.6: Real, repeated roots">🔗</a></div></article></details> <article class="definition definition-like" id="ch2-higherorderodes-5-2-24"><h3 class="heading">
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.3.7</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Euler’s formula.</span>
+</h3>
+<div class="para logical" id="ch2-higherorderodes-5-2-24-2">
+<div class="para">Euler’s formula says</div>
+<div class="displaymath process-math" id="ch2-higherorderodes-5-2-24-2-1">
+\begin{equation*}
+e^{i\theta}=\cos(\theta)+i\sin(\theta).
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ch2-higherorderodes-5-2-24-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 2.3.7: Euler’s formula"><a href="#ch2-higherorderodes-5-2-24" title="Copy heading and permalink for Definition 2.3.7: Euler’s formula" aria-label="Copy heading and permalink for Definition 2.3.7: Euler’s formula">🔗</a></div></article> <article class="theorem theorem-like" id="ch2-higherorderodes-5-2-25"><h3 class="heading">
+<span class="type">Theorem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.3.8</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Complex roots.</span>
+</h3>
+<div class="para logical" id="ch2-higherorderodes-5-2-25-2">
+<div class="para">Suppose <a href="ch2-higherorderodes-5.html#def_2ndorderlinearhomogeneousconstantcoeffs" class="xref" data-knowl="./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 2.3.1">(2.3.1)</a> has a characteristic equation with complex roots <span class="process-math">\(r=\alpha \pm \beta i\text{.}\)</span> Then the general solution takes form</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html" id="ch2-higherorderodes-5-2-25-2-3">
+\begin{equation*}
+y(t)=e^{\alpha t}\big[ c_1\cos(\beta t)+c_2\sin(\beta t) \big].
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ch2-higherorderodes-5-2-25-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 2.3.8: Complex roots"><a href="#ch2-higherorderodes-5-2-25" title="Copy heading and permalink for Theorem 2.3.8: Complex roots" aria-label="Copy heading and permalink for Theorem 2.3.8: Complex roots">🔗</a></div></article> <details id="ch2-higherorderodes-5-2-26" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h3 class="heading"><span class="type">Proof<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h3></summary><article class="hiddenproof knowl__content"><div class="para" id="ch2-higherorderodes-5-2-26-1">coming later!<div class="autopermalink" data-description="Paragraph"><a href="#ch2-higherorderodes-5-2-26-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Proof 2"><a href="#ch2-higherorderodes-5-2-26" title="Copy heading and permalink for Proof 2" aria-label="Copy heading and permalink for Proof 2">🔗</a></div></article></details> <details id="ch2-higherorderodes-5-2-27" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.3.9</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Complex roots.</span>
+</h3></summary><article class="example example-like knowl__content"><div class="para logical" id="ch2-higherorderodes-5-2-27-2">
+<div class="para">Consider the differential equation <span class="process-math">\(y''+4y'+13y=0\text{.}\)</span>
+</div>
+<ol class="decimal" id="ch2-higherorderodes-5-2-27-2-2">
+<li id="ch2-higherorderodes-5-2-27-2-2-1">
+<div class="para" id="p-derived-ch2-higherorderodes-5-2-27-2-2-1">Classify the differential equation by order, linearity, type of coefficients, and whether or not the equation is homogeneous or nonhomogeneous.</div>
+<div class="autopermalink" data-description="Item 1"><a href="#ch2-higherorderodes-5-2-27-2-2-1" title="Copy heading and permalink for Item 1" aria-label="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="ch2-higherorderodes-5-2-27-2-2-2">
+<div class="para" id="p-derived-ch2-higherorderodes-5-2-27-2-2-2">Solve the differential equation.</div>
+<div class="autopermalink" data-description="Item 2"><a href="#ch2-higherorderodes-5-2-27-2-2-2" title="Copy heading and permalink for Item 2" aria-label="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Paragraph"><a href="#ch2-higherorderodes-5-2-27-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 2.3.9: Complex roots"><a href="#ch2-higherorderodes-5-2-27" title="Copy heading and permalink for Example 2.3.9: Complex roots" aria-label="Copy heading and permalink for Example 2.3.9: Complex roots">🔗</a></div></article></details> Any linear homogeneous ODE with constant coefficients takes a form resembling <a href="ch2-higherorderodes-5.html#def_1storderlinearhomogeneousconstantcoeffs" class="xref" data-knowl="./knowl/xref/def_1storderlinearhomogeneousconstantcoeffs.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 2.3.2">(2.3.2)</a> and <a href="ch2-higherorderodes-5.html#def_2ndorderlinearhomogeneousconstantcoeffs" class="xref" data-knowl="./knowl/xref/def_2ndorderlinearhomogeneousconstantcoeffs.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 2.3.1">(2.3.1)</a> and we solve them the same way: assume a solution form <span class="process-math">\(y(t)=e^{rt}\text{,}\)</span> substitute it in, and solve the resulting polynomial for <span class="process-math">\(r\text{.}\)</span> <details id="ch2-higherorderodes-5-2-32" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.3.10</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h3></summary><article class="example example-like knowl__content"><div class="para logical" id="ch2-higherorderodes-5-2-32-1">
+<div class="para">Consider the differential equation <span class="process-math">\(y'''-2y''-y'+2y=0\text{.}\)</span>
+</div>
+<ol class="decimal" id="ch2-higherorderodes-5-2-32-1-2">
+<li id="ch2-higherorderodes-5-2-32-1-2-1">
+<div class="para" id="p-derived-ch2-higherorderodes-5-2-32-1-2-1">Classify the differential equation by order, linearity, type of coefficients, and whether or not the equation is homogeneous or nonhomogeneous.</div>
+<div class="autopermalink" data-description="Item 1"><a href="#ch2-higherorderodes-5-2-32-1-2-1" title="Copy heading and permalink for Item 1" aria-label="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="ch2-higherorderodes-5-2-32-1-2-2">
+<div class="para" id="p-derived-ch2-higherorderodes-5-2-32-1-2-2">Solve the differential equation.</div>
+<div class="autopermalink" data-description="Item 2"><a href="#ch2-higherorderodes-5-2-32-1-2-2" title="Copy heading and permalink for Item 2" aria-label="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Paragraph"><a href="#ch2-higherorderodes-5-2-32-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 2.3.10"><a href="#ch2-higherorderodes-5-2-32" title="Copy heading and permalink for Example 2.3.10" aria-label="Copy heading and permalink for Example 2.3.10">🔗</a></div></article></details> <details id="ch2-higherorderodes-5-2-33" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.3.11</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h3></summary><article class="example example-like knowl__content"><div class="para logical" id="ch2-higherorderodes-5-2-33-1">
+<div class="para">Consider the differential equation <span class="process-math">\(y^{(4)}-16y=0\text{.}\)</span>
+</div>
+<ol class="decimal" id="ch2-higherorderodes-5-2-33-1-2">
+<li id="ch2-higherorderodes-5-2-33-1-2-1">
+<div class="para" id="p-derived-ch2-higherorderodes-5-2-33-1-2-1">Classify the differential equation by order, linearity, type of coefficients, and whether or not the equation is homogeneous or nonhomogeneous.</div>
+<div class="autopermalink" data-description="Item 1"><a href="#ch2-higherorderodes-5-2-33-1-2-1" title="Copy heading and permalink for Item 1" aria-label="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="ch2-higherorderodes-5-2-33-1-2-2">
+<div class="para" id="p-derived-ch2-higherorderodes-5-2-33-1-2-2">Solve the differential equation.</div>
+<div class="autopermalink" data-description="Item 2"><a href="#ch2-higherorderodes-5-2-33-1-2-2" title="Copy heading and permalink for Item 2" aria-label="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Paragraph"><a href="#ch2-higherorderodes-5-2-33-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 2.3.11"><a href="#ch2-higherorderodes-5-2-33" title="Copy heading and permalink for Example 2.3.11" aria-label="Copy heading and permalink for Example 2.3.11">🔗</a></div></article></details> <details id="ch2-higherorderodes-5-2-34" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.3.12</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h3></summary><article class="example example-like knowl__content"><div class="para logical" id="ch2-higherorderodes-5-2-34-1">
+<div class="para">Consider the differential equation <span class="process-math">\(y^{(4)}-y'''-y'+y=0\text{.}\)</span>
+</div>
+<ol class="decimal" id="ch2-higherorderodes-5-2-34-1-2">
+<li id="ch2-higherorderodes-5-2-34-1-2-1">
+<div class="para" id="p-derived-ch2-higherorderodes-5-2-34-1-2-1">Classify the differential equation by order, linearity, type of coefficients, and whether or not the equation is homogeneous or nonhomogeneous.</div>
+<div class="autopermalink" data-description="Item 1"><a href="#ch2-higherorderodes-5-2-34-1-2-1" title="Copy heading and permalink for Item 1" aria-label="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="ch2-higherorderodes-5-2-34-1-2-2">
+<div class="para" id="p-derived-ch2-higherorderodes-5-2-34-1-2-2">Solve the differential equation.</div>
+<div class="autopermalink" data-description="Item 2"><a href="#ch2-higherorderodes-5-2-34-1-2-2" title="Copy heading and permalink for Item 2" aria-label="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Paragraph"><a href="#ch2-higherorderodes-5-2-34-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 2.3.12"><a href="#ch2-higherorderodes-5-2-34" title="Copy heading and permalink for Example 2.3.12" aria-label="Copy heading and permalink for Example 2.3.12">🔗</a></div></article></details>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ch2-higherorderodes-5-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Section 2.3: Homogeneous equations with constant coefficients"><a href="#ch2-higherorderodes-5" title="Copy heading and permalink for Section 2.3: Homogeneous equations with constant coefficients" aria-label="Copy heading and permalink for Section 2.3: Homogeneous equations with constant coefficients">🔗</a></div></section></div>
+<div id="ptx-content-footer" class="ptx-content-footer">
+<a class="previous-button button" href="ch2-higherorderodes-4.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="ch2-higherorderodes-6.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="338 3000 8772 6866" role="img"><title>PreTeXt logo</title><g style="stroke-width:.025in; stroke:currentColor; fill:none"><polyline points="472,3590 472,9732 " style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png" alt="Runstone Academy logo"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png" alt="MathJax logo"></a>
+</div>
+</body>
+</html>

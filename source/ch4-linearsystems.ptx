@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<chapter xml:id="ch4-linearsystems" xmlns:xi="http://www.w3.org/2001/XInclude">
+ <title>Linear systems</title>
+
+ <introduction>
+  <p> Text before the first section. </p>
+ </introduction>
+ <section>
+  <title>Introduction to linear systems</title>
+  <p>
+   <definition>
+    <title>Matrices</title>
+    <p>
+     A <term>matrix</term> <m>A=\{a_{ij}\}</m> is any rectangular array of numbers. The <term>size</term> of <m>A</m> is written as <m>m \times n</m>, where <m>m</m> is the number of rows and <m>n</m> is the number of columns.
+    </p>
+   </definition>
+   <theorem>
+    <title>Properties of matrices</title>
+    <p>
+     <ol>
+      <li><emph>Equality</emph>: <m>A=B</m> if and oly if <m>A</m> and <m>B</m> are the same size and <m>a_{ij}=b_{ij}</m> for all <m>(i,j)</m>.</li>
+      <li><emph>Addition</emph>: If <m>A</m> and <m>B</m> are the same size, then <m>A+B=(a+b)_{ij}</m>.</li>
+      <li><emph>Scalar multiplication</emph>: If <m>A</m> is an <m>m \times n</m> matrix and <m>k \in \mathbb{R}</m>, then <m>kA=k(a_{ij})</m>.</li>
+      <li><emph>Matrix multiplication</emph>: If <m>A</m> is an <m>m \times n</m> matrix and <m>B</m> is an <m>n \times p</m> matrix, then <m>AB</m> exists and is an <m>m \times p</m> matrix.</li>
+     </ol>
+    </p>
+   </theorem>
+   <example>
+    <p>
+     Let <m>A=\begin{bmatrix} 1&amp;2&amp;3 \\ 4&amp;5&amp;6 \end{bmatrix}</m> and <m>B=\begin{bmatrix} 1&amp;0 \\ -1&amp;1 \\ 0&amp;1 \end{bmatrix}</m>.
+     <ol>
+      <li>Find <m>AB</m>.</li>
+      <li>Find <m>BA</m>.</li>
+     </ol>
+    </p>
+   </example>
+   <definition>
+    <title>Matrix transpose</title>
+    <p>
+     If <m>A=\{a_{ij}\}</m> is an <m>m \times n</m> matrix, its <term>transpose</term> <m>A^T=\{a_{ji}\}</m> is an <m>n \times m</m> matrix.
+    </p>
+   </definition>
+   <definition>
+    <title>Square matrices</title>
+    <p>
+     A matrix <m>A</m> is called <term>square</term> if the number of its rows equals the number of its columns, i.e. that <m>A</m> is an <m>n \times n</m> matrix.
+    </p>
+   </definition>
+   <definition>
+    <title>Identity matrix</title>
+    <p>
+     An <term>identity matrix</term> <m>I_n</m> is an <m>n \times n</m> matrix with entries of <m>1</m> along the main diagonal (top left to bottom right) and <m>0</m> everywhere else.
+    </p>
+   </definition>
+   <definition>
+    <title>Trace</title>
+    <p>
+     The <term>trace</term> of an <m>n \times n</m> matrix <m>A</m> is the sum of all the entries on its main diagonal, i.e.
+     <md>\mathrm{tr}(A) = \displaystyle\sum_{i=1}^n a_{ii}.</md>
+    </p>
+   </definition>
+   <definition>
+    <title>Determinant of <m>2 \times 2</m> matrices</title>
+    <p>
+     Let <m>A=\begin{bmatrix}a&amp;b \\ c&amp;d\end{bmatrix}</m>. The <term>determinant</term> of <m>A</m> is 
+     <md>\mathrm{det}(A)=ad-bc.</md>
+    </p>
+   </definition>
+   <definition>
+    <title>Invertibility</title>
+    <p>
+     Let <m>A</m> be an <m>n \times n</m> matrix. If <m>\mathrm{det}(A) \neq 0</m>, then <m>A</m> is called <term>invertible</term> (also called <term>nonsingular</term>), which implies the rows of <m>A</m> are linearly independent. If <m>\mathrm{det}(A)=0</m>, then <m>A</m> is called <term>noninvertible</term> (also called <term>singular</term>), which implies the rows of <m>A</m> are linearly dependent so that at least one row can be written as a linear combination of the other rows.
+    </p>
+   </definition>
+   <definition>
+    <title>Matrix inverse</title>
+    <p>
+     Let <m>A</m> be an <m>n \times n</m> matrix with <m>\mathrm{det}(A) \neq 0</m>. Then there exists a unique <m>n \times n</m> matrix <m>A^{-1}</m> such that <m>A^{-1}A=AA^{-1}=I_n</m>. The matrix <m>A^{-1}</m> is the <term>multiplicative inverse</term> of <m>A</m>.
+    </p>
+   </definition>
+   
+   <theorem>
+    <title>Inverse of <m>2 \times 2</m> matrices</title>
+    <p>
+     If <m>A=\begin{bmatrix} a&amp;b\\c&amp;d\end{bmatrix}</m> with <m>\mathrm{det}(A)=ad-bc\neq 0</m>, then
+     <md>A^{-1} = \dfrac{1}{\mathrm{det}(A)} \begin{bmatrix} d&amp;-b \\ -c&amp; a\end{bmatrix}.</md>
+    </p>
+   </theorem>
+   <example>
+    <p>
+     Consider the linear system 
+     <md>\left\{ \begin{array}{ll} ax+by=s \\ cx+dy=t. \end{array}\right.</md>
+     This sytem can be written in as a vector equation of the form <m>A\vec{x}=\vec{b}</m>.
+    </p>
+   </example>
+   <theorem>
+    <title>Trichotomy for linear systems</title>
+    <p>
+     There are three possible outcomes for the solution of the vector equation <m>A\vec{x}=\vec{b}</m>. The three possibilities are revealed by understanding a <m>2 \times 2</m> system as a pair of lines and solutions as intersections of those lines. The three possibilities are as follows:
+     <ol>
+      <li><emph>Unique solution</emph>: there is only one solution at the intersection of the lines.</li>
+      <li><emph>No solution</emph>: the lines do not intersect.</li>
+      <li><emph>Infinitely many solutions</emph>: the lines are identical.</li>
+     </ol>
+    </p>
+   </theorem>
+   <theorem>
+    <title>Solution of vector equation with invertible matrix</title>
+    <p>
+     Consider <m>A\vec{x}=\vec{b}</m> with <m>\mathrm{det}(A)\neq 0</m>. Then there is a unique solution <m>\vec{x}=A^{-1}\vec{b}</m>. If also <m>\vec{b}=\vec{0}</m>, then <m>\vec{x}=A^{-1}\vec{0}=\vec{0}</m>, which is called the <term>trivial solution</term>. 
+    </p>
+   </theorem>
+   <example>
+    <p>
+     Let <m>\vec{x}</m> be a length two vector and let <m>c \in \mathbb{R}</m>. Then <m>c\vec{x}</m> scales the vector's length, but "preserves" its direction.
+    </p>
+   </example>
+   <definition>
+    <title>Eigenvalues and eigenvectors</title>
+    <p>
+     Let <m>A</m> be an <m>n \times n</m> matrix. A constant <m>\lambda</m> is called an <term>eigenvalue</term> of <m>A</m> if there is a nonzero vector <m>\vec{v}</m> such that 
+     <md>A\vec{v}=\lambda \vec{v}.</md>
+     The vector <m>\vec{v}</m> is called the <term>eigenvector</term> corresponding to the eigenvalue <m>\lambda</m>. The pair <m>\left\{ \lambda, \vec{v}\right\}</m> is called an <term>eigenpair</term> of <m>A</m>.
+    </p>
+   </definition>
+   To find eigenvectors, we rewrite <m>A\vec{v}=\lambda \vec{v}</m> as <m>(A-\lambda I)\vec{v}=\vec{0}</m>. 
+   <theorem>
+    <title>Characteristic equation</title>
+    <p>
+     Let <m>A=\begin{bmatrix}a&amp; b\\c&amp; d\end{bmatrix}</m>. Then the corresponding characteristic equation is 
+     <m>\lambda^2-\mathrm{tr}(A)\lambda+\mathrm{det}(A)=0.</m>
+    </p>
+   </theorem>
+   <example>
+    <p>
+     Find the eigenpairs of <m>A=\begin{bmatrix} 5&amp;-1 \\ 3&amp;1\end{bmatrix}</m>.
+    </p>
+   </example>
+   <example>
+    <p>
+     We rewrite the spring-mass problems as a system of linear ODEs using a substitution. Consider <m>my''+\beta y'+ky=f(t)</m>, or in standard form <m>y''+2\lambda y+\omega^2 y=u_2(t)</m>.
+    </p>
+   </example>
+   <example>
+    <p>
+     Consider two brine tanks, Tank 1 contains <m>x(t)</m> pounds of salt in <m>100</m> gallons of brine and Tank 2 contains <m>y(t)</m> pounds of salt in <m>200</m> gallons of brine. Each tank is well-stirred and brine in one tank is pumped into the other. In addition, fresh water flows into Tank 1 at a rate of <m>20</m> gallons per minute and the brine in Tank 2 flows out at a rate of <m>20</m> gallons per minute so that the total volume of brine remains constant. Find the vector equation of the given system.
+    </p>
+   </example>
+   <definition>
+    <title>Homogeneous systems</title>
+    <p>
+     A linear homogeneous sytem is of the form
+     <md xml:id="def_homogeneoussystem" number="yes">\vec{x}'=A\vec{x},</md>
+     where <m>A</m> is an <m>n \times n</m> matrix.
+    </p>
+   </definition>
+   <definition>
+    <title>Homogeneous solutions</title>
+    <p>
+     A vector-valued function <m>\vec{w}\colon I \rightarrow \mathbb{R}^n</m>, where <m>I</m> is the interval of existence, is called a solution to <xref ref="def_homogeneoussystem"/> provided that <m>\vec{w}'(t)=A\vec{w}(t)</m> for all <m>t \in I</m>. Note that the zero vector is always a asolution to <xref ref="def_homogeneoussystem"/>, called the <term>trivial solution</term>.
+    </p>
+   </definition>
+   <example>
+    <p>
+     Let <m>\vec{x}'=\begin{bmatrix} 5&amp;-1 \\ 3&amp;1 \end{bmatrix}\vec{x}</m>. Determine if the following are solutions on <m>(-\infty,\infty)</m>.
+     <ol>
+      <li><m>\vec{x}=\begin{bmatrix} 1\\ 1 \end{bmatrix} e^{-t}</m></li>
+      <li><m>\vec{x}=\begin{bmatrix} 1\\3 \end{bmatrix}e^{2t}</m></li>
+     </ol>
+    </p>
+   </example>
+   <theorem>
+    <title>Nontrivial solutions</title>
+    <p>
+     Nontrivial solutions of <xref ref="def_homogeneoussystem"/> are of the form
+     <md>x_i(t)=\vec{v}_ie^{\lambda_i t},</md>
+     where <m>\{\lambda_i,\vec{v}_i\}</m> is an eigenpair of <m>A</m>.
+    </p>
+   </theorem>
+   <proof>
+    <p>later!</p>
+   </proof>
+   <theorem>
+    <title>Superposition principle</title>
+    <p>
+     Let <m>\vec{x}_1,\vec{x}_2,\ldots,\vec{x_k} \in \mathbb{R}^n</m> be solutions to <xref ref="def_homogeneoussystem"/> on <m>I</m>. Then for <m>k\leq n</m>,
+     <md>\vec{x}=c_1\vec{x}_1+c_2\vec{x}_2+\ldots+c_k\vec{x}_k</md>
+     is also a solution to <xref ref="def_homogeneoussystem"/> on <m>I</m>.
+    </p>
+   </theorem>
+   In order to ensure that solutions to <xref ref="def_homogeneoussystem"/> are "distinct", we need an idea of linear independence in this setting.
+   <theorem>
+    <title>Linear independence</title>
+    <p>
+     The vectors <m>\vec{x}_1,\ldots,\vec{x}_n \in \mathbb{R}^n</m> are linearly independent on <m>I</m> if and only if the Wronskian
+     <md>W(\vec{x}_1,\ldots,\vec{x}_n) = \mathrm{det} \begin{bmatrix} \vec{x}_1 &amp; \vec{x}_2 &amp; \ldots &amp; \vec{x}_n \end{bmatrix} \neq 0.</md>
+    </p>
+   </theorem>
+   <theorem>
+    <title>Fundamental set of solutions</title>
+    <p>
+     The vectors <m>\vec{x}_1,\ldots,\vec{x}_n \in \mathbb{R}^n</m> form a <term>fundamental set of solutions</term> (FSS) to <xref ref="def_homogeneoussystem"/> on <m>I</m> if
+     <ol>
+      <li><m>\vec{x}_1,\ldots,\vec{x}_n</m> are solutions to <xref ref="def_homogeneoussystem"/> on <m>I</m>,</li>
+      <li><m>\vec{x}_1,\ldots,\vec{x}_n</m> are linearly independent on <m>I</m>, and</li>
+      <li>the number of linearly independent solutions is equal to the number of columns of <m>A</m>.</li>
+     </ol>
+    </p>
+   </theorem>
+   <definition>
+    <title>General solution</title>
+    <p>
+     Let <m>\vec{x}_1,\ldots,\vec{x}_n \in \mathbb{R}^n</m> form a fundamental set of solutions to <xref ref="def_homogeneoussystem"/> on <m>I</m>. Then 
+     <md>\vec{x}=c_1\vec{x}_1+c_2\vec{x}_2+\ldots+c_n\vec{x}_n</md>
+     is a <term>general solution</term> to <xref ref="def_homogeneoussystem"/> on <m>I</m>.
+    </p>
+   </definition>
+   <example>
+    <p>
+     Verify <m>\vec{x}_1(t)=\begin{bmatrix} 1\\ 3 \end{bmatrix}e^{2t}</m> and <m>\vec{x}_2(t)=\begin{bmatrix} 1\\ 1\end{bmatrix}e^{4t}</m> form a fundamental set of solutions to <m>\vec{x}'=\begin{bmatrix} 5&amp;-1 \\ 3&amp; 1 \end{bmatrix}\vec{x}</m> on <m>(-\infty,\infty)</m>.
+    </p>
+   </example>
+   <example>
+    <p>
+     Solve <m>\vec{x}'=\begin{bmatrix} 5&amp;-1 \\ 3&amp; 1 \end{bmatrix}\vec{x}, \vec{x}(0)=\begin{bmatrix} 2 \\ -1 \end{bmatrix}.</m>
+    </p>
+   </example>
+  </p>
+ </section>
+ <section>
+  <title>Solutions to linear homogeneous systems</title>
+  <p>
+   In the previous section, we shows that nontrivial solutions to <xref ref="def_homogeneoussystem"/> are of the form
+   <m>\vec{x}_i(t)=\vec{v}_ie^{\lambda_i t}</m>, where <m>\{\lambda_i,\vec{v}_i\}</m> is an eigenpair of <m>A</m>.
+   <definition>
+    <title>Stability</title>
+    <p>
+     The origin <m>(0,0)</m> is a critical point of the first-order autonomous system <m>\vec{x}'=A\vec{x}</m>. The origin can be classified as
+     <ul>
+      <li><term>asymptotically stable</term> if <m>\mathrm{Re}(\lambda)&lt;0</m> for all eigenvalues <m>\lambda</m> of <m>A</m>,</li>
+      <li><term>stable</term> if <m>\mathrm{Re}(\lambda)=0</m> for all eigenvalues <m>\lambda</m> of <m>A</m>, and</li>
+      <li><term>unstable</term> if there exists an eigenvalue <m>\lambda</m> of <m>A</m> where <m>\mathrm{Re}(\lambda)&gt;0</m>.</li>
+     </ul>
+    </p>
+   </definition>
+   <!-- Pictures in each case -->
+   <example>
+    <title>Distinct real eigenvalues</title>
+    <p>
+     Solve <m>\vec{x}'=\begin{bmatrix}3&amp; -2 \\ 2 &amp; -2 \end{bmatrix}\vec{x}</m>.
+    </p>
+   </example>
+   <example>
+    <title>Distinct real eigenvalues</title>
+    <p>
+     Solve <m>\vec{x}'=\begin{bmatrix}-2&amp; 1 \\ 1 &amp; -2 \end{bmatrix}\vec{x}, \vec{x}(0)=\begin{bmatrix} 2\\3 \end{bmatrix}</m>.
+    </p>
+   </example>
+   For a <m>2\times 2</m> matrix <m>A</m> with the eigenvalue <m>\lambda</m> repeated, there are two possibilities. Either (proper case) there are two independent eigenvectors associated to <m>\lambda</m>, i.e. the vector equation <m>(A-\lambda I)\vec{v}=\vec{0}</m> has two free variables, or (degenerate case) there is only one eigenvector associated with <m>\lambda</m>. 
+   <theorem>
+    <title>Solutions in the degenerate case</title>
+    <p>
+     Let <m>\lambda</m> be a real, repeated eigenvalue of <m>A</m> with <m>\vec{v}\neq \vec{0}</m> is its only corresponding eigenvector. Then the solutions to <xref ref="def_homogeneoussystem"/> are of the form
+     <md>\vec{x}_1(t)=\vec{v}e^{\lambda t}, \quad \vec{x}_2(t)=(\vec{v}t+\vec{p})e^{\lambda t},</md>
+     where <m>\vec{p} \neq 0</m> satisfies <m>(A-\lambda I)\vec{p}=\vec{v}</m>. 
+    </p>
+   </theorem>
+   <proof>
+    later!
+   </proof>
+   <definition>
+    <title>Generalized eigenvectors</title>
+    <p>
+     A nonzero vector <m>\vec{p}</m> is said to be a <term>generalized eigenvector</term> of <m>A</m> if <m>\vec{p}</m> satisfies <m>(A-\lambda I)\vec{p}=\vec{v}</m>.
+    </p>
+   </definition>
+   <example>
+    <title>Repeated eigenvalues</title>
+    <p>
+     Solve <m>\vec{x}'=\begin{bmatrix} 4&amp; 0 \\ 0&amp; 4\end{bmatrix}\vec{x}</m>.
+    </p>
+   </example>
+   <example>
+    <title>Repeated eigenvalues</title>
+    <p>
+     Solve <m>\vec{x}'=\begin{bmatrix} 7&amp; 1 \\ -4&amp; 3\end{bmatrix}\vec{x}</m>.
+    </p>
+   </example>
+   <example>
+    <title>Repeated eigenvalues</title>
+    <p>
+     Solve <m>\vec{x}'=\begin{bmatrix} 3&amp; -4 \\ 1&amp; -1\end{bmatrix}\vec{x}, \quad \vec{x}(0)=\begin{bmatrix} -1 \\ 3 \end{bmatrix}</m>.
+    </p>
+   </example>
+   <theorem>
+    <title>Complex eigenvalues for real-valued matrices</title>
+    <p>
+     Let <m>A</m> be an <m>n \times n</m> matrix with real-valued entries. If <m>\lambda=\alpha+\beta i</m> is an eigenvalue of <m>A</m>, then so is <m>\overline{\lambda}=\alpha-\beta i</m>. Furthermore, the corresponding eigenvectors to <m>\lambda</m> and <m>\overline{\lambda}</m> are complex conjugates.
+    </p>
+   </theorem>
+   <proof>
+    later!
+   </proof>
+   <example>
+    <p>
+     Find the eigenpairs of <m>A=\begin{bmatrix} 0&amp; 2 \\ -2&amp; 0\end{bmatrix}</m>.
+    </p>
+   </example>
+   <remark>
+    <title>Useful tips when finding eigenvectors</title>
+    <p>
+     <ol>
+      <li>Always write complex eigenvalues in parentheses when calculating the correpsonding eigenvector. Otherwise, you might calculate the eigenvector associated to its complex conjugate.</li>
+      <li>When checking if the rows are scalar multiples of one another, multiply the first row by the complex conjugate of the entry in the top right. Then check if the rows are scalar multiples of each other.</li>
+      <li>Your eigenvector can look different depending on your choice of row to expand or choice of free variable. For our purposes, let's expand by the top row.</li>
+      <li>Since our eigenpairs are complex ocnjugates, we only need one eigenpair to find two real-valued, linearly independent solutions.</li>
+     </ol>
+    </p>
+   </remark>
+   <theorem>
+    <title>Solutions for complex eigenvalues</title>
+    <p>
+     Let <m>\lambda=\alpha+\beta i</m> be an eigenvalue of <m>A</m> with <m>\vec{v}=\vec{a}+\vec{b}i</m> as its corresponding eigenvector. Then the real-valued, linearly independent solutions to <xref ref="def_homogeneoussystem"/> are of the form 
+     <md>\vec{x}_1(t)=e^{\alpha t}\Big( \vec{a}\cos(\beta t) - \vec{b}\sin(\beta t)\Big),</md>
+     <md>\vec{x}_2(t)=e^{\alpha t}\Big( \vec{a}\sin(\beta t)+\vec{b}\cos(\beta t) \Big).</md>
+    </p>
+   </theorem>
+   <proof>
+    later!
+   </proof>
+   <example>
+    <title>Complex eigenvalues</title>
+    <p>
+     Solve <m>\vec{x}'=\begin{bmatrix} 0&amp; 2 \\ -2&amp; 0\end{bmatrix}\vec{x}, \quad \vec{x}(0)=\begin{bmatrix} 2 \\ -1 \end{bmatrix}</m>.
+    </p>
+   </example>
+   <example>
+    <title>Complex eigenvalues</title>
+    <p>
+     Solve <m>\vec{x}'=\begin{bmatrix} 1&amp; -4 \\ 2&amp; -3\end{bmatrix}\vec{x}, \quad \vec{x}(0)=\begin{bmatrix} 6 \\ -2 \end{bmatrix}</m>.
+    </p>
+   </example>
+   <example>
+    <title>Complex eigenvalues</title>
+    <p>
+     Solve <m>\vec{x}'=\begin{bmatrix} 2&amp; -1 \\ 2&amp; 0\end{bmatrix}\vec{x}, \quad \vec{x}(0)=\begin{bmatrix} 3 \\ -2 \end{bmatrix}</m>.
+    </p>
+   </example>
+  </p>
+ </section>
+ <section>
+  <title>Variation of parameters</title>
+  <p>
+   <definition>
+    <title>Fundamental matrix</title>
+    <p>
+     An <m>n \times n</m> matrix-valued function <m>\Phi</m> is called a <term>fundamental matrix</term> to <xref ref="def_homogeneoussystem"/> if <m>\Phi'(t)=A\Phi(t)</m> and for each <m>t</m>, <m>\Phi(t)</m> is an invertible matrix.
+    </p>
+   </definition>
+   <definition>
+    <title>Nonohomogeneous systems</title>
+    <p>
+     A <term>nonohomogeneous vector equation</term> is of the form 
+     <md xml:id="def_nonhomogeneousssytem" number="yes">\vec{x}'(t)=A\vec{x}(t)+\vec{u}(t),</md>
+     where <m>\vec{x}</m> is the <term>state vector</term> and <m>\vec{u}</m> is the <term>control vector</term>.
+    </p>
+   </definition>
+   <theorem>
+    <title>Variation of parameters for systems</title>
+    <p>
+     The solution to <xref ref="def_nonhomogeneousssytem"/> is of the form
+     <m>\vec{x}=\vec{x}_h+\vec{x}_p</m>, where <m>\vec{x}_h(t)=\Phi(t)\vec{c}</m> is the homogeneous solution for some constant vector <m>\vec{c}</m> and <m>\vec{x}_p=\Phi(t)\displaystyle\int \Phi^{-1}(t)\vec{u}(t)\mathrm{d}t</m> is the particular solution.
+    </p>
+   </theorem>
+   <proof>
+    later!
+   </proof>
+   <example>
+    <p>
+     Use variation of parameters to find a general solution to the nonohomogeneous system
+     <md>\vec{x}'(t)=\begin{bmatrix} 5&amp; -1 \\ 3&amp; 1 \end{bmatrix} \vec{x}(t) + \begin{bmatrix} 2 \\ 1 \end{bmatrix}e^{2t},</md>
+     where <m>\Phi(t)=\begin{bmatrix} e^{2t} &amp; e^{4t} \\ 3e^t &amp; e^{4t} \end{bmatrix}</m> is a fundamental matrix of the associated homogeneous system on <m>(-\infty,\infty)</m>.
+    </p>
+   </example>
+   <example>
+    <p>
+     Use variation of parameters to find a general solution to the nonohomogeneous system
+     <md>\vec{x}'(t)=\begin{bmatrix} 1&amp; -1 \\ 1&amp; -1 \end{bmatrix} \vec{x}(t) + \begin{bmatrix} 1 \\ 1 \end{bmatrix}t^{-1},</md>
+     where <m>\Phi(t)=\begin{bmatrix} t+1 &amp; 1 \\ t &amp; 1 \end{bmatrix}</m> is a fundamental matrix of the associated homogeneous system on <m>(0,\infty)</m>.
+    </p>
+   </example>
+   <example>
+    <p>
+     Use variation of parameters to find a general solution to the nonohomogeneous system
+     <md>\vec{x}'(t)=\begin{bmatrix} 0&amp; 2 \\ -2&amp; 0 \end{bmatrix} \vec{x}(t) + \begin{bmatrix} 0 \\ 2 \end{bmatrix}t^{-1},</md>
+     where <m>\Phi(t)=\begin{bmatrix} \cos(2t) &amp; \sin(2t) \\ -\sin(2t) &amp; \cos(2t) \end{bmatrix}</m> is a fundamental matrix of the associated homogeneous system.
+    </p>
+   </example>
+  </p>
+ </section>
+ <section>
+  <title>The Laplace transform of linear systems</title>
+  <p>
+   Some linear systems are easier to solve using the Laplace transform rather than eigenpair techniques. Here we take the Laplace transform of a set of linear differential equations and use algebraic techniques to solve for <m>X(s)</m> and <m>Y(s)</m>. We then use the inverse transform to find the <m>x(t)</m> and <m>y(t)</m> that satisfy our system.
+  </p>
+  <example>
+   <p>
+    Solve <md>\left\{ \begin{array}{ll} 
+    x'(t)-x(t)+y(t)=\mathcal{U}(t-2) \\ 
+    -x(t)+y'(t)+y(t)=0 \\ 
+    x(0)=y(0)=0.
+    \end{array} \right.</md>
+   </p>
+  </example>
+  <example>
+   <p>
+    Solve <md>\left\{ \begin{array}{ll} 
+    x''(t)+3y'(t)+3y(t)=0 \\ 
+    x''(t)+3y(t)=e^{-t} \\ 
+    x(0)=x'(0)=y(0)=0
+    \end{array} \right.</md>
+   </p>
+  </example>
+ </section>
+</chapter>
